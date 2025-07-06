@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoundLab F2F: Camada de Execução Reputacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #030712 0%, #0b1d3a 100%);
+        }
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .flow-step {
+            transition: all 0.3s ease-in-out;
+            flex: 1;
+            min-width: 150px;
+        }
+        .flow-step.active {
+            background-color: #1e3a8a;
+            border-color: #3b82f6;
+        }
+        .flow-step.burn-active {
+            background-color: #991B1B; border-color: #EF4444;
+        }
+        .flow-step.allow-active {
+             background-color: #166534; border-color: #22C55E;
+        }
+        .flow-step.active .flow-title { color: #ffffff; }
+        .flow-arrow {
+            transition: color 0.3s ease-in-out;
+        }
+        .flow-arrow.active { color: #3b82f6; }
+        .progress-bar {
+            transition: width 2s ease-out;
+        }
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+        .has-tooltip:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M6 9l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1.2em;
+            padding-right: 2.5rem;
+        }
+        .graph-connector {
+            flex-grow: 1;
+            background-color: #374151;
+            height: 2px;
+            width: auto;
+        }
+        .graph-node {
+            border: 2px solid #4b5563;
+        }
+        .graph-node.risk {
+            border-color: #ef4444;
+            color: #fca5a5;
+        }
+        .graph-node.safe {
+            border-color: #22c55e;
+            color: #86efac;
+        }
+        #toast-notification, #report-modal, #gemini-modal, #case-modal {
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 50;
+        }
+        .gemini-content h1 { font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem; color: white; }
+        .gemini-content h2 { font-size: 1.1rem; font-weight: bold; margin-top: 1rem; margin-bottom: 0.5rem; color: #e5e7eb; }
+        .gemini-content p { margin-bottom: 0.5rem; }
+        .gemini-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+        .gemini-content li { margin-bottom: 0.25rem; }
+    </style>
+</head>
+<body class="text-gray-300 flex flex-col items-center min-h-screen p-4 sm:p-6 lg:p-8">
+
+    <div id="toast-notification" class="fixed top-8 right-8 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 transform translate-y-[-20px]"></div>
+
+    <!-- Modals -->
+    <div id="report-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b border-gray-700"><h2 class="text-xl font-bold text-white">Relatório de Execução de Conformidade</h2><button id="close-report-modal-btn" class="text-gray-400 hover:text-white text-2xl">&times;</button></div>
+            <div id="report-content" class="p-6 overflow-y-auto"></div>
+        </div>
+    </div>
+    <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b border-gray-700"><h2 id="gemini-modal-title" class="text-xl font-bold text-white">Análise da Guardian AI</h2><button id="close-gemini-modal-btn" class="text-gray-400 hover:text-white text-2xl">&times;</button></div>
+            <div id="gemini-modal-content" class="p-6 overflow-y-auto gemini-content"></div>
+        </div>
+    </div>
+    <div id="case-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b border-gray-700"><h2 id="case-modal-title" class="text-xl font-bold text-white">Detalhes do Caso</h2><button id="close-case-modal-btn" class="text-gray-400 hover:text-white text-2xl">&times;</button></div>
+            <div id="case-modal-content" class="p-6 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <div class="w-full max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-gray-800 border border-gray-600 flex items-center justify-center rounded-lg font-bold text-xl text-white tracking-tighter">FL</div>
+                <div class="text-left">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-white">FoundLab F2F – Reputação como Comando</h1>
+                    <p class="text-sm text-gray-400 mt-1">Simulação de Governança para o BTG Pactual</p>
+                </div>
+            </div>
+            <div id="mode-badge" class="bg-gray-800 border border-gray-700 text-xs text-gray-300 font-semibold px-3 py-1 rounded-full hidden sm:flex items-center gap-2">
+                <span class="text-blue-400">➤</span> Modo de Execução: Shadow Live (Simulação com Dados Reais)
+            </div>
+        </div>
+
+        <div class="bg-gray-900/50 border border-gray-700 rounded-xl p-6 mb-8">
+             <h2 class="text-xl font-semibold text-white text-center mb-6">Arquitetura de Execução em Tempo Real</h2>
+             <div id="flow-diagram" class="flex flex-col md:flex-row items-stretch justify-between gap-4 text-center">
+                <div id="flow-1" class="flow-step bg-gray-800 p-4 rounded-lg border border-gray-700"><h3 class="flow-title font-semibold text-gray-400">1. Input da API</h3></div>
+                <div id="arrow-1" class="flow-arrow text-2xl font-mono self-center md:self-auto">→</div>
+                <div id="flow-2" class="flow-step bg-gray-800 p-4 rounded-lg border border-gray-700"><h3 class="flow-title font-semibold text-gray-400">2. Guardian AI</h3></div>
+                <div id="arrow-2" class="flow-arrow text-2xl font-mono self-center md:self-auto">→</div>
+                <div id="flow-3" class="flow-step bg-gray-800 p-4 rounded-lg border border-gray-700"><h3 class="flow-title font-semibold text-gray-400">3. Política Aplicada</h3></div>
+                <div id="arrow-3" class="flow-arrow text-2xl font-mono self-center md:self-auto">→</div>
+                <div id="flow-4" class="flow-step bg-gray-800 p-4 rounded-lg border border-gray-700"><h3 class="flow-title font-semibold text-gray-400">4. Engine</h3></div>
+                <div id="arrow-4" class="flow-arrow text-2xl font-mono self-center md:self-auto">→</div>
+                <div id="flow-5" class="flow-step bg-gray-800 p-4 rounded-lg border border-gray-700"><h3 class="flow-title font-semibold text-gray-400">5. Log de Auditoria</h3></div>
+             </div>
+        </div>
+
+        <div class="w-full bg-gray-900/70 rounded-2xl shadow-2xl border border-gray-700">
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                    <h3 class="text-lg font-semibold text-white mb-4">1. Simulação de Entrada e Política</h3>
+                    <form id="transaction-form">
+                        <div class="space-y-4">
+                             <div>
+                                <label for="scenario-select" class="text-sm font-medium text-gray-400">Selecionar Cenário de Teste</label>
+                                <select id="scenario-select" class="w-full bg-gray-700 border-gray-600 rounded-md p-2 mt-1 font-mono text-gray-300 cursor-pointer focus:ring-2 focus:ring-blue-500"></select>
+                            </div>
+                             <div>
+                                <label for="policy-select" class="text-sm font-medium text-gray-400">Modo de Política</label>
+                                <select id="policy-select" class="w-full bg-gray-700 border-gray-600 rounded-md p-2 mt-1 font-mono text-gray-300 cursor-pointer focus:ring-2 focus:ring-blue-500">
+                                    <option value="rigorous">Política Rigorosa (Padrão)</option>
+                                    <option value="flexible">Política Flexível (Customizada)</option>
+                                </select>
+                            </div>
+                            <div id="single-tx-view">
+                                <div>
+                                    <label class="text-sm font-medium text-gray-400">CPF Hash</label>
+                                    <div id="pre-reputation-badge" class="text-xs text-gray-500 font-medium mt-1 hidden"></div>
+                                    <div class="flex items-center gap-3">
+                                        <input id="input-cpf" type="text" value="---" readonly class="w-full bg-gray-700 border-gray-600 rounded-md p-2 mt-1 font-mono text-gray-300 cursor-default">
+                                        <div id="risk-tag-cpf" class="hidden mt-1 text-xs font-bold px-2 py-1 rounded-md whitespace-nowrap"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-4"><label class="text-sm font-medium text-gray-400">Valor (BRL)</label><input id="input-amount" type="text" value="---" readonly class="w-full bg-gray-700 border-gray-600 rounded-md p-2 mt-1 font-mono text-gray-300 cursor-default"></div>
+                            </div>
+                            <div id="multi-tx-view" class="hidden">
+                                <label class="text-sm font-medium text-gray-400">Transações Correlacionadas</label>
+                                <div id="multi-tx-list" class="mt-1 space-y-2 max-h-32 overflow-y-auto p-2 bg-gray-900/50 rounded-md"></div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <div id="progress-container" class="w-full bg-gray-700 rounded-full h-2.5 mb-4 hidden"><div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full progress-bar" style="width: 0%"></div></div>
+                            <button type="button" id="execute-btn" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500">Executar Decisão Reputacional</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="space-y-6">
+                    <div id="justification-panel" class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 opacity-50 transition-opacity duration-500"><h3 class="text-lg font-semibold text-white mb-4">2. Justificativa de Decisão</h3><div id="justification-content" class="text-gray-500 min-h-[310px] flex items-center justify-center">Aguardando execução...</div></div>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-gray-700"><h3 class="text-lg font-semibold text-white mb-4">3. Log de Auditoria e Casos</h3><div id="log-panel" class="bg-black p-4 rounded-md font-mono text-sm text-gray-300 min-h-[124px] opacity-50 transition-opacity duration-500 overflow-x-auto"><span class="text-gray-500">Aguardando veredito...</span></div></div>
+            
+            <div id="cases-section" class="p-6 border-t border-gray-700">
+                <h3 class="text-lg font-semibold text-white mb-4">4. Casos de Risco em Análise</h3>
+                <div id="cases-list" class="space-y-2">
+                    <p class="text-gray-500 text-sm">Nenhum caso gerado nesta sessão.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="w-full mt-8 text-xs text-gray-500">
+            <div class="border-t border-gray-700 pt-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="text-center sm:text-left">
+                    <p>FoundLab.cloud © 2025 – Todos os direitos reservados.</p>
+                    <p>Versão Demo F2F 1.0 – Simulação privada.</p>
+                </div>
+                <div class="text-center sm:text-right">
+                    <p class="font-semibold">Engine Versions: Guardian AI v2.4 | ScoreLab Core v3.1 | Burn Engine v1.2</p>
+                    <p class="font-semibold mt-1">Infraestrutura hospedada com segurança na <span class="font-bold text-gray-400">Google Cloud Platform™</span></p>
+                </div>
+            </div>
+             <p class="text-center mt-4">Simulação Privada – Uso Institucional BTG. Nenhum dado real foi exposto nesta demonstração.</p>
+        </footer>
+    </div>
+
+    <script>
+        // DOM Elements
+        const executeBtn = document.getElementById('execute-btn');
+        const justificationPanel = document.getElementById('justification-panel');
+        const justificationContent = document.getElementById('justification-content');
+        const logPanel = document.getElementById('log-panel');
+        const riskTagCpf = document.getElementById('risk-tag-cpf');
+        const preReputationBadge = document.getElementById('pre-reputation-badge');
+        const scenarioSelect = document.getElementById('scenario-select');
+        const policySelect = document.getElementById('policy-select');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+        const toastNotification = document.getElementById('toast-notification');
+        const reportModal = document.getElementById('report-modal');
+        const reportContent = document.getElementById('report-content');
+        const closeModalBtn = document.getElementById('close-report-modal-btn');
+        const geminiModal = document.getElementById('gemini-modal');
+        const geminiModalTitle = document.getElementById('gemini-modal-title');
+        const geminiModalContent = document.getElementById('gemini-modal-content');
+        const closeGeminiModalBtn = document.getElementById('close-gemini-modal-btn');
+        const caseModal = document.getElementById('case-modal');
+        const caseModalTitle = document.getElementById('case-modal-title');
+        const caseModalContent = document.getElementById('case-modal-content');
+        const closeCaseModalBtn = document.getElementById('close-case-modal-btn');
+        const inputCpf = document.getElementById('input-cpf');
+        const inputAmount = document.getElementById('input-amount');
+        const singleTxView = document.getElementById('single-tx-view');
+        const multiTxView = document.getElementById('multi-tx-view');
+        const multiTxList = document.getElementById('multi-tx-list');
+        const flowSteps = [1,2,3,4,5].map(i => document.getElementById(`flow-${i}`));
+        const flowArrows = [1,2,3,4].map(i => document.getElementById(`arrow-${i}`));
+        const casesList = document.getElementById('cases-list');
+
+        // Data & State
+        const scenarios = [
+            { id: "onboarding_risk", title: "Cenário 01: Onboarding Pix-Cripto / CPF suspeito", cpf: "***.***.***-XX (Encrypted Input)", amount: "R$ 1.500,00", preReputation: "Baixa", outcomes: { rigorous: { riskScore: 98.5, confidence: 0.99, flags: ["SYNTHETIC_IDENTITY", "CPF_LOW_REPUTATION", "NEW_WALLET_HIGH_VALUE_TX"], reasoning: "CPF em lista de fraude sintética + wallet associada a mixer.", command: "BURN_ONBOARDING_ATTEMPT", verdict: "BURN", policy: "onboarding_policy_v1.3", complianceLayer: "Default (Hard Enforcement Mode)", analysisTime: 147 }}},
+            { id: "good_client", title: "Cenário 02: Transação PIX / Cliente com bom histórico", cpf: "***.***.***-XX (Encrypted Input)", amount: "R$ 250,75", preReputation: "Alta", history: [120, 190, 80, 210, 150, 250.75], outcomes: { rigorous: { riskScore: 12.3, confidence: 0.95, flags: ["EXISTING_CLIENT", "GOOD_REPUTATION_SCORE"], reasoning: "Cliente com histórico positivo e transação dentro do perfil esperado.", command: "ALLOW_TRANSACTION", verdict: "ALLOW", policy: "transaction_policy_v2.1", complianceLayer: "Custom BTG (Standard Mode)", analysisTime: 89 }}},
+            { id: "dormant_account", title: "Cenário 03: Transação de Alto Valor / Conta Dormente", cpf: "***.***.***-XX (Encrypted Input)", amount: "R$ 15.800,00", preReputation: "Neutra", outcomes: { rigorous: { riskScore: 87.2, confidence: 0.92, flags: ["HIGH_VALUE_UNUSUAL_TIME", "DORMANT_ACCOUNT_ACTIVITY"], reasoning: "Transação de alto valor fora do horário padrão para conta dormente.", command: "BURN_TRANSACTION", verdict: "BURN", policy: "high_value_policy_v1.8", complianceLayer: "Default (Hard Enforcement Mode)", analysisTime: 112 }, flexible: { riskScore: 65.0, confidence: 0.88, flags: ["HIGH_VALUE_UNUSUAL_TIME", "DORMANT_ACCOUNT_ACTIVITY"], reasoning: "Risco elevado, mas permitido pela política flexível com monitoramento adicional.", command: "ALLOW_WITH_FLAG", verdict: "ALLOW", policy: "high_value_policy_v1.8", complianceLayer: "Custom BTG (Flexible Mode)", analysisTime: 115 }}},
+            { id: "triangulation", title: "Cenário 04: Tentativa de Triangulação PIX", type: "multi_tx", transactions: [ { cpf: "hash_A...", amount: "R$ 499,00" }, { cpf: "hash_B...", amount: "R$ 495,50" }, { cpf: "hash_C...", amount: "R$ 498,75" } ], destinationWallet: "0x1a2b...c3d4", outcomes: { rigorous: { riskScore: 99.8, confidence: 0.98, flags: ["TRIANGULATION_PATTERN_DETECTED", "MULTIPLE_SOURCES_SINGLE_DESTINATION"], reasoning: "Múltiplas fontes de baixo valor para um único destino em curto período, caracterizando tentativa de lavagem ou pulverização.", command: "BURN_TRANSACTIONS_AND_FLAG_WALLET", verdict: "BURN", policy: "pattern_detection_v1.1", complianceLayer: "Default (Hard Enforcement Mode)", analysisTime: 215 }}},
+            { id: "network_risk", title: "Cenário 05: Risco de Rede (Guardian Network)", cpf: "***.***.***-XX (Encrypted Input)", amount: "R$ 7.500,00", preReputation: "Neutra", outcomes: { rigorous: { riskScore: 95.0, confidence: 0.96, flags: ["HIGH_RISK_DESTINATION"], networkAlert: "Wallet de destino foi sinalizada em 2 outras instituições na rede FoundLab nas últimas 24h.", reasoning: "Transação direcionada para endereço com histórico de risco confirmado pela rede Guardian.", command: "BURN_TRANSACTION", verdict: "BURN", policy: "network_intel_v1.0", complianceLayer: "Default (Network Enforcement)", analysisTime: 180 }}}
+        ];
+        let isRunning = false;
+        let transactionChart = null;
+        let lastCompletedRun = {};
+        let openCases = [];
+
+        // Functions
+        function populateScenarios() {
+            scenarios.forEach((scenario, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = scenario.title;
+                scenarioSelect.appendChild(option);
+            });
+        }
+
+        function loadScenario(index) {
+            const scenario = scenarios[index];
+            policySelect.querySelector('option[value="flexible"]').disabled = (scenario.id !== "dormant_account");
+            if (policySelect.querySelector('option[value="flexible"]').disabled) {
+                policySelect.value = 'rigorous';
+            }
+            
+            if (scenario.type === 'multi_tx') {
+                singleTxView.classList.add('hidden');
+                multiTxView.classList.remove('hidden');
+                multiTxList.innerHTML = '';
+                scenario.transactions.forEach(tx => {
+                    const li = document.createElement('li');
+                    li.className = 'font-mono text-sm text-gray-400 flex justify-between';
+                    li.innerHTML = `<span>Origem: ${tx.cpf}</span><span>Valor: ${tx.amount}</span>`;
+                    multiTxList.appendChild(li);
+                });
+            } else {
+                singleTxView.classList.remove('hidden');
+                multiTxView.classList.add('hidden');
+                inputCpf.value = scenario.cpf;
+                inputAmount.value = scenario.amount;
+                preReputationBadge.textContent = `Reputação prévia: ${scenario.preReputation}`;
+                preReputationBadge.classList.remove('hidden');
+            }
+        }
+
+        function runSimulation() {
+            if (isRunning) return;
+            isRunning = true;
+            
+            executeBtn.disabled = true;
+            executeBtn.textContent = 'Processando Decisão...';
+            executeBtn.classList.replace('bg-blue-700', 'bg-blue-800');
+            executeBtn.classList.add('cursor-wait');
+
+            resetVisuals();
+            
+            progressContainer.classList.remove('hidden');
+            progressBar.style.width = '0%';
+            setTimeout(() => { progressBar.style.width = '100%'; }, 100);
+            
+            const selectedIndex = scenarioSelect.value;
+            const policy = policySelect.value;
+            const scenario = scenarios[selectedIndex];
+            const outcome = scenario.outcomes[policy] || scenario.outcomes['rigorous'];
+            lastCompletedRun = { scenario, outcome };
+
+            setTimeout(() => updateFlow(0, outcome), 500);
+            setTimeout(() => { updateFlow(1, outcome); showJustification(scenario, outcome); }, 1500);
+            setTimeout(() => updateFlow(2, outcome), 2000);
+            setTimeout(() => updateFlow(3, outcome), 2500);
+            setTimeout(() => {
+                updateFlow(4, outcome);
+                showLog(scenario, outcome);
+                if (outcome.verdict === 'BURN') {
+                    createCase(scenario, outcome);
+                }
+                executeBtn.disabled = false;
+                executeBtn.textContent = 'Executar Nova Análise';
+                executeBtn.classList.replace('bg-blue-800', 'bg-blue-700');
+                executeBtn.classList.remove('cursor-wait');
+                isRunning = false;
+            }, 3500);
+        }
+
+        function resetVisuals() {
+             justificationPanel.classList.add('opacity-50');
+             logPanel.classList.add('opacity-50');
+             riskTagCpf.classList.add('hidden');
+             progressContainer.classList.add('hidden');
+             justificationContent.innerHTML = '<div class="text-blue-400">Analisando dados transacionais e reputacionais...</div>';
+             logPanel.innerHTML = '<div class="text-gray-500">Aguardando veredito...</div>';
+             justificationPanel.classList.remove('opacity-50');
+             if(transactionChart) { transactionChart.destroy(); transactionChart = null; }
+             flowSteps.forEach(step => step.classList.remove('active', 'burn-active', 'allow-active'));
+             flowArrows.forEach(arrow => arrow.classList.remove('active'));
+        }
+
+        function updateFlow(index, outcome) {
+            flowSteps[index].classList.add('active');
+            if (index === 3) { flowSteps[index].classList.add(outcome.verdict === 'BURN' ? 'burn-active' : 'allow-active'); }
+            if (index > 0) { flowArrows[index - 1].classList.add('active'); }
+        }
+        
+        function createRiskGraph(scenario, outcome) {
+            if (scenario.type === 'multi_tx') {
+                 return `<div class="mt-4"><span class="font-semibold text-gray-400">Grafo de Conexões de Risco:</span><div class="flex items-center justify-center gap-2 mt-2 p-4 bg-gray-900/50 rounded-lg"><div class="flex flex-col gap-2"><div class="graph-node safe text-xs font-mono p-2 rounded-md text-center">CPF HASH A</div><div class="graph-node safe text-xs font-mono p-2 rounded-md text-center">CPF HASH B</div><div class="graph-node safe text-xs font-mono p-2 rounded-md text-center">CPF HASH C</div></div><div class="graph-connector w-8"></div><div class="graph-node risk text-xs font-mono p-2 rounded-md text-center">WALLET<br/><span class="text-gray-500">Destino Único</span></div></div></div>`;
+            }
+            const cpfNodeClass = outcome.flags.some(f => f.includes('CPF') || f.includes('IDENTITY')) ? 'risk' : 'safe';
+            return `<div class="mt-4"><span class="font-semibold text-gray-400">Grafo de Conexões de Risco:</span><div class="flex items-center justify-center gap-2 mt-2 p-4 bg-gray-900/50 rounded-lg"><div class="graph-node ${cpfNodeClass} text-xs font-mono p-2 rounded-md text-center">CPF HASH<br/><span class="text-gray-500">${scenario.preReputation}</span></div><div class="graph-connector"></div><div class="graph-node safe text-xs font-mono p-2 rounded-md text-center">TRANSAÇÃO<br/><span class="text-gray-500">${scenario.amount}</span></div><div class="graph-connector"></div><div class="graph-node risk text-xs font-mono p-2 rounded-md text-center">WALLET<br/><span class="text-gray-500">Destino</span></div></div></div>`;
+        }
+
+        function createHistoryChart() { return `<div class="mt-4"><span class="font-semibold text-gray-400">Histórico Transacional (Últimos 6 meses):</span><div class="relative h-40 w-full mt-2"><canvas id="history-chart"></canvas></div></div>`; }
+        function createMonitoringMessage() { return `<div class="mt-4 p-4 bg-yellow-900/50 rounded-lg text-yellow-300 text-center"><span class="font-bold">Monitoramento Adicional Ativado</span><p class="text-xs mt-1">A transação foi permitida pela política flexível, mas foi marcada para revisão e monitoramento contínuo.</p></div>`;}
+        function createNetworkAlert(alertText) {
+            return `<div class="mt-4 p-4 bg-purple-900/50 border border-purple-700 rounded-lg text-purple-300 text-center"><span class="font-bold">Guardian Network Intelligence</span><p class="text-xs mt-1">${alertText}</p></div>`;
+        }
+
+        function renderHistoryChart(historyData) {
+             const ctx = document.getElementById('history-chart').getContext('2d');
+             if (transactionChart) { transactionChart.destroy(); }
+             transactionChart = new Chart(ctx, { type: 'bar', data: { labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'], datasets: [{ label: 'Valor', data: historyData, backgroundColor: 'rgba(34, 197, 94, 0.2)', borderColor: 'rgba(34, 197, 94, 1)', borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: '#030712' } }, scales: { y: { grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: '#9ca3af', font: { size: 10 } } }, x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 10 } } } } } });
+        }
+
+        function showJustification(scenario, outcome) {
+            const isBurn = outcome.verdict === 'BURN';
+            if (scenario.type !== 'multi_tx') {
+                riskTagCpf.classList.remove('hidden');
+                riskTagCpf.textContent = isBurn ? '⚠️ RISCO ELEVADO' : '✓ BAIXO RISCO';
+                riskTagCpf.className = `mt-1 text-xs font-bold px-2 py-1 rounded-md whitespace-nowrap ${isBurn ? 'bg-red-900/50 text-red-300 border-red-700' : 'bg-green-900/50 text-green-300 border-green-700'}`;
+            }
+
+            const verdictColor = isBurn ? 'text-red-500 border-red-500' : 'text-green-500 border-green-500';
+            const scoreColor = isBurn ? 'text-red-400' : 'text-green-400';
+            let dynamicVizHtml = '';
+            if(isBurn) { dynamicVizHtml = createRiskGraph(scenario, outcome); } 
+            else if (scenario.id === 'good_client') { dynamicVizHtml = createHistoryChart(); } 
+            else { dynamicVizHtml = createMonitoringMessage(); }
+
+            let networkAlertHtml = '';
+            if (outcome.networkAlert) {
+                networkAlertHtml = createNetworkAlert(outcome.networkAlert);
+            }
+
+            justificationContent.innerHTML = `
+                <div class="text-center border-b border-gray-700 pb-3 has-tooltip relative">
+                    <div class="text-3xl font-bold ${verdictColor} border-2 rounded-lg py-2">${outcome.verdict}</div>
+                    <div class="tooltip absolute bottom-full mb-2 w-max bg-black text-white text-xs rounded py-1 px-2 shadow-lg">Comando irreversível enviado via SmartTrigger – registrado em log imutável.</div>
+                    <p class="text-sm text-gray-400 mt-2">Comando de execução conforme política pré-definida.</p>
+                </div>
+                <div id="justification-details" class="mt-3 space-y-3 text-sm">
+                    ${networkAlertHtml}
+                    <div class="flex justify-between items-center"><span class="font-semibold text-gray-400">Score de Risco:</span><span class="font-mono font-bold ${scoreColor} text-base">${outcome.riskScore}%</span></div>
+                    <div class="flex justify-between items-center"><span class="font-semibold text-gray-400">Nível de Confiança:</span><span class="font-mono font-bold text-gray-300">${outcome.confidence}</span></div>
+                    <div class="flex justify-between items-center has-tooltip relative"><span class="font-semibold text-gray-400">Política Ativada:</span><span class="font-mono text-gray-300">${outcome.policy}</span><div class="tooltip absolute bottom-full right-0 mb-2 w-max bg-black text-white text-xs rounded py-1 px-2 shadow-lg">Aplicada conforme política integrada ao Comitê de Risco.</div></div>
+                    <div class="flex justify-between items-center"><span class="font-semibold text-gray-400">Compliance Layer:</span><span class="font-mono text-gray-300">${outcome.complianceLayer}</span></div>
+                    <div class="flex justify-between items-center"><span class="font-semibold text-gray-400">Tempo total (API → Veredito):</span><span class="font-mono text-gray-300">${outcome.analysisTime}ms</span></div>
+                    <div><span class="font-semibold text-gray-400">Motivo da Decisão:</span><p class="text-gray-300 mt-1">${outcome.reasoning}</p></div>
+                    ${dynamicVizHtml}
+                </div>`;
+
+            const detailsContainer = justificationContent.querySelector('#justification-details');
+            
+            const geminiRiskButton = document.createElement('button');
+            geminiRiskButton.id = 'gemini-risk-btn';
+            geminiRiskButton.className = 'w-full text-xs bg-blue-900/50 hover:bg-blue-800/50 border border-blue-800 text-blue-300 font-semibold py-2 px-3 rounded-lg mt-4 transition-all';
+            geminiRiskButton.innerHTML = 'Analisar Fatores de Risco com IA';
+            detailsContainer.appendChild(geminiRiskButton);
+
+            if (scenario.id === 'dormant_account' && !isBurn) {
+                const retrainButton = document.createElement('button');
+                retrainButton.className = 'w-full text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-2 px-3 rounded-lg mt-2 transition-all';
+                retrainButton.textContent = 'Sinalizar Edge Case para Retreinamento da IA';
+                retrainButton.onclick = handleEdgeCaseSignal;
+                detailsContainer.appendChild(retrainButton);
+            }
+            if (!isBurn && scenario.history) { renderHistoryChart(scenario.history); }
+        }
+
+        function handleEdgeCaseSignal(event) {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = 'Sinalização Enviada';
+            btn.classList.add('opacity-50');
+            toastNotification.textContent = 'Edge case enviado ao ScoreLab Core.';
+            toastNotification.classList.remove('opacity-0', 'transform', 'translate-y-[-20px]');
+            toastNotification.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                toastNotification.classList.remove('opacity-100', 'translate-y-0');
+                toastNotification.classList.add('opacity-0', 'translate-y-[-20px]');
+            }, 3000);
+        }
+
+        function showLog(scenario, outcome) {
+            logPanel.classList.remove('opacity-50');
+            const logId = `log-${crypto.randomUUID().slice(0, 8)}`;
+            const timestamp = new Date().toISOString();
+            lastCompletedRun.logId = logId; // Salva o ID do log para uso posterior
+            
+            let sarButtonHtml = '';
+            if (outcome.verdict === 'BURN') {
+                sarButtonHtml = `<button id="sar-btn" class="text-xs bg-red-900/50 hover:bg-red-800/50 border border-red-800 text-red-300 font-semibold py-1 px-3 rounded-md mt-3 transition-all">Gerar Rascunho de Relatório (SAR)</button>`;
+            }
+            
+            logPanel.innerHTML = `
+                <div><span class="text-gray-500">logId:</span> <a href="#" onclick="event.preventDefault()" class="text-blue-400 hover:underline" title="Ver versão auditável do log">${logId}</a></div>
+                <div><span class="text-gray-500">transactionId:</span> pix-onboard-${crypto.randomUUID().slice(0,12)}</div>
+                <div><span class="text-gray-500">timestamp:</span> ${timestamp}</div>
+                <div><span class="text-gray-500">command:</span> <span class="${outcome.verdict === 'BURN' ? 'text-red-400' : 'text-green-400'}">${outcome.command}</span></div>
+                <div class="mt-2 pt-2 border-t border-gray-700">
+                    <span class="text-gray-500">Análise auditável via hash criptográfico (SHA256):</span> 
+                    <span class="text-gray-400 break-all block mt-1">${crypto.randomUUID().replace(/-/g, '')}${crypto.randomUUID().replace(/-/g, '')}</span>
+                </div>
+                <div class="mt-2 flex gap-2">
+                    <button id="report-btn" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-1 px-3 rounded-md mt-3 transition-all">Gerar Relatório de Compliance</button>
+                    ${sarButtonHtml}
+                </div>`;
+        }
+        
+        function generateComplianceReport() {
+            const { scenario, outcome } = lastCompletedRun;
+            let inputsHtml = '';
+            if (scenario.type === 'multi_tx') {
+                inputsHtml = scenario.transactions.map(tx => `<p class="font-mono text-gray-400">${tx.cpf} → ${tx.amount}</p>`).join('');
+                inputsHtml = `<h4 class="font-semibold text-gray-300 mt-2">Transações Correlacionadas:</h4>${inputsHtml}`;
+            } else {
+                inputsHtml = `<p><span class="text-gray-500">CPF Hash:</span> <span class="font-mono">${scenario.cpf}</span></p><p><span class="text-gray-500">Valor:</span> <span class="font-mono">${scenario.amount}</span></p>`;
+            }
+
+            reportContent.innerHTML = `<div class="space-y-4 text-sm"><div class="p-4 bg-gray-800 rounded-lg"><h3 class="text-lg font-bold text-white mb-2">Resumo da Execução</h3><p><span class="font-semibold text-gray-400">ID do Log:</span> <span class="font-mono">${lastCompletedRun.logId || 'N/A'}</span></p><p><span class="font-semibold text-gray-400">Timestamp:</span> <span class="font-mono">${new Date().toISOString()}</span></p></div><div class="p-4 bg-gray-800 rounded-lg"><h3 class="text-lg font-bold text-white mb-2">Dados de Entrada</h3>${inputsHtml}</div><div class="p-4 bg-gray-800 rounded-lg"><h3 class="text-lg font-bold text-white mb-2">Análise e Veredito</h3><p><span class="font-semibold text-gray-400">Veredito Final:</span> <span class="font-bold ${outcome.verdict === 'BURN' ? 'text-red-400' : 'text-green-400'}">${outcome.verdict}</span></p><p><span class="font-semibold text-gray-400">Score de Risco:</span> <span class="font-mono">${outcome.riskScore}%</span></p><p><span class="font-semibold text-gray-400">Política Aplicada:</span> <span class="font-mono">${outcome.policy}</span></p><p><span class="font-semibold text-gray-400">Motivo:</span> ${outcome.reasoning}</p></div><div class="p-4 bg-gray-800 rounded-lg"><h3 class="text-lg font-bold text-white mb-2">Prova Criptográfica</h3><p class="text-xs text-gray-400 break-all font-mono">${crypto.randomUUID().replace(/-/g, '')}${crypto.randomUUID().replace(/-/g, '')}</p></div></div>`;
+            reportModal.classList.remove('hidden');
+        }
+        
+        function callGeminiAPI(prompt, button) {
+            const originalText = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = 'A processar com IA...';
+            
+            geminiModalContent.innerHTML = '<div class="text-blue-400">A processar com a IA simulada...</div>';
+            geminiModal.classList.remove('hidden');
+
+            // SIMULAÇÃO DA API - SEM CHAMADA EXTERNA
+            setTimeout(() => {
+                let mockResponse = '';
+                const { scenario, outcome } = lastCompletedRun;
+
+                // Verifica o tipo de prompt para gerar a resposta mockada correta
+                if (geminiModalTitle.textContent.includes("Fatores de Risco")) {
+                    // Mock para Análise de Risco
+                    mockResponse = `
+                        <h1>Análise Forense dos Fatores de Risco</h1>
+                        <p>Relatório técnico sobre os vetores de risco identificados na transação, gerado pela simulação da Guardian AI.</p>
+                        ${outcome.flags.map(flag => `
+                            <h2>Vetor: ${flag.replace(/_/g, ' ')}</h2>
+                            <p><strong>Padrão Detectado:</strong> Atividade consistente com o vetor de risco "${flag}". A análise de dados simulados indica uma alta probabilidade de que este padrão represente uma anomalia significativa.</p>
+                            <p><strong>Risco Associado:</strong> Este padrão está comumente associado a tentativas de fraude, lavagem de dinheiro ou outras atividades ilícitas. A exposição de risco para a instituição inclui perdas financeiras diretas, dano reputacional e possíveis sanções regulatórias.</p>
+                        `).join('')}
+                    `;
+                } else if (geminiModalTitle.textContent.includes("Relatório de Atividade Suspeita")) {
+                    // Mock para Relatório SAR
+                    mockResponse = `
+                        <h1>Rascunho: Relatório de Atividade Suspeita (SAR)</h1>
+                        
+                        <h2>1. Resumo da Atividade Suspeita</h2>
+                        <p>Uma transação foi bloqueada automaticamente pela Guardian AI devido a um score de risco de <strong>${outcome.riskScore}%</strong>. A atividade é suspeita de ${scenario.id === 'triangulation' ? 'tentativa de lavagem de dinheiro por meio de triangulação PIX' : 'fraude relacionada a identidade sintética ou comprometimento de conta'}.</p>
+
+                        <h2>2. Detalhes da Transação</h2>
+                        <ul>
+                            <li><strong>ID do Log:</strong> ${lastCompletedRun.logId || 'N/A'}</li>
+                            <li><strong>Data/Hora:</strong> ${new Date().toISOString()}</li>
+                            ${scenario.type === 'multi_tx' 
+                                ? `<li><strong>Transações:</strong> Múltiplas entradas para um único destino.</li>` 
+                                : `<li><strong>CPF Hash:</strong> ${scenario.cpf}</li><li><strong>Valor:</strong> ${scenario.amount}</li>`
+                            }
+                        </ul>
+
+                        <h2>3. Fatores de Risco Identificados</h2>
+                        <p>A decisão foi baseada nos seguintes fatores de risco:</p>
+                        <ul>
+                            ${outcome.flags.map(flag => `<li>${flag.replace(/_/g, ' ')}</li>`).join('')}
+                        </ul>
+                        <p><strong>Justificativa da IA:</strong> ${outcome.reasoning}</p>
+
+                        <h2>4. Ação Tomada</h2>
+                        <p>A(s) transação(ões) foram bloqueadas (comando: <strong>${outcome.command}</strong>) em tempo real, antes da sua efetivação. Nenhum fundo foi transferido. As contas e/ou wallets envolvidas foram sinalizadas para análise aprofundada.</p>
+
+                        <h2>5. Recomendações</h2>
+                        <p>Recomenda-se que a equipe de compliance revise este caso, inicie uma investigação formal se necessário e considere o bloqueio preventivo das contas associadas. Este relatório deve ser submetido aos órgãos reguladores competentes, se aplicável.</p>
+                    `;
+                } else {
+                    mockResponse = '<div class="text-yellow-400">Tipo de prompt não reconhecido para simulação.</div>';
+                }
+
+                geminiModalContent.innerHTML = mockResponse;
+                
+                // Re-habilita o botão no final
+                button.disabled = false;
+                button.innerHTML = originalText;
+
+            }, 1500); // Simula um delay de 1.5 segundos
+        }
+
+        function handleGeminiRiskAnalysis(outcome, button) {
+            geminiModalTitle.textContent = "Análise de Fatores de Risco";
+            const prompt = `Aja como uma IA de análise forense fiscal (FoundLab Guardian AI). Analise os seguintes vetores de risco de uma transação financeira e forneça um relatório técnico e objetivo. Para cada vetor, descreva o padrão detetado e o risco associado para a instituição. Vetores: ${outcome.flags.join(', ')}. A resposta deve ser direta, estruturada com títulos para cada vetor, e sem introduções ou conclusões conversacionais.`;
+            callGeminiAPI(prompt, button);
+        }
+
+        function handleGeminiSAR({ scenario, outcome }, button) {
+            geminiModalTitle.textContent = "Rascunho de Relatório de Atividade Suspeita (SAR)";
+            const prompt = `Aja como um oficial de compliance de um grande banco. Com base nos seguintes dados de uma transação bloqueada, gere um rascunho claro e estruturado de um Relatório de Atividade Suspeita (SAR) para revisão interna. Dados: ${JSON.stringify({ scenario, outcome })}. O relatório deve incluir as seguintes seções em Português: 1. Resumo da Atividade Suspeita, 2. Detalhes da Transação, 3. Fatores de Risco Identificados, 4. Ação Tomada, 5. Recomendações.`;
+            callGeminiAPI(prompt, button);
+        }
+        
+        function createCase(scenario, outcome) {
+            const caseId = `CASE-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+            const newCase = { id: caseId, scenario, outcome, status: 'Novo', analyst: 'Não Atribuído' };
+            openCases.unshift(newCase);
+            renderCases();
+        }
+
+        function renderCases() {
+            if (openCases.length === 0) {
+                casesList.innerHTML = '<p class="text-gray-500 text-sm">Nenhum caso gerado nesta sessão.</p>';
+                return;
+            }
+            casesList.innerHTML = '';
+            openCases.forEach(c => {
+                const caseElement = document.createElement('div');
+                caseElement.className = 'case-item bg-gray-800/50 p-3 rounded-lg flex justify-between items-center cursor-pointer hover:bg-gray-800 transition-colors';
+                caseElement.dataset.caseId = c.id;
+                caseElement.innerHTML = `
+                    <div>
+                        <p class="font-mono text-white font-semibold">${c.id}</p>
+                        <p class="text-xs text-gray-400 mt-1">${c.scenario.title}</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold bg-yellow-900/50 text-yellow-300 border border-yellow-700 px-2 py-1 rounded-md">${c.status}</span>
+                        <p class="text-xs text-gray-500 mt-1">Analista: ${c.analyst}</p>
+                    </div>
+                `;
+                casesList.appendChild(caseElement);
+            });
+        }
+
+        function showCaseDetails(caseId) {
+            const theCase = openCases.find(c => c.id === caseId);
+            if (!theCase) return;
+
+            caseModalTitle.textContent = `Detalhes do Caso: ${caseId}`;
+
+            let inputsHtml = '';
+            if (theCase.scenario.type === 'multi_tx') {
+                inputsHtml = `<div class="space-y-1 mt-2">${theCase.scenario.transactions.map(tx => `<p class="font-mono text-xs text-gray-400">${tx.cpf} → ${tx.amount}</p>`).join('')}</div>`;
+            } else {
+                inputsHtml = `<p><span class="text-gray-500">CPF Hash:</span> <span class="font-mono">${theCase.scenario.cpf}</span></p><p><span class="text-gray-500">Valor:</span> <span class="font-mono">${theCase.scenario.amount}</span></p>`;
+            }
+
+            caseModalContent.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                    <div class="md:col-span-1 space-y-4">
+                        <div class="p-4 bg-gray-800 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-bold text-white mb-2">Status do Caso</h3>
+                            <p><span class="font-semibold text-gray-400">Status:</span> <span class="font-bold text-yellow-400">${theCase.status}</span></p>
+                            <p><span class="font-semibold text-gray-400">Analista:</span> <span class="font-mono">${theCase.analyst}</span></p>
+                        </div>
+                        <div class="p-4 bg-gray-800 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-bold text-white mb-2">Ações do Analista</h3>
+                            <div class="space-y-2">
+                                <button class="w-full text-sm bg-blue-700 hover:bg-blue-600 text-white font-semibold py-2 px-3 rounded-md transition-all">Atribuir a Mim</button>
+                                <button class="w-full text-sm bg-yellow-700 hover:bg-yellow-600 text-white font-semibold py-2 px-3 rounded-md transition-all">Escalar Caso</button>
+                                <button class="w-full text-sm bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-2 px-3 rounded-md transition-all">Fechar Caso (Falso Positivo)</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 space-y-4">
+                        <div class="p-4 bg-gray-800 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-bold text-white mb-2">Resumo da Transação Bloqueada</h3>
+                            <p class="text-gray-300 mb-2">${theCase.scenario.title}</p>
+                            ${inputsHtml}
+                        </div>
+                        <div class="p-4 bg-gray-800 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-bold text-white mb-2">Análise da Guardian AI</h3>
+                            <p><span class="font-semibold text-gray-400">Veredito:</span> <span class="font-bold text-red-400">${theCase.outcome.verdict}</span></p>
+                            <p><span class="font-semibold text-gray-400">Score de Risco:</span> <span class="font-mono">${theCase.outcome.riskScore}%</span></p>
+                            <p class="mt-1"><span class="font-semibold text-gray-400">Motivo:</span> ${theCase.outcome.reasoning}</p>
+                            <div class="mt-2"><span class="font-semibold text-gray-400">Flags de Risco:</span><div class="flex flex-wrap gap-2 mt-1">${theCase.outcome.flags.map(flag => `<span class="text-xs font-mono bg-red-900/50 text-red-300 px-2 py-1 rounded">${flag}</span>`).join('')}</div></div>
+                        </div>
+                    </div>
+                </div>`;
+            caseModal.classList.remove('hidden');
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            populateScenarios();
+            loadScenario(0);
+            executeBtn.addEventListener('click', runSimulation);
+            scenarioSelect.addEventListener('change', (e) => loadScenario(e.target.value));
+            closeModalBtn.addEventListener('click', () => reportModal.classList.add('hidden'));
+            closeGeminiModalBtn.addEventListener('click', () => geminiModal.classList.add('hidden'));
+            closeCaseModalBtn.addEventListener('click', () => caseModal.classList.add('hidden'));
+            
+            justificationPanel.addEventListener('click', function(e) {
+                const geminiButton = e.target.closest('#gemini-risk-btn');
+                if(geminiButton){
+                    handleGeminiRiskAnalysis(lastCompletedRun.outcome, geminiButton);
+                }
+            });
+
+             logPanel.addEventListener('click', function(e) {
+                const reportButton = e.target.closest('#report-btn');
+                const sarButton = e.target.closest('#sar-btn');
+                if(reportButton){
+                    generateComplianceReport();
+                }
+                if(sarButton){
+                    handleGeminiSAR(lastCompletedRun, sarButton);
+                }
+            });
+
+            casesList.addEventListener('click', function(e) {
+                const caseItem = e.target.closest('.case-item');
+                if (caseItem && caseItem.dataset.caseId) {
+                    showCaseDetails(caseItem.dataset.caseId);
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
