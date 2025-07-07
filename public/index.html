@@ -73,6 +73,27 @@
         }
     </style>
 </head>
+
+<!-- Modal com Iframe Tally -->
+<div id="wireframeModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+  <div class="bg-white w-full max-w-3xl h-[80vh] rounded-xl shadow-xl relative overflow-hidden">
+    <button onclick="closeModal()" class="absolute top-3 right-4 text-slate-600 hover:text-slate-900 text-2xl font-bold">&times;</button>
+    <iframe src="https://tally.so/r/wg18oP" class="w-full h-full border-0 rounded-b-xl"></iframe>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById('wireframeModal').classList.remove('hidden');
+  }
+  function closeModal() {
+    document.getElementById('wireframeModal').classList.add('hidden');
+  }
+</script>
+
+
+
+
 <body class="font-sans bg-[#FDFDFD] text-slate-800 overflow-x-hidden">
 
 <!-- Header -->
@@ -82,9 +103,10 @@
             <img src="logofound.png" alt="FoundLab Logo" class="h-8"> <!-- logo reduzida -->
             <span class="font-bold text-xl text-slate-900">FoundLab</span>
         </div>
-        <a href="./demo.html" class="hidden md:inline-block bg-slate-900 text-white font-medium py-2 px-6 rounded-lg hover:bg-slate-700 transition-colors duration-300">
-            Testar DEMO
-        </a>
+            <button onclick="openModal()" class="hidden md:inline-block bg-slate-900 text-white font-medium py-2 px-6 rounded-lg hover:bg-slate-700 transition-colors duration-300">
+                Testar DEMO
+            </button>
+
     </div>
 </header>
 
@@ -404,9 +426,9 @@ const audit = await foundlab.audit({
                 Veja como a infraestrutura da FoundLab F2F pode reduzir suas perdas, otimizar a eficiência operacional e destravar novas fontes de receita com segurança. Agende uma demonstração estratégica e personalizada com nossos especialistas.
             </p>
             <div class="mt-10 animate-on-scroll" style="transition-delay: 300ms;">
-                <a href="./demo.html" class="inline-block bg-white text-slate-900 font-bold py-4 px-10 rounded-lg hover:bg-slate-200 transition-colors duration-300 text-lg">
-                    Testar DEMO
-                </a>
+            <button onclick="openModal()" class="hidden md:inline-block bg-slate-900 text-white font-medium py-2 px-6 rounded-lg hover:bg-slate-700 transition-colors duration-300">
+                Testar DEMO
+            </button>
             </div>
         </div>
     </section>
