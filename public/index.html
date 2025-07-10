@@ -99,16 +99,44 @@
 <!-- Header -->
 <header class="absolute top-0 left-0 w-full py-6 px-4 sm:px-6 lg:px-8 z-30">
     <div class="container mx-auto flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <img src="logofound.png" alt="FoundLab Logo" class="h-8"> <!-- logo reduzida -->
+        <a href="#" class="flex items-center space-x-2">
+            <img src="logofound.png" alt="FoundLab Logo" class="h-8">
             <span class="font-bold text-xl text-slate-900">FoundLab</span>
-        </div>
-            <button onclick="openModal()" class="hidden md:inline-block bg-slate-900 text-white font-medium py-2 px-6 rounded-lg hover:bg-slate-700 transition-colors duration-300">
-                Testar DEMO
-            </button>
+        </a>
 
+        <nav class="hidden md:flex items-center space-x-8">
+            <a href="#solucao" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">A Solução</a>
+            <a href="#casos-de-uso" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Casos de Uso</a>
+            <a href="#integracao" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Para Devs</a>
+        </nav>
+
+        <button onclick="openModal()" class="hidden md:inline-block bg-slate-900 text-white font-medium py-2 px-6 rounded-lg hover:bg-slate-700 transition-colors duration-300">
+            Testar DEMO
+        </button>
+
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-slate-900">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
     </div>
 </header>
+
+<div id="mobile-menu" class="hidden fixed inset-0 bg-white z-40 md:hidden">
+    <div class="flex flex-col items-center justify-center h-full">
+        <button id="mobile-menu-close-button" class="absolute top-7 right-6 text-slate-900">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <nav class="flex flex-col items-center space-y-8">
+            <a href="#solucao" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">A Solução</a>
+            <a href="#casos-de-uso" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">Casos de Uso</a>
+            <a href="#integracao" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">Para Devs</a>
+            <button onclick="openModal(); closeMobileMenu();" class="mt-8 bg-slate-900 text-white font-medium py-3 px-8 rounded-lg text-lg">
+                Testar DEMO
+            </button>
+        </nav>
+    </div>
+</div>
 
 
     <!-- Seção 1: Hero (VERSÃO CORRIGIDA) -->
@@ -156,7 +184,7 @@
     </section>
 
     <!-- Seção 3: A Solução -->
-    <section class="py-20 lg:py-32">
+    <section id="solucao" class="py-20 lg:py-32">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">Não Apenas Analisamos. Entregamos um Veredito.</h2>
@@ -270,7 +298,7 @@
     </section>
 
     <!-- Seção 5: Casos de Uso -->
-    <section class="py-20 lg:py-32">
+    <section id="casos-de-uso" class="py-20 lg:py-32">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">Resolva Problemas Críticos. Desde o Dia 1.</h2>
@@ -281,7 +309,7 @@
                         <button data-target="pix" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-active">Pix-Cripto</button>
                         <button data-target="drex" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-inactive">DREX (CBDC)</button>
                         <button data-target="credit" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-inactive">Crédito</button>
-                        <button data-target="shadow" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-inactive">Modo Shadow</button>
+                        <button data-target="shadow" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-inactive">Modo de Validação</button>
                     </nav>
                 </div>
                 <div class="mt-8">
@@ -305,8 +333,8 @@
                     </div>
                     <div id="use-case-shadow" class="tab-panel hidden">
                         <div class="text-center p-8 bg-slate-50 rounded-lg">
-                            <h3 class="text-2xl font-bold text-slate-900">Modo Shadow Live</h3>
-                            <p class="mt-4 text-slate-600">Valide o poder do RaaT em seu ambiente real, sem impacto produtivo. Nosso Modo Shadow executa em paralelo ao seu sistema atual, provando o ROI e a redução de risco antes do go-live.</p>
+                            <h3 class="text-2xl font-bold text-slate-900">Validação Segura em Produção</h3>
+                            <p class="mt-4 text-slate-600">Teste nossa ferramenta diretamente em seu ambiente produtivo, de forma 100% segura e sem impacto. O Modo de Validação permite comparar os resultados e comprovar o valor da nossa solução antes de qualquer mudança no seu fluxo operacional.</p>
                         </div>
                     </div>
                 </div>
@@ -314,63 +342,82 @@
         </div>
     </section>
 
- <!-- Seção Para Devs -->
-<section class="bg-slate-900 text-white py-20 lg:py-32 font-sans">
+<section id="integracao" class="bg-slate-900 text-white py-20 lg:py-32 font-sans">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
     
-    <!-- Texto -->
     <div class="animate-on-scroll">
       <h2 class="text-4xl md:text-5xl font-bold tracking-tight font-serif text-white">
-        PARA <span class="text-blue-500">DEVS</span>
+        Integração <span class="text-blue-500">Simplificada</span>
       </h2>
       <p class="mt-4 text-lg text-slate-300">
-        APIs robustas, documentação completa e SDKs para as principais linguagens. Integre em minutos, não em semanas.
+        Nossas ferramentas foram desenhadas para uma implementação rápida e segura. Conecte sua plataforma aos nossos recursos em minutos.
       </p>
 
       <div class="mt-8 space-y-6 text-slate-400">
         <div>
-          <h3 class="text-white font-semibold text-lg">Documentação Completa</h3>
-          <p class="mt-1">Guias detalhados, exemplos práticos e referência completa da API.</p>
+          <h3 class="text-white font-semibold text-lg">Documentação Clara e Objetiva</h3>
+          <p class="mt-1">Oferecemos guias completos com exemplos práticos para auxiliar sua equipe a cada passo do processo.</p>
         </div>
         <div>
-          <h3 class="text-white font-semibold text-lg">SDKs Oficiais</h3>
-          <p class="mt-1">JavaScript, Python, Go, PHP e mais. Escolha a sua linguagem favorita.</p>
+          <h3 class="text-white font-semibold text-lg">Compatível com Sua Tecnologia</h3>
+          <p class="mt-1">Nossas soluções se adaptam facilmente às principais tecnologias do mercado, como JavaScript, Python e mais.</p>
         </div>
         <div>
-          <h3 class="text-white font-semibold text-lg">Suporte Técnico</h3>
-          <p class="mt-1">Nossa equipa está sempre disponível para ajudar na sua integração.</p>
+          <h3 class="text-white font-semibold text-lg">Suporte Especializado</h3>
+          <p class="mt-1">Nossa equipe está sempre disponível para garantir que sua integração seja um sucesso.</p>
         </div>
       </div>
     </div>
 
-    <!-- Bloco de Código -->
-    <div class="bg-slate-800 rounded-xl p-6 shadow-lg font-mono text-sm animate-on-scroll">
-      <div class="flex items-center gap-2 mb-4">
-        <span class="w-3 h-3 bg-red-500 rounded-full"></span>
-        <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
-        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-        <span class="ml-2 text-slate-300 font-sans text-sm">terminal</span>
+   <div class="bg-slate-800 rounded-xl p-8 shadow-lg animate-on-scroll">
+  <div class="space-y-8 relative">
+
+    <div class="absolute left-5 top-2 bottom-2 w-0.5 bg-slate-700"></div>
+
+    <div class="flex items-center relative">
+      <div class="z-10 flex items-center justify-center w-10 h-10 bg-blue-500 rounded-full text-white font-bold">
+        1
       </div>
-<pre class="text-green-400 whitespace-pre overflow-x-auto"><code>
-# Instalar SDK
-npm install @foundlab/sdk
-
-# Inicializar cliente
-const foundlab = new FoundLab({
-  apikey: process.env.FOUNDLAB_KEY,
-  environment: 'production'
-});
-
-# Criar auditoria
-const audit = await foundlab.audit({
-  action: 'user_login',
-  userId: '12345',
-  metadata: { ip, userAgent }
-});
-
-// ✓ Auditoria criada com sucesso
-</code></pre>
+      <div class="ml-6">
+        <h4 class="text-lg font-semibold text-white">Conexão Inicial</h4>
+        <p class="text-slate-400 mt-1">Adicione nossa ferramenta ao seu ambiente de desenvolvimento.</p>
+      </div>
     </div>
+
+    <div class="flex items-center relative">
+      <div class="z-10 flex items-center justify-center w-10 h-10 bg-blue-500 rounded-full text-white font-bold">
+        2
+      </div>
+      <div class="ml-6">
+        <h4 class="text-lg font-semibold text-white">Ativação Segura</h4>
+        <p class="text-slate-400 mt-1">Use sua chave de acesso exclusiva para sincronizar com a nossa plataforma.</p>
+      </div>
+    </div>
+
+    <div class="flex items-center relative">
+      <div class="z-10 flex items-center justify-center w-10 h-10 bg-blue-500 rounded-full text-white font-bold">
+        3
+      </div>
+      <div class="ml-6">
+        <h4 class="text-lg font-semibold text-white">Comece a Usar</h4>
+        <p class="text-slate-400 mt-1">Monitore e registre os eventos mais importantes da sua aplicação.</p>
+      </div>
+    </div>
+    
+    <div class="flex items-center relative">
+       <div class="z-10 flex items-center justify-center w-10 h-10 bg-green-500 rounded-full text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div class="ml-6">
+        <h4 class="text-lg font-semibold text-white">Pronto!</h4>
+        <p class="text-slate-400 mt-1">Sua integração foi concluída com sucesso.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
 
   </div>
 </section>
@@ -643,5 +690,33 @@ const audit = await foundlab.audit({
             });
         });
     </script>
+
+    <script>
+    // Seleciona os elementos do menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+    // Função para fechar o menu mobile, precisa ser global por causa do `onclick` no botão DEMO
+    function closeMobileMenu() {
+        mobileMenu.classList.add('hidden');
+    }
+
+    // Abre o menu
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.remove('hidden');
+    });
+
+    // Fecha o menu pelo botão 'X'
+    mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
+
+    // Fecha o menu ao clicar em um dos links de navegação
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+</script>
+
+
 </body>
 </html>
