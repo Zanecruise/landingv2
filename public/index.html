@@ -98,6 +98,61 @@
   z-index: 1;
 }
 
+
+/* Adicione isso dentro da sua tag <style> */
+
+@keyframes pulsate {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}
+
+.typing-indicator span {
+  width: 0.5rem; /* 8px */
+  height: 0.5rem; /* 8px */
+  border-radius: 9999px; /* rounded-full */
+  background-color: #64748B; /* slate-500 */
+  animation: pulsate 1.5s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+
+/* Adicione estas classes dentro da sua tag <style> */
+
+/* Estilo base para os botões e SVGs */
+.use-case-tab {
+    background-color: #f1f5f9; /* slate-100 */
+    color: #475569; /* slate-600 */
+}
+.use-case-tab svg {
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Estilo do botão ATIVO, que também ativa a animação do SVG */
+.use-case-tab-active {
+  background-color: #ffffff; /* branco */
+  color: #0f172a; /* slate-900 */
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+.use-case-tab-active svg {
+  transform: scale(1.1);
+}
+
+
+
     </style>
 </head>
 
@@ -133,6 +188,7 @@
 
         <nav class="hidden md:flex items-center space-x-8">
             <a href="#solucao" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">A Solução</a>
+            <a href="#spezzatura" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Spezzatura</a>
             <a href="#casos-de-uso" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Casos de Uso</a>
             <a href="#integracao" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Para Devs</a>
         </nav>
@@ -156,6 +212,7 @@
         </button>
         <nav class="flex flex-col items-center space-y-8">
             <a href="#solucao" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">A Solução</a>
+            <a href="#spezzatura" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">Spezzatura</a>
             <a href="#casos-de-uso" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">Casos de Uso</a>
             <a href="#integracao" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">Para Devs</a>
             <button onclick="openModal(); closeMobileMenu();" class="mt-8 bg-slate-900 text-white font-medium py-3 px-8 rounded-lg text-lg">
@@ -197,18 +254,160 @@
         </div>
     </section>
 
-    <!-- Seção 2: O Paradoxo da Confiança -->
-    <section class="py-20 lg:py-32 bg-slate-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">
-                O Paradoxo da Confiança na Nova Economia Digital.
-            </h2>
-            <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">
-                O sistema financeiro está num ponto de inflexão. A transição para uma infraestrutura híbrida (TradFi-Web3) trouxe velocidade sem precedentes, mas também uma nova vulnerabilidade: quanto mais conectadas as transações, mais frágil se torna a confiança. As ferramentas atuais, reativas e lentas, criam uma lacuna crítica. A FoundLab preenche essa lacuna.
 
-            </p>
+<section class="bg-white py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">
+                Nossas Tecnologias
+            </h2>
+            
+            <div class="mt-16 flex justify-center items-center flex-wrap gap-x-12 sm:gap-x-16 gap-y-8">
+
+                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro2.png" alt="Logo Parceiro 1" />
+                
+                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro3.png" alt="Logo Parceiro 2" />
+                
+                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro7.png" alt="Logo Parceiro 3" />
+
+                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro9.png" alt="Logo Parceiro 4" />
+
+            </div>
+        </div>
     </div>
-    </section>
+</section>
+
+
+
+
+    <!-- Seção 2: O Paradoxo da Confiança -->
+<section class="py-20 lg:py-32 bg-slate-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+            <div class="animate-on-scroll">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+                    O Paradoxo da Confiança na Nova Economia Digital.
+                </h2>
+                <p class="mt-6 text-xl text-slate-600">
+                    O sistema financeiro está num ponto de inflexão. A transição para uma 
+                    <span class="text-blue-600 font-semibold">infraestrutura híbrida (TradFi-Web3)</span> 
+                    trouxe velocidade sem precedentes, mas também uma nova vulnerabilidade: quanto mais conectadas as transações, mais 
+                    <span class="text-blue-600 font-semibold">frágil se torna a confiança.</span> 
+                    As ferramentas atuais, reativas e lentas, criam uma lacuna crítica. A FoundLab preenche essa lacuna.
+                </p>
+            </div>
+
+            <div class="flex justify-center items-center animate-on-scroll" style="transition-delay: 200ms;">
+                <div class="w-full max-w-sm">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <g id="network" stroke="#cbd5e1" stroke-width="1.5">
+                            <line x1="100" y1="100" x2="40" y2="50"/>
+                            <line x1="100" y1="100" x2="60" y2="150"/>
+                            <line x1="100" y1="100" x2="160" y2="140"/>
+                            <line x1="100" y1="100" x2="150" y2="40"/>
+                            <line x1="40" y1="50" x2="60" y2="150"/>
+                            <line x1="60" y1="150" x2="160" y2="140"/>
+                            <line x1="160" y1="140" x2="150" y2="40"/>
+                            <line x1="150" y1="40" x2="40" y2="50"/>
+                            <circle cx="40" cy="50" r="5" fill="#e2e8f0"/>
+                            <circle cx="60" cy="150" r="7" fill="#e2e8f0"/>
+                            <circle cx="160" cy="140" r="6" fill="#e2e8f0"/>
+                            <circle cx="150" cy="40" r="4" fill="#e2e8f0"/>
+                        </g>
+
+                        <g id="crystal" transform="translate(100, 100) scale(1.2)">
+                            <path d="M 0,-40 L 35,0 L 0,40 L -35,0 Z" fill="#3b82f6"/>
+                            <path d="M 0,-40 L 0,40" stroke="white" stroke-width="1.5" stroke-opacity="0.5"/>
+                            <path d="M -35,0 L 35,0" stroke="white" stroke-width="1" stroke-opacity="0.3"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+<section id="spezzatura" class="bg-white py-20 lg:py-32">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      
+      <div class="animate-on-scroll">
+        <p class="font-semibold text-blue-600">Oráculo de Reputação Onchain</p>
+        <h2 class="mt-4 font-serif text-4xl md:text-5xl font-bold text-slate-900">
+          Confiança Determinística e Auditável.
+        </h2>
+        <p class="mt-6 text-lg text-slate-600">
+          O Spezzatura não é uma caixa-preta. É um mecanismo reputacional transparente, desenvolvido para validar decisões de confiança com lógica reproduzível. Explore sua fórmula e propósito diretamente com nossa IA.
+        </p>
+        <div class="mt-10">
+          <a href="https://chatgpt.com/g/g-686b43cfcd488191875bddbf2aef6563-spezzatura-onchain-reputational-oracle" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-3 bg-slate-900 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-700 transition-colors duration-300">
+            Conversar com Spezzatura
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="animate-on-scroll" style="transition-delay: 200ms;">
+        <div class="bg-slate-900 rounded-xl shadow-2xl p-6 font-mono text-sm text-slate-300">
+          <div class="flex items-center gap-2 mb-6">
+            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+          </div>
+
+          <div class="space-y-5">
+            <div>
+              <span class="text-green-400">você:~$</span>
+              <p class="mt-1 ml-2 bg-slate-800/50 rounded-lg p-3 inline-block">Explique a fórmula e o propósito do Spezzatura.</p>
+            </div>
+
+            <div>
+              <span class="text-blue-400">spezzatura_ai:~$</span>
+              <p class="mt-1 ml-2 bg-slate-800 rounded-lg p-3">
+                O Spezzatura Oracle é um mecanismo reputacional <span class="text-white">determinístico</span> e <span class="text-white">auditável</span>, desenvolvido para validar decisões de confiança em ambientes Web3 e TradFi.
+              </p>
+            </div>
+            
+            <div>
+              <span class="text-blue-400">spezzatura_ai:~$</span>
+              <p class="mt-1 ml-2 bg-slate-800 rounded-lg p-3">
+                Sua finalidade é validar decisões com lógica reproduzível. Cada decisão gera um score numérico, um veredito (ALLOW, REVIEW, BLOCK) e uma rationale textual com hash SHA-256.
+              </p>
+            </div>
+
+            <div>
+              <span class="text-blue-400">spezzatura_ai:~$</span>
+              <p class="mt-1 ml-2">A reputação é medida com a seguinte fórmula:</p>
+              <div class="mt-2 ml-2 bg-slate-800 rounded-lg p-4 text-center">
+                <code class="text-teal-300">score <span class="text-white">=</span> log₂<span class="text-slate-400">(</span><span class="text-amber-400">C</span> <span class="text-white">×</span> <span class="text-amber-400">A</span> <span class="text-white">×</span> <span class="text-amber-400">T</span><span class="text-teal-300">²</span> <span class="text-white">×</span> <span class="text-amber-400">U</span> <span class="text-white">×</span> <span class="text-amber-400">R</span> <span class="text-white">×</span> <span class="text-amber-400">Å</span><span class="text-slate-400">)</span></code>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
 
 <section id="solucao" class="py-20 lg:py-32 relative bg-white">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -285,10 +484,10 @@
   </div>
 </section>
 
-<div class="bg-white">
+<div class="bg-slate-100">
   <div class="w-full h-20 md:h-32 lg:h-40 bg-slate-900">
     <svg
-      class="w-full h-full text-white" 
+      class="w-full h-full text-slate-100" 
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1440 320"
       preserveAspectRatio="none"
@@ -300,49 +499,166 @@
 </div>
 
     <!-- Seção 5: Casos de Uso -->
-    <section id="casos-de-uso" class="py-20 lg:py-32">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">Resolva Problemas Críticos. Desde o Dia 1.</h2>
+<section id="casos-de-uso" class="py-20 lg:py-32 bg-slate-100">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center">
+      <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">
+        Resolva Problemas Críticos. Desde o Dia 1.
+      </h2>
+      <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">
+        Nossa plataforma se adapta aos desafios mais complexos do ecossistema financeiro híbrido. Veja como podemos ajudar.
+      </p>
+    </div>
+
+    <div class="mt-16 grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      
+      <div class="lg:col-span-1" role="tablist" aria-label="Casos de Uso">
+        <div class="space-y-4">
+          
+          <button class="use-case-tab w-full flex items-center gap-4 text-left p-4 rounded-xl transition-all use-case-tab-active" data-target="panel-pix" role="tab" aria-selected="true">
+            <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-md">
+              <svg class="w-8 h-8 text-slate-800 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.886 7.113a.938.938 0 1 0-1.326 1.326.938.938 0 0 0 1.326-1.326Z" fill="#2dd4bf" stroke="#1e293b" stroke-width="1.5"/> <path stroke="#1e293b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.438 17.813h-5.25m5.25-2.813h-5.25m10.313-5.25a3.75 3.75 0 1 1-5.304 0 3.75 3.75 0 0 1 5.304 0Z"/> <path stroke="#1e293b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.313 19.313a9 9 0 1 1-14.625-14.625 9 9 0 0 1 14.625 14.625Z"/>
+              </svg>
             </div>
-            <div class="max-w-4xl mx-auto mt-12 animate-on-scroll">
-                <div class="border-b border-slate-200">
-                    <nav id="use-case-nav" class="-mb-px flex flex-wrap justify-center gap-x-8" aria-label="Tabs">
-                        <button data-target="pix" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-active">Pix-Cripto</button>
-                        <button data-target="drex" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-inactive">DREX (CBDC)</button>
-                        <button data-target="credit" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-inactive">Crédito</button>
-                        <button data-target="shadow" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg tab-inactive">Modo de Validação</button>
-                    </nav>
-                </div>
-                <div class="mt-8">
-                    <div id="use-case-pix" class="tab-panel">
-                        <div class="text-center p-8 bg-slate-50 rounded-lg">
-                            <h3 class="text-2xl font-bold text-slate-900">Análise de Risco para Pix-Cripto</h3>
-                            <p class="mt-4 text-slate-600">Bloqueio em tempo real de triangulações fraudulentas, com veredito justificável e irreversível. Reduza em até 60% as fraudes não detetadas pelos sistemas tradicionais.</p>
-                        </div>
-                    </div>
-                    <div id="use-case-drex" class="tab-panel hidden">
-                        <div class="text-center p-8 bg-slate-50 rounded-lg">
-                            <h3 class="text-2xl font-bold text-slate-900">Conformidade para Operações Drex</h3>
-                            <p class="mt-4 text-slate-600">Atuamos como uma camada de política programável para a CBDC brasileira. Aplicamos regras de AML diretamente no nível do smart contract para operações de mint e burn, resolvendo os desafios explorados no Piloto Drex.</p>
-                        </div>
-                    </div>
-                    <div id="use-case-credit" class="tab-panel hidden">
-                        <div class="text-center p-8 bg-slate-50 rounded-lg">
-                            <h3 class="text-2xl font-bold text-slate-900">Concessão de Crédito Baseada em Reputação</h3>
-                            <p class="mt-4 text-slate-600">Parametrização dinâmica de juros e limites com base no Spezzatura Score. Precifique o risco de forma granular e habilite novos produtos de crédito para o ecossistema híbrido.</p>
-                        </div>
-                    </div>
-                    <div id="use-case-shadow" class="tab-panel hidden">
-                        <div class="text-center p-8 bg-slate-50 rounded-lg">
-                            <h3 class="text-2xl font-bold text-slate-900">Validação Segura em Produção</h3>
-                            <p class="mt-4 text-slate-600">Teste nossa ferramenta diretamente em seu ambiente produtivo, de forma 100% segura e sem impacto. O Modo de Validação permite comparar os resultados e comprovar o valor da nossa solução antes de qualquer mudança no seu fluxo operacional.</p>
-                        </div>
-                    </div>
-                </div>
+            <span class="font-bold text-lg">Análise Pix-Cripto</span>
+          </button>
+
+          <button class="use-case-tab w-full flex items-center gap-4 text-left p-4 rounded-xl transition-all" data-target="panel-drex" role="tab" aria-selected="false">
+             <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-md">
+                <svg class="w-8 h-8 text-slate-800 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M12 6.75h.008v.008H12V6.75Z" fill="#2dd4bf"/>
+                </svg>
             </div>
+            <span class="font-bold text-lg">Operações Drex</span>
+          </button>
+
+          <button class="use-case-tab w-full flex items-center gap-4 text-left p-4 rounded-xl transition-all" data-target="panel-credit" role="tab" aria-selected="false">
+             <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-md">
+              <svg class="w-8 h-8 text-slate-800 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 8.5a4.5 4.5 0 1 0-8.485 2.016M4 20v-2.382a4.5 4.5 0 0 1 2.87-4.133M18.5 18.5l-3-3m0 3l3-3" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M15.5 13a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM18.5 13a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM15.5 10a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" fill="#2dd4bf"/>
+              </svg>
+            </div>
+            <span class="font-bold text-lg">Crédito por Reputação</span>
+          </button>
+          
+          <button class="use-case-tab w-full flex items-center gap-4 text-left p-4 rounded-xl transition-all" data-target="panel-validation" role="tab" aria-selected="false">
+             <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-md">
+              <svg class="w-8 h-8 text-slate-800 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g opacity="0.4"><rect x="5" y="5" width="13" height="13" rx="2" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="2 2"/></g>
+                <rect x="8" y="8" width="13" height="13" rx="2" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.5"/>
+                <path d="m11.5 14.5 2 2 4-4" stroke="#1e293b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="font-bold text-lg">Modo de Validação</span>
+          </button>
+
         </div>
-    </section>
+      </div>
+
+      <div class="lg:col-span-2 bg-white rounded-2xl p-8 lg:p-12 shadow-xl">
+        <div id="panel-pix" class="use-case-panel" role="tabpanel">
+          <h3 class="text-3xl font-bold text-slate-900">Análise de Risco para Pix-Cripto</h3>
+          <p class="mt-4 text-lg text-slate-600">Bloqueio em tempo real de triangulações fraudulentas, com veredito justificável e irreversível. Reduza em até 60% as fraudes não detetadas pelos sistemas tradicionais.</p>
+ <!--         <a href="#" class="mt-6 inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-800 transition-colors">Saiba Mais <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a> -->
+        </div>
+        <div id="panel-drex" class="use-case-panel hidden" role="tabpanel">
+          <h3 class="text-3xl font-bold text-slate-900">Conformidade para Operações Drex</h3>
+          <p class="mt-4 text-lg text-slate-600">Atuamos como uma camada de política programável para a CBDC brasileira, aplicando regras de AML diretamente no nível do smart contract para operações de mint e burn, resolvendo os desafios explorados no Piloto Drex.</p>
+<!--          <a href="#" class="mt-6 inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-800 transition-colors">Saiba Mais <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a> -->
+        </div>
+        <div id="panel-credit" class="use-case-panel hidden" role="tabpanel">
+          <h3 class="text-3xl font-bold text-slate-900">Concessão de Crédito Baseada em Reputação</h3>
+          <p class="mt-4 text-lg text-slate-600">Parametrização dinâmica de juros e limites com base no Spezzatura Score. Precifique o risco de forma granular e habilite novos produtos de crédito para o ecossistema híbrido.</p>
+<!--          <a href="#" class="mt-6 inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-800 transition-colors">Saiba Mais <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a> -->
+        </div>
+        <div id="panel-validation" class="use-case-panel hidden" role="tabpanel">
+           <h3 class="text-3xl font-bold text-slate-900">Validação Segura em Produção</h3>
+           <p class="mt-4 text-lg text-slate-600">Teste nossa ferramenta diretamente em seu ambiente produtivo, de forma 100% segura e sem impacto. O Modo de Validação permite comparar os resultados e comprovar o valor da nossa solução antes de qualquer mudança no seu fluxo operacional.</p>
+<!--           <a href="#" class="mt-6 inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-800 transition-colors">Saiba Mais <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!--
+<section class="bg-slate-900 py-20 lg:py-32 dark-section-bg">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="font-serif text-4xl md:text-5xl font-bold text-white">
+        Uma base financeira sólida
+      </h2>
+      <p class="mt-4 text-lg text-slate-400">
+        Recursos de alto rendimento, cartões com cashback e capital de giro flexível para impulsionar seu negócio.
+      </p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <div class="bg-slate-800 rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 border border-transparent hover:border-slate-700">
+        <div>
+          <div class="aspect-video bg-slate-900/50 rounded-lg flex items-center justify-center">
+            <svg class="w-16 h-16 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Z" />
+            </svg>
+          </div>
+          
+          <h3 class="text-2xl font-bold text-white mt-8">Contas Correntes e Poupança</h3>
+          <p class="mt-2 text-slate-400">
+            Transferências gratuitas para clientes Pro, rendimentos elevados e segurança com seguro FDIC.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-slate-800 rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 border border-transparent hover:border-slate-700">
+        <div>
+          <div class="aspect-video bg-slate-900/50 rounded-lg flex items-center justify-center">
+            <svg class="w-16 h-16 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+            </svg>
+          </div>
+
+          <h3 class="text-2xl font-bold text-white mt-8">Capital de Giro</h3>
+          <p class="mt-2 text-slate-400">
+            Acesso a financiamentos, linhas de crédito e capital para investir através de nossos parceiros.
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2 bg-slate-800 rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 border border-transparent hover:border-slate-700">
+        <div>
+          <div class="aspect-video bg-slate-900/50 rounded-lg flex items-center justify-center">
+             <svg class="w-16 h-16 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3.375m-3.375 2.25h10.5m4.5-9.75h-5.625m0 0a3.375 3.375 0 0 1-3.375-3.375M9 5.25a3.375 3.375 0 0 0-3.375 3.375m0 0h3.375m-3.375 0h-1.5m1.5 0v-1.5m0 1.5v1.5m0 0v1.5m3.375 0h-3.375" />
+            </svg>
+          </div>
+
+          <h3 class="text-2xl font-bold text-white mt-8">Cartões Corporativos com 2% de Cashback</h3>
+          <p class="mt-2 text-slate-400">
+            Cashback ilimitado, cartões virtuais e físicos, e controles de gastos incomparáveis para sua equipe.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+-->
+
+
+
+
+
+
+
+
 
 <section id="integracao" class="bg-slate-900 text-white py-20 lg:py-32 font-sans dark-section-bg">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
@@ -463,80 +779,62 @@
         </div>
     </section>
 
-    <!-- Seção CTA Final -->
-    <section id="cta" class="py-20 lg:py-32 bg-slate-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-            <h2 class="font-serif text-5xl md:text-5xl font-bold leading-tight animate-on-scroll">
-                Pare de Monitorar o Risco. Comece a Executá-lo.
-            </h2>
-            <p class="mt-6 text-lg text-slate-300 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">
-                Descubra como a infraestrutura da FoundLab F2F pode reduzir as suas perdas, otimizar a eficiência operacional e destravar novas fontes de receita com segurança.
-            </p>
-            <p class="mt-6 text-lg text-slate-300 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">
-                Agende uma demonstração estratégica e personalizada com nossos especialistas.
-            </p>
-            <div class="mt-10 animate-on-scroll" style="transition-delay: 300ms;">
-            <button onclick="openModal()" class="hidden md:inline-block bg-slate-900 text-white font-medium py-2 px-6 rounded-lg hover:bg-slate-700 transition-colors duration-300">
+
+<section id="cta" class="bg-white py-20 lg:py-32">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+<!--        <img src="logofound.png" alt="FoundLab Logo" class="mx-auto h-12 w-auto animate-on-scroll">  -->
+
+        <h2 class="mt-8 font-serif text-4xl md:text-5xl font-bold leading-tight text-slate-900 animate-on-scroll" style="transition-delay: 100ms;">
+            Pare de Monitorar o Risco. <br>Comece a Executá-lo.
+        </h2>
+        
+        <p class="mt-6 text-lg text-slate-600 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 200ms;">
+            Descubra como nossa infraestrutura pode reduzir perdas, otimizar sua operação e destravar novas fontes de receita com segurança total.
+        </p>
+        
+        <div class="mt-10 animate-on-scroll" style="transition-delay: 300ms;">
+            <a href="#" onclick="openModal(); return false;" class="inline-block bg-blue-600 text-white font-bold text-lg py-4 px-10 rounded-xl shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-1">
                 Testar DEMO
-            </button>
-            </div>
+            </a>
         </div>
-    </section>
+<!--
+        <p class="mt-6 text-sm text-slate-500 animate-on-scroll" style="transition-delay: 400ms;">
+            ou <a href="#" class="font-medium text-blue-600 underline hover:text-blue-500">agende uma demonstração</a> com nossos especialistas.
+        </p> -->
+    </div>
+</section>
 
 <footer class="bg-white">
   <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      
-      <div>
-        <h3 class="text-sm font-semibold text-slate-500 tracking-wider uppercase">Institucional</h3>
-        <ul class="mt-4 space-y-4">
-          <li><a href="/sobre" class="text-base text-slate-600 hover:text-slate-900">Sobre Nós</a></li>
-          <li><a href="/servicos" class="text-base text-slate-600 hover:text-slate-900">Serviços</a></li>
-          <li><a href="/blog" class="text-base text-slate-600 hover:text-slate-900">Blog</a></li>
-          <li><a href="/contato" class="text-base text-slate-600 hover:text-slate-900">Contato</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-semibold text-slate-500 tracking-wider uppercase">Legal</h3>
-        <ul class="mt-4 space-y-4">
-          <li><a href="/politica-de-privacidade" class="text-base text-slate-600 hover:text-slate-900">Política de Privacidade</a></li>
-          <li><a href="/termos-de-uso" class="text-base text-slate-600 hover:text-slate-900">Termos de Uso</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-semibold text-slate-500 tracking-wider uppercase">Contato</h3>
-        <ul class="mt-4 space-y-4">
-          <li><a href="mailto:contato@foundlab.cloud" class="text-base text-slate-600 hover:text-slate-900">contato@foundlab.cloud</a></li>
-          <li><p class="text-base text-slate-600">+55 (XX) XXXX-XXXX</p></li>
-          <li><p class="text-base text-slate-600">Seu Endereço, 123 - Cidade, UF</p></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-semibold text-slate-500 tracking-wider uppercase">Siga-nos</h3>
-        <div class="mt-4 flex space-x-6">
-          <a href="#" class="text-slate-600 hover:text-slate-900">
-            <span class="sr-only">LinkedIn</span>
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-          <a href="#" class="text-slate-600 hover:text-slate-900">
-            <span class="sr-only">GitHub</span>
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.82c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.65.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
+    
+    <div class="flex justify-center">
+      <a href="#" class="flex items-center space-x-2">
+        <img class="h-8 w-auto" src="logofound.png" alt="FoundLab Logo">
+        <span class="font-bold text-xl text-slate-900">FoundLab</span>
+      </a>
     </div>
-
-    <div class="mt-12 border-t border-slate-200 pt-8 text-center">
-      <p class="text-base text-slate-500">&copy; 2025 FoundLab. Todos os direitos reservados.</p>
+    
+    <nav class="mt-8" aria-label="Footer">
+      <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        <li><a href="#solucao" class="text-base text-slate-600 hover:text-slate-900">A Solução</a></li>
+        <li><a href="#spezzatura" class="text-base text-slate-600 hover:text-slate-900">Spezzatura</a></li>
+        <li><a href="#casos-de-uso" class="text-base text-slate-600 hover:text-slate-900">Casos de Uso</a></li>
+        <li><a href="#integracao" class="text-base text-slate-600 hover:text-slate-900">Para Devs</a></li>
+      </ul>
+    </nav>
+    
+    <div class="mt-12 border-t border-slate-200 pt-8">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-base text-slate-500 order-2 sm:order-1">
+          &copy; 2025 FoundLab. Todos os direitos reservados.
+        </p>
+        <a href="mailto:domains@foundlab.cloud" class="text-base font-medium text-slate-600 hover:text-slate-900 order-1 sm:order-2">
+          domains@foundlab.cloud
+        </a>
+      </div>
     </div>
+    
   </div>
 </footer>
 
@@ -748,6 +1046,68 @@
         link.addEventListener('click', closeMobileMenu);
     });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.use-case-tab');
+    const panels = document.querySelectorAll('.use-case-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-target');
+
+        // Atualiza o estilo dos botões (abas)
+        tabs.forEach(t => {
+          t.classList.remove('use-case-tab-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('use-case-tab-active');
+        tab.setAttribute('aria-selected', 'true');
+
+        // Esconde todos os painéis e mostra apenas o alvo
+        panels.forEach(panel => {
+          if (panel.id === targetId) {
+            panel.classList.remove('hidden');
+          } else {
+            panel.classList.add('hidden');
+          }
+        });
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+      window.va = window.va || function () { (window.va.q = window.va.q || []).push(arguments); };
+      const vercelAnalyticsScript = document.createElement('script');
+      vercelAnalyticsScript.defer = true;
+      vercelAnalyticsScript.src = '/_vercel/insights/script.js';
+      document.body.appendChild(vercelAnalyticsScript);
+    </script>
+  </body>
+</html>
+
+
+
 
 
 </body>
