@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoundLab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="logofound.png" type="image/x-icon">
+    <script>
+        // (function(h,o,t,j,a,r){ ... }); // Paste tracking code here
+    </script>
+    <style>
+        /* Custom styles and Tailwind config */
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'Inter', sans-serif; }
+        .hero-bg { position: relative; overflow: hidden; }
+        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .content-z { position: relative; z-index: 2; }
+        .tab-active { border-bottom-color: #1E293B; color: #1E293B; }
+        .tab-inactive { border-bottom-color: transparent; color: #64748B; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .testimonial-bg-quote { position: absolute; font-size: 12rem; font-family: 'Playfair Display', serif; color: rgba(255, 255, 255, 0.05); top: 50%; left: 50%; transform: translate(-50%, -50%); line-height: 1; user-select: none; z-index: 1; }
+        .dark-section-bg { position: relative; background-color: #0F172A; }
+        .dark-section-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.5; z-index: 0; }
+        .dark-section-bg > * { position: relative; z-index: 1; }
+        @keyframes pulsate { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.9); } }
+        .typing-indicator span { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background-color: #64748B; animation: pulsate 1.5s infinite ease-in-out; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        .use-case-tab { background-color: #f1f5f9; color: #475569; }
+        .use-case-tab svg { transform: scale(1); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .use-case-tab-active { background-color: #ffffff; color: #0f172a; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .use-case-tab-active svg { transform: scale(1.1); }
+    </style>
+</head>
+
+<div id="wireframeModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white w-full max-w-4xl h-[80vh] rounded-xl shadow-xl relative overflow-hidden">
+        <button onclick="closeModal()" class="absolute top-3 right-4 text-slate-600 hover:text-slate-900 text-2xl font-bold">&times;</button>
+        <iframe src="https://tally.so/r/wg18oP" class="w-full h-full border-0 rounded-b-xl"></iframe>
+    </div>
+</div>
+<script>
+    function openModal() { document.getElementById('wireframeModal').classList.remove('hidden'); }
+    function closeModal() { document.getElementById('wireframeModal').classList.add('hidden'); }
+</script>
+
+<body class="font-sans bg-[#FDFDFD] text-slate-800 overflow-x-hidden">
+
+<header class="absolute top-0 left-0 w-full py-6 px-4 sm:px-6 lg:px-8 z-30">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="flex items-center space-x-2">
+            <img src="logofound.png" alt="FoundLab Logo" class="h-8">
+            <span class="font-bold text-xl text-slate-900">FoundLab</span>
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8">
+            <a href="#solucao" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">The Solution</a>
+            <a href="#spezzatura" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Spezzatura</a>
+            <a href="#casos-de-uso" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Use Cases</a>
+            <a href="#integracao" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">For Devs</a>
+        </nav>
+
+        <div class="hidden md:flex items-center bg-slate-100 rounded-full p-1 space-x-1 mx-6">
+            <a href="index.html" class="font-medium text-sm py-1 px-3 rounded-full text-slate-500 hover:bg-slate-200 transition-colors">PT</a>
+            <a href="index-en.html" class="font-medium text-sm py-1 px-3 rounded-full bg-white text-slate-800 shadow">EN</a>
+        </div>
+
+        <button onclick="openModal()" class="hidden md:inline-block bg-slate-900 text-white font-medium py-2 px-6 rounded-lg hover:bg-slate-700 transition-colors duration-300">
+            Test DEMO
+        </button>
+
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-slate-900">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div id="mobile-menu" class="hidden fixed inset-0 bg-white z-40 md:hidden">
+    <div class="flex flex-col items-center justify-center h-full">
+        <button id="mobile-menu-close-button" class="absolute top-7 right-6 text-slate-900">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <nav class="flex flex-col items-center space-y-8">
+            <a href="#solucao" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">The Solution</a>
+            <a href="#spezzatura" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">Spezzatura</a>
+            <a href="#casos-de-uso" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">Use Cases</a>
+            <a href="#integracao" class="mobile-menu-link text-2xl font-bold text-slate-800 hover:text-blue-600">For Devs</a>
+            <button onclick="openModal(); closeMobileMenu();" class="mt-8 bg-slate-900 text-white font-medium py-3 px-8 rounded-lg text-lg">
+                Test DEMO
+            </button>
+            <div class="mt-8 flex items-center bg-slate-100 rounded-full p-1 space-x-2">
+                <a href="index.html" class="font-bold text-lg py-2 px-6 rounded-full text-slate-500">PT</a>
+                <a href="index-en.html" class="font-bold text-lg py-2 px-6 rounded-full bg-white text-slate-800 shadow">EN</a>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<section class="hero-bg min-h-screen flex items-center py-24 md:py-0">
+    <canvas id="hero-canvas"></canvas>
+    <div class="content-z container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="text-center md:text-left">
+                <div class="mb-0 animate-on-scroll text-center md:text-left">
+                    <img src="logoheader.png" alt="FoundLab Logo" class="w-full max-w-md md:max-w-lg lg:max-w-1xl">
+                </div>
+                <p id="hero-subtitle" class="mt-4 text-2xl md:text-2xl font-medium text-slate-800 max-w-2xl mx-auto md:mx-0 animate-on-scroll" style="transition-delay: 200ms;">
+                    Turn Risk into Revenue and Compliance into a Competitive Advantage.
+                </p>
+            </div>
+            <div></div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-white py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">
+                Our Technologies
+            </h2>
+            <div class="mt-16 flex justify-center items-center flex-wrap gap-x-12 sm:gap-x-16 gap-y-8">
+                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro2.png" alt="Partner Logo 1" />
+                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro3.png" alt="Partner Logo 2" />
+                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro7.png" alt="Partner Logo 3" />
+                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro9.png" alt="Partner Logo 4" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 lg:py-32 bg-slate-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="animate-on-scroll">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+                    The Trust Paradox in the New Digital Economy.
+                </h2>
+                <p class="mt-6 text-xl text-slate-600">
+                    The financial system is at an inflection point. The transition to a
+                    <span class="text-blue-600 font-semibold">hybrid infrastructure (TradFi-Web3)</span>
+                    has brought unprecedented speed, but also a new vulnerability: the more connected transactions are, the
+                    <span class="text-blue-600 font-semibold">more fragile trust becomes.</span>
+                    Current tools, reactive and slow, create a critical gap. FoundLab fills that gap.
+                </p>
+            </div>
+            <div class="flex justify-center items-center animate-on-scroll" style="transition-delay: 200ms;">
+                <div class="w-full max-w-sm">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <g id="network" stroke="#cbd5e1" stroke-width="1.5">
+                            <line x1="100" y1="100" x2="40" y2="50"/><line x1="100" y1="100" x2="60" y2="150"/><line x1="100" y1="100" x2="160" y2="140"/><line x1="100" y1="100" x2="150" y2="40"/><line x1="40" y1="50" x2="60" y2="150"/><line x1="60" y1="150" x2="160" y2="140"/><line x1="160" y1="140" x2="150" y2="40"/><line x1="150" y1="40" x2="40" y2="50"/>
+                            <circle cx="40" cy="50" r="5" fill="#e2e8f0"/><circle cx="60" cy="150" r="7" fill="#e2e8f0"/><circle cx="160" cy="140" r="6" fill="#e2e8f0"/><circle cx="150" cy="40" r="4" fill="#e2e8f0"/>
+                        </g>
+                        <g id="crystal" transform="translate(100, 100) scale(1.2)">
+                            <path d="M 0,-40 L 35,0 L 0,40 L -35,0 Z" fill="#3b82f6"/><path d="M 0,-40 L 0,40" stroke="white" stroke-width="1.5" stroke-opacity="0.5"/><path d="M -35,0 L 35,0" stroke="white" stroke-width="1" stroke-opacity="0.3"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="spezzatura" class="bg-white py-20 lg:py-32">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-on-scroll">
+                <p class="font-semibold text-blue-600">Onchain Reputation Oracle</p>
+                <h2 class="mt-4 font-serif text-4xl md:text-5xl font-bold text-slate-900">
+                    Deterministic and Auditable Trust.
+                </h2>
+                <p class="mt-6 text-lg text-slate-600">
+                    Spezzatura is not a black box. It's a transparent reputational mechanism, designed to validate trust decisions with reproducible logic. Explore its formula and purpose directly with our AI.
+                </p>
+                <div class="mt-10">
+                    <a href="https://chatgpt.com/g/g-686b43cfcd488191875bddbf2aef6563-spezzatura-onchain-reputational-oracle" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-3 bg-slate-900 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-700 transition-colors duration-300">
+                        Chat with Spezzatura
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" /></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="animate-on-scroll" style="transition-delay: 200ms;">
+                <div class="bg-slate-900 rounded-xl shadow-2xl p-6 font-mono text-sm text-slate-300">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div><div class="w-3 h-3 bg-yellow-500 rounded-full"></div><div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <span class="text-green-400">you:~$</span>
+                            <p class="mt-1 ml-2 bg-slate-800/50 rounded-lg p-3 inline-block">Explain the formula and purpose of Spezzatura.</p>
+                        </div>
+                        <div>
+                            <span class="text-blue-400">spezzatura_ai:~$</span>
+                            <p class="mt-1 ml-2 bg-slate-800 rounded-lg p-3">
+                                The Spezzatura Oracle is a <span class="text-white">deterministic</span> and <span class="text-white">auditable</span> reputational mechanism, designed to validate trust decisions in Web3 and TradFi environments.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="text-blue-400">spezzatura_ai:~$</span>
+                            <p class="mt-1 ml-2 bg-slate-800 rounded-lg p-3">
+                                Its purpose is to validate decisions with reproducible logic. Each decision generates a numerical score, a verdict (ALLOW, REVIEW, BLOCK), and a textual rationale with a SHA-256 hash.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="text-blue-400">spezzatura_ai:~$</span>
+                            <p class="mt-1 ml-2">Reputation is measured with the following formula:</p>
+                            <div class="mt-2 ml-2 bg-slate-800 rounded-lg p-4 text-center">
+                                <code class="text-teal-300">score <span class="text-white">=</span> log₂<span class="text-slate-400">(</span><span class="text-amber-400">C</span> <span class="text-white">×</span> <span class="text-amber-400">A</span> <span class="text-white">×</span> <span class="text-amber-400">T</span><span class="text-teal-300">²</span> <span class="text-white">×</span> <span class="text-amber-400">U</span> <span class="text-white">×</span> <span class="text-amber-400">R</span> <span class="text-white">×</span> <span class="text-amber-400">Å</span><span class="text-slate-400">)</span></code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="solucao" class="py-20 lg:py-32 relative bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">We Don't Just Analyze. We Deliver a Verdict.</h2>
+            <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">
+                Introducing Reputation-as-a-Transaction (RaaT). A programmatic execution layer that conditions every transaction on the reputation of the parties, in real-time, embedding directly into the core of your operations.
+            </p>
+        </div>
+        <div class="relative z-10 -mb-16 lg:-mb-20 mt-16 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 animate-on-scroll">
+            <div class="text-center p-4"><p class="text-lg font-semibold text-slate-500">Transaction In</p></div>
+            <div class="text-slate-300 hidden md:block"><svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+            <div class="p-6 border-2 border-slate-800 rounded-xl shadow-2xl bg-white text-center"><p class="font-bold text-2xl text-slate-900">FOUNDLAB F2F</p></div>
+            <div class="text-slate-300 hidden md:block"><svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+            <div class="grid grid-cols-3 gap-4 text-center mt-8 md:mt-0">
+                <div class="flex flex-col items-center p-4"><div class="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full"><svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div><p class="mt-2 font-bold text-green-800">ALLOW</p></div>
+                <div class="flex flex-col items-center p-4"><div class="flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full"><svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div><p class="mt-2 font-bold text-yellow-800">REVIEW</p></div>
+                <div class="flex flex-col items-center p-4"><div class="flex items-center justify-center w-16 h-16 bg-red-100 rounded-full"><svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg></div><p class="mt-2 font-bold text-red-800">BLOCK</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="bg-white">
+    <div class="w-full h-20 md:h-32 lg:h-40 bg-slate-900"><svg class="w-full h-full text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor"><path d="M0,192L48,197.3C96,203,192,213,288,208C384,203,480,181,576,176C672,171,768,181,864,197.3C960,213,1056,235,1152,240C1248,245,1344,235,1392,229.3L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg></div>
+</div>
+
+<section class="pt-28 lg:pt-32 pb-20 lg:pb-32 bg-slate-900 text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="font-serif text-4xl md:text-5xl font-bold animate-on-scroll">The Architecture of Intelligent Trust.</h2>
+            <p class="mt-4 text-lg text-slate-300 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">Our platform is not just another tool in your stack. It's the central nervous system of your operational risk: a single core that integrates intelligence, speed, and execution.</p>
+        </div>
+        <div class="mt-20 max-w-5xl mx-auto grid md:grid-cols-2 gap-x-12 gap-y-16"></div>
+    </div>
+</section>
+
+<div class="bg-slate-100">
+    <div class="w-full h-20 md:h-32 lg:h-40 bg-slate-900"><svg class="w-full h-full text-slate-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor"><path d="M0,224L48,213.3C96,203,192,181,288,176C384,171,480,181,576,202.7C672,224,768,256,864,250.7C960,245,1056,203,1152,186.7C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg></div>
+</div>
+
+<section id="casos-de-uso" class="py-20 lg:py-32 bg-slate-100">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">Solve Critical Problems. From Day 1.</h2>
+            <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">Our platform adapts to the most complex challenges of the hybrid financial ecosystem. See how we can help.</p>
+        </div>
+        <div class="mt-16 grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="lg:col-span-1" role="tablist" aria-label="Use Cases">
+                <div class="space-y-4">
+                    <button class="use-case-tab w-full flex items-center gap-4 text-left p-4 rounded-xl transition-all use-case-tab-active" data-target="panel-pix" role="tab" aria-selected="true">
+                        <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-md"><svg class="w-8 h-8 text-slate-800 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.886 7.113a.938.938 0 1 0-1.326 1.326.938.938 0 0 0 1.326-1.326Z" fill="#2dd4bf" stroke="#1e293b" stroke-width="1.5"/> <path stroke="#1e293b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.438 17.813h-5.25m5.25-2.813h-5.25m10.313-5.25a3.75 3.75 0 1 1-5.304 0 3.75 3.75 0 0 1 5.304 0Z"/> <path stroke="#1e293b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.313 19.313a9 9 0 1 1-14.625-14.625 9 9 0 0 1 14.625 14.625Z"/></svg></div>
+                        <span class="font-bold text-lg">Pix-Crypto Analysis</span>
+                    </button>
+                    <button class="use-case-tab w-full flex items-center gap-4 text-left p-4 rounded-xl transition-all" data-target="panel-drex" role="tab" aria-selected="false">
+                        <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-md"><svg class="w-8 h-8 text-slate-800 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M12 6.75h.008v.008H12V6.75Z" fill="#2dd4bf"/></svg></div>
+                        <span class="font-bold text-lg">Drex Operations</span>
+                    </button>
+                    <button class="use-case-tab w-full flex items-center gap-4 text-left p-4 rounded-xl transition-all" data-target="panel-credit" role="tab" aria-selected="false">
+                        <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-md"><svg class="w-8 h-8 text-slate-800 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 8.5a4.5 4.5 0 1 0-8.485 2.016M4 20v-2.382a4.5 4.5 0 0 1 2.87-4.133M18.5 18.5l-3-3m0 3l3-3" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M15.5 13a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM18.5 13a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM15.5 10a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" fill="#2dd4bf"/></svg></div>
+                        <span class="font-bold text-lg">Reputation-based Credit</span>
+                    </button>
+                    <button class="use-case-tab w-full flex items-center gap-4 text-left p-4 rounded-xl transition-all" data-target="panel-validation" role="tab" aria-selected="false">
+                        <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-md"><svg class="w-8 h-8 text-slate-800 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.4"><rect x="5" y="5" width="13" height="13" rx="2" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="2 2"/></g><rect x="8" y="8" width="13" height="13" rx="2" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.5"/><path d="m11.5 14.5 2 2 4-4" stroke="#1e293b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="font-bold text-lg">Validation Mode</span>
+                    </button>
+                </div>
+            </div>
+            <div class="lg:col-span-2 bg-white rounded-2xl p-8 lg:p-12 shadow-xl">
+                <div id="panel-pix" class="use-case-panel" role="tabpanel">
+                    <h3 class="text-3xl font-bold text-slate-900">Risk Analysis for Pix-Crypto</h3>
+                    <p class="mt-4 text-lg text-slate-600">Real-time blocking of fraudulent triangulations with a justifiable and irreversible verdict. Reduce fraud undetected by traditional systems by up to 60%.</p>
+                </div>
+                <div id="panel-drex" class="use-case-panel hidden" role="tabpanel">
+                    <h3 class="text-3xl font-bold text-slate-900">Compliance for Drex Operations</h3>
+                    <p class="mt-4 text-lg text-slate-600">We act as a programmable policy layer for the Brazilian CBDC, applying AML rules directly at the smart contract level for mint and burn operations, addressing challenges explored in the Drex Pilot.</p>
+                </div>
+                <div id="panel-credit" class="use-case-panel hidden" role="tabpanel">
+                    <h3 class="text-3xl font-bold text-slate-900">Reputation-based Credit Granting</h3>
+                    <p class="mt-4 text-lg text-slate-600">Dynamic parameterization of interest rates and limits based on the Spezzatura Score. Price risk granularly and enable new credit products for the hybrid ecosystem.</p>
+                </div>
+                <div id="panel-validation" class="use-case-panel hidden" role="tabpanel">
+                    <h3 class="text-3xl font-bold text-slate-900">Secure Validation in Production</h3>
+                    <p class="mt-4 text-lg text-slate-600">Test our tool directly in your production environment, 100% securely and without impact. Validation Mode allows you to compare results and prove the value of our solution before any changes to your operational flow.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="integracao" class="bg-slate-900 text-white py-20 lg:py-32 font-sans dark-section-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+        <div class="animate-on-scroll">
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight font-serif text-white">Simplified <span class="text-blue-500">Integration</span></h2>
+            <p class="mt-4 text-lg text-slate-300">Our tools are designed for quick and secure implementation. Connect your platform to our resources in minutes.</p>
+            <div class="mt-8 space-y-6 text-slate-400">
+                <div><h3 class="text-white font-semibold text-lg">Clear and Objective Documentation</h3><p class="mt-1">We provide comprehensive guides with practical examples to assist your team every step of the way.</p></div>
+                <div><h3 class="text-white font-semibold text-lg">Compatible with Your Technology</h3><p class="mt-1">Our solutions easily adapt to major market technologies like JavaScript, Python, and more.</p></div>
+                <div><h3 class="text-white font-semibold text-lg">Specialized Support</h3><p class="mt-1">Our team is always available to ensure your integration is a success.</p></div>
+            </div>
+        </div>
+        <div class="bg-slate-800 rounded-xl p-8 shadow-lg animate-on-scroll">
+            <div class="space-y-8 relative">
+                <div class="absolute left-5 top-2 bottom-2 w-0.5 bg-slate-700"></div>
+                <div class="flex items-center relative"><div class="z-10 flex items-center justify-center w-10 h-10 bg-blue-500 rounded-full text-white font-bold">1</div><div class="ml-6"><h4 class="text-lg font-semibold text-white">Initial Connection</h4><p class="text-slate-400 mt-1">Add our tool to your development environment.</p></div></div>
+                <div class="flex items-center relative"><div class="z-10 flex items-center justify-center w-10 h-10 bg-blue-500 rounded-full text-white font-bold">2</div><div class="ml-6"><h4 class="text-lg font-semibold text-white">Secure Activation</h4><p class="text-slate-400 mt-1">Use your unique access key to sync with our platform.</p></div></div>
+                <div class="flex items-center relative"><div class="z-10 flex items-center justify-center w-10 h-10 bg-blue-500 rounded-full text-white font-bold">3</div><div class="ml-6"><h4 class="text-lg font-semibold text-white">Start Using</h4><p class="text-slate-400 mt-1">Monitor and log the most important events in your application.</p></div></div>
+                <div class="flex items-center relative"><div class="z-10 flex items-center justify-center w-10 h-10 bg-green-500 rounded-full text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg></div><div class="ml-6"><h4 class="text-lg font-semibold text-white">Ready!</h4><p class="text-slate-400 mt-1">Your integration has been successfully completed.</p></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 lg:py-32 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">Building Auditable Trust with Transparent Governance.</h2>
+            <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">We believe the future of trust cannot be a black box. We built FoundLab on a foundation of governance and algorithmic ethics to ensure fairness and transparency.</p>
+        </div>
+        <div class="mt-16 max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="text-center animate-on-scroll"><div class="flex justify-center items-center mx-auto bg-slate-100 rounded-full w-16 h-16"><svg class="w-8 h-8 text-slate-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg></div><h3 class="mt-4 text-xl font-bold text-slate-900">Algorithmic Ethics Council</h3><p class="mt-2 text-slate-600">Independent human review of risk factors to ensure fairness and mitigate bias.</p></div>
+            <div class="text-center animate-on-scroll" style="transition-delay: 150ms;"><div class="flex justify-center items-center mx-auto bg-slate-100 rounded-full w-16 h-16"><svg class="w-8 h-8 text-slate-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m-16.5 0H6.75m11.25 0h-1.5m1.5 0h1.5M3.75 5.25h16.5M3.75 7.5h16.5M3.75 9.75h16.5m-16.5 2.25h16.5m-16.5 2.25H6.75m5.25 0h.01M17.25 16.5h1.5m-1.5 0h-1.5m-1.5 0h-1.5m-1.5 0H6.75m5.25 0h.01M17.25 16.5h1.5m-1.5 0h-1.5m-1.5 0h-1.5m-1.5 0H6.75m5.25 0h.01M17.25 16.5h1.5m-1.5 0h-1.5m-1.5 0h-1.5m-1.5 0H6.75" /></svg></div><h3 class="mt-4 text-xl font-bold text-slate-900">Right to Adversarial Process</h3><p class="mt-2 text-slate-600">Mechanisms that guarantee the right to reply and appeal for users affected by an automated verdict.</p></div>
+            <div class="text-center animate-on-scroll" style="transition-delay: 300ms;"><div class="flex justify-center items-center mx-auto bg-slate-100 rounded-full w-16 h-16"><svg class="w-8 h-8 text-slate-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg></div><h3 class="mt-4 text-xl font-bold text-slate-900">Stratified Responsibility</h3><p class="mt-2 text-slate-600">A clear and computable model that defines responsibility sharing between the client, FoundLab, and auditors.</p></div>
+        </div>
+    </div>
+</section>
+
+<section id="cta" class="bg-white py-20 lg:py-32">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="mt-8 font-serif text-4xl md:text-5xl font-bold leading-tight text-slate-900 animate-on-scroll" style="transition-delay: 100ms;">
+            Stop Monitoring Risk. <br>Start Executing It.
+        </h2>
+        <p class="mt-6 text-lg text-slate-600 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 200ms;">
+            Discover how our infrastructure can reduce losses, optimize your operation, and unlock new revenue streams with total security.
+        </p>
+        <div class="mt-10 animate-on-scroll" style="transition-delay: 300ms;">
+            <a href="#" onclick="openModal(); return false;" class="inline-block bg-blue-600 text-white font-bold text-lg py-4 px-10 rounded-xl shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-1">
+                Test DEMO
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-white">
+    <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-center">
+            <a href="#" class="flex items-center space-x-2">
+                <img class="h-8 w-auto" src="logofound.png" alt="FoundLab Logo">
+                <span class="font-bold text-xl text-slate-900">FoundLab</span>
+            </a>
+        </div>
+        <nav class="mt-8" aria-label="Footer">
+            <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+                <li><a href="#solucao" class="text-base text-slate-600 hover:text-slate-900">The Solution</a></li>
+                <li><a href="#spezzatura" class="text-base text-slate-600 hover:text-slate-900">Spezzatura</a></li>
+                <li><a href="#casos-de-uso" class="text-base text-slate-600 hover:text-slate-900">Use Cases</a></li>
+                <li><a href="#integracao" class="text-base text-slate-600 hover:text-slate-900">For Devs</a></li>
+            </ul>
+        </nav>
+        <div class="mt-12 border-t border-slate-200 pt-8">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-base text-slate-500 order-2 sm:order-1">
+                    &copy; 2025 FoundLab. All rights reserved.
+                </p>
+                <a href="mailto:domains@foundlab.cloud" class="text-base font-medium text-slate-600 hover:text-slate-900 order-1 sm:order-2">
+                    domains@foundlab.cloud
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Script para a animação do Canvas no Hero
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) { this.directionX = -this.directionX; }
+                if (this.y > canvas.height || this.y < 0) { this.directionY = -this.directionY; }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * .4) - .2;
+                let directionY = (Math.random() * .4) - .2;
+                let color = 'rgba(100, 116, 139, 0.4)';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                                 ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(100, 116, 139,' + opacityValue + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        init();
+        animate();
+
+        // --- SCRIPTS DE OTIMIZAÇÃO AVANÇADA ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Animação de Scroll
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+                scrollObserver.observe(el);
+            });
+
+            // 2. Contadores Animados
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = +el.getAttribute('data-target');
+                        const prefix = el.getAttribute('data-prefix') || '';
+                        const suffix = el.getAttribute('data-suffix') || '';
+                        const duration = 2000;
+                        let current = 0;
+                        const stepTime = 20;
+                        const steps = duration / stepTime;
+                        const increment = target / steps;
+
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                clearInterval(timer);
+                                current = target;
+                            }
+                            el.innerText = prefix + Math.floor(current).toLocaleString('pt-BR') + suffix;
+                        }, stepTime);
+
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.counter').forEach(counter => {
+                counterObserver.observe(counter);
+            });
+
+            // 3. Personalização Dinâmica
+            const urlParams = new URLSearchParams(window.location.search);
+            const profile = urlParams.get('profile');
+
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const useCaseNav = document.getElementById('use-case-nav');
+            const useCaseTabs = useCaseNav.querySelectorAll('.tab-btn');
+            const useCasePanels = document.querySelectorAll('.tab-panel');
+
+            if (profile === 'fintech') {
+                heroSubtitle.innerHTML = "Execute o futuro das *Fintechs* com confiança programável e vantagem competitiva irrefutável.";
+                // Destaca o caso de uso de Pix-Cripto (já é o padrão)
+            } else if (profile === 'bank') {
+                heroSubtitle.innerHTML = "A infraestrutura de risco para a próxima geração de *serviços bancários* e ativos digitais.";
+                // Altera o caso de uso em destaque para DREX
+                const drexTab = useCaseNav.querySelector('[data-target="drex"]');
+                const drexPanel = document.getElementById('use-case-drex');
+                
+                useCaseTabs.forEach(t => {
+                    t.classList.remove('tab-active');
+                    t.classList.add('tab-inactive');
+                });
+                useCasePanels.forEach(p => p.classList.add('hidden'));
+
+                if(drexTab && drexPanel) {
+                    drexTab.classList.add('tab-active');
+                    drexTab.classList.remove('tab-inactive');
+                    drexPanel.classList.remove('hidden');
+                }
+            }
+
+            // 4. Lógica das Abas (Tabs)
+            useCaseTabs.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    
+                    useCaseTabs.forEach(btn => {
+                        btn.classList.remove('tab-active');
+                        btn.classList.add('tab-inactive');
+                    });
+                    useCasePanels.forEach(panel => {
+                        panel.classList.add('hidden');
+                    });
+
+                    button.classList.add('tab-active');
+                    button.classList.remove('tab-inactive');
+                    
+                    document.getElementById(`use-case-${targetId}`)?.classList.remove('hidden');
+                });
+            });
+        });
+    </script>
+
+    <script>
+    // Seleciona os elementos do menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+    // Função para fechar o menu mobile, precisa ser global por causa do `onclick` no botão DEMO
+    function closeMobileMenu() {
+        mobileMenu.classList.add('hidden');
+    }
+
+    // Abre o menu
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.remove('hidden');
+    });
+
+    // Fecha o menu pelo botão 'X'
+    mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
+
+    // Fecha o menu ao clicar em um dos links de navegação
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.use-case-tab');
+    const panels = document.querySelectorAll('.use-case-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-target');
+
+        // Atualiza o estilo dos botões (abas)
+        tabs.forEach(t => {
+          t.classList.remove('use-case-tab-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('use-case-tab-active');
+        tab.setAttribute('aria-selected', 'true');
+
+        // Esconde todos os painéis e mostra apenas o alvo
+        panels.forEach(panel => {
+          if (panel.id === targetId) {
+            panel.classList.remove('hidden');
+          } else {
+            panel.classList.add('hidden');
+          }
+        });
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+      window.va = window.va || function () { (window.va.q = window.va.q || []).push(arguments); };
+      const vercelAnalyticsScript = document.createElement('script');
+      vercelAnalyticsScript.defer = true;
+      vercelAnalyticsScript.src = '/_vercel/insights/script.js';
+      document.body.appendChild(vercelAnalyticsScript);
+    </script>
+    
+</body>
+</html>
