@@ -153,6 +153,89 @@
 
 
 
+@keyframes pulse-core {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.9; }
+}
+@keyframes pulse-ring {
+    0% { transform: scale(0.5); opacity: 0.7; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+@keyframes draw-line {
+    to { stroke-dashoffset: 0; }
+}
+.animate-pulse-core { animation: pulse-core 4s infinite cubic-bezier(0.4, 0, 0.6, 1); }
+.pulse-ring { animation: pulse-ring 4s infinite cubic-bezier(0.4, 0, 0.6, 1); }
+.connecting-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-line 2s 1s infinite alternate ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    border-color: rgba(96, 165, 250, 0.8);
+    box-shadow: 0 0 35px rgba(59, 130, 246, 0.3);
+  }
+}
+.card-pulse-border {
+  animation: pulse-border 4s infinite ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.6)); }
+    50% { filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.9)); }
+}
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Animações para quando a seção se torna visível */
+.section-visible .animate-fadeInUp {
+    animation: fadeInUp 0.8s 0.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+}
+.section-visible .svg-pulse {
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+.section-visible .svg-rotate {
+    animation: rotate 20s linear infinite;
+}
+.section-visible .svg-path-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: stroke-draw 2s 0.5s ease-out forwards;
+}
+@keyframes stroke-draw {
+    to { stroke-dashoffset: 0; }
+}
+
+
+
     </style>
 </head>
 
@@ -181,34 +264,31 @@
 <!-- Header -->
 <header class="absolute top-0 left-0 w-full py-6 px-4 sm:px-6 lg:px-8 z-30">
     <div class="container mx-auto flex justify-between items-center">
-        <a href="#" class="flex items-center space-x-2">
-            <img src="logofound.png" alt="FoundLab Logo" class="h-8">
+        <a href="#" class="flex items-center space-x-3">
+            <img src="logofound.png" alt="Logótipo da FoundLab" class="h-8">
             <span class="font-bold text-xl text-slate-900">FoundLab</span>
         </a>
-
         <nav class="hidden md:flex items-center space-x-8">
-            <a href="#solucao" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">A Solução</a>
-            <a href="#spezzatura" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Spezzatura</a>
-            <a href="#casos-de-uso" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Casos de Uso</a>
-            <a href="#integracao" class="text-slate-700 hover:text-slate-900 font-medium transition-colors">Para Devs</a>
+            <a href="#solucao" class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">A Solução</a>
+            <a href="#spezzatura" class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Spezzatura</a>
+            <a href="#casos-de-uso" class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Casos de Uso</a>
+            <a href="#integracao" class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Para Devs</a>
         </nav>
-
-        <div class="hidden md:flex items-center bg-slate-100 rounded-full p-1 space-x-1 mx-6">
-            <a href="index.html" class="font-medium text-sm py-1 px-3 rounded-full bg-white text-slate-800 shadow">PT</a>
-            <a href="index-en.html" class="font-medium text-sm py-1 px-3 rounded-full text-slate-500 hover:bg-slate-200 transition-colors">EN</a>
-        </div>
-
-        <button onclick="openModal()" class="hidden md:inline-block bg-slate-900 text-white font-medium py-2 px-6 rounded-lg hover:bg-slate-700 transition-colors duration-300">
-            Testar DEMO
-        </button>
-
-        <div class="md:hidden">
-            <button id="mobile-menu-button" class="text-slate-900">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        <div class="flex items-center gap-4">
+             <div class="hidden md:flex items-center bg-slate-200/80 rounded-full p-1 space-x-1">
+                <a href="index.html" class="font-medium text-xs py-1 px-3 rounded-full bg-white text-slate-800 shadow">PT</a>
+                <a href="index-en.html" class="font-medium text-xs py-1 px-3 rounded-full text-slate-500 hover:bg-slate-300/60 transition-colors">EN</a>
+            </div>
+            <button onclick="openModal()" class="hidden md:inline-block bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg text-sm hover:bg-blue-700 transition-transform hover:-translate-y-0.5 shadow-lg shadow-blue-500/20">
+                Testar DEMO
+            </button>
+            <button id="mobile-menu-button" class="md:hidden text-slate-800">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
     </div>
 </header>
+
 
 <div id="mobile-menu" class="hidden fixed inset-0 bg-white z-40 md:hidden">
     <div class="flex flex-col items-center justify-center h-full">
@@ -235,68 +315,62 @@
 
 
     <!-- Seção 1: Hero (VERSÃO CORRIGIDA) -->
-    <section class="hero-bg min-h-screen flex items-center py-24 md:py-0">
-        <canvas id="hero-canvas"></canvas>
-        <div class="content-z container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div class="text-center md:text-left">
-                    <div class="mb-0 animate-on-scroll text-center md:text-left">
-                    <img src="logoheader.png" alt="FoundLab Logo" class="w-full max-w-md md:max-w-lg lg:max-w-1xl">
-                    </div>
-
-                    <p id="hero-subtitle" class="mt-4 text-2xl md:text-2xl font-medium text-slate-800 max-w-2xl mx-auto md:mx-0 animate-on-scroll" style="transition-delay: 200ms;">
-
-                        Transforme Risco em Receita e Compliance em Vantagem Competitiva.
-
-                    </p>
-
-                    <!--
-                    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 animate-on-scroll" style="transition-delay: 300ms;">
-                        <a href="./obrigado.html" class="w-full sm:w-auto bg-slate-900 text-white font-bold py-4 px-8 rounded-lg hover:bg-slate-700 transition-colors duration-300 text-center">
-                            Solicitar Demonstração Estratégica
-                        </a>
-                    </div>
-
-                    -->
-
-                </div>
-                <div></div>
-            </div>
-        </div>
-    </section>
-
-
-<section class="bg-white py-16">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
+<section class="relative hero-bg min-h-screen flex items-center justify-center text-center bg-white overflow-hidden">
+    <!-- O canvas para a animação de fundo -->
+    <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+    
+    <!-- Conteúdo da Hero, posicionado acima do canvas -->
+    <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Imagem do Logótipo Principal -->
+            <img src="logoheader.png" alt="Logótipo Principal da FoundLab" class="w-full max-w-2xl mx-auto animate-on-scroll is-visible">
             
-            <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">
-                Nossas Tecnologias
-            </h2>
+            <!-- Subtítulo -->
+            <p class="mt-4 text-xl md:text-2xl font-medium text-slate-700 max-w-2xl mx-auto animate-on-scroll is-visible" style="transition-delay: 200ms;">
+                Transforme Risco em Receita e Compliance em Vantagem Competitiva.
+            </p>
             
-            <div class="mt-16 flex justify-center items-center flex-wrap gap-x-12 sm:gap-x-16 gap-y-8">
-
-                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro2.png" alt="Logo Parceiro 1" />
-                
-                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro3.png" alt="Logo Parceiro 2" />
-                
-                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro7.png" alt="Logo Parceiro 3" />
-
-                <img class="max-h-40 grayscale hover:grayscale-0 transition duration-300" src="./parceiro9.png" alt="Logo Parceiro 4" />
-
+            <!-- Botão de Ação -->
+            <div class="mt-10 animate-on-scroll is-visible" style="transition-delay: 400ms;">
+                <button onclick="openModal()" class="bg-blue-600 text-white font-bold text-lg py-4 px-10 rounded-xl shadow-xl shadow-blue-500/30 hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-1">
+                    Solicitar Demonstração
+                </button>
             </div>
         </div>
     </div>
 </section>
 
 
-
-
-    <!-- Seção 2: O Paradoxo da Confiança -->
-<section class="py-20 lg:py-32 bg-slate-50">
+<section class="bg-slate-50 py-20 lg:py-24">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Seção Parceiros -->
+        <div class="text-center">
+            <h2 class="text-base font-semibold text-slate-500 tracking-wider uppercase">
+                Construído com os Líderes da Indústria
+            </h2>
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 items-center">
+                <!-- Google Cloud -->
+                <div class="flex justify-center">
+                    <img class="max-h-36 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" src="./parceiro2.png" alt="Logótipo da Google Cloud" />
+                </div>
+                <!-- Stripe -->
+                <div class="flex justify-center">
+                    <img class="max-h-28 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" src="./parceiro3.png" alt="Logótipo da Stripe" />
+                </div>
+                <!-- Polygon -->
+                <div class="flex justify-center">
+                    <img class="max-h-28 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" src="./parceiro9.png" alt="Logótipo da Polygon" />
+                </div>
+                <!-- Vercel -->
+                <div class="flex justify-center">
+                    <img class="max-h-24 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" src="./parceiro7.png" alt="Logótipo da Vercel" />
+                </div>
+            </div>
+        </div>
 
+        <!-- Seção Paradoxo da Confiança -->
+        <div class="mt-24 lg:mt-32 grid lg:grid-cols-2 gap-16 items-center">
+            <!-- Coluna de Texto -->
             <div class="animate-on-scroll">
                 <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
                     O Paradoxo da Confiança na Nova Economia Digital.
@@ -310,54 +384,60 @@
                 </p>
             </div>
 
-            <div class="flex justify-center items-center animate-on-scroll" style="transition-delay: 200ms;">
-                <div class="w-full max-w-sm">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <g id="network" stroke="#cbd5e1" stroke-width="1.5">
-                            <line x1="100" y1="100" x2="40" y2="50"/>
-                            <line x1="100" y1="100" x2="60" y2="150"/>
-                            <line x1="100" y1="100" x2="160" y2="140"/>
-                            <line x1="100" y1="100" x2="150" y2="40"/>
-                            <line x1="40" y1="50" x2="60" y2="150"/>
-                            <line x1="60" y1="150" x2="160" y2="140"/>
-                            <line x1="160" y1="140" x2="150" y2="40"/>
-                            <line x1="150" y1="40" x2="40" y2="50"/>
-                            <circle cx="40" cy="50" r="5" fill="#e2e8f0"/>
-                            <circle cx="60" cy="150" r="7" fill="#e2e8f0"/>
-                            <circle cx="160" cy="140" r="6" fill="#e2e8f0"/>
-                            <circle cx="150" cy="40" r="4" fill="#e2e8f0"/>
-                        </g>
+            <!-- Coluna da Animação Visual -->
+            <div class="relative flex justify-center items-center min-h-[400px] animate-on-scroll" style="transition-delay: 200ms;">
+                <svg viewBox="0 0 300 300" class="w-full max-w-sm">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3.5" result="coloredBlur"></feGaussianBlur>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"></feMergeNode>
+                                <feMergeNode in="SourceGraphic"></feMergeNode>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Linhas de Conexão -->
+                    <path d="M 150 150 L 60 70" stroke="#e2e8f0" stroke-width="2" class="connecting-line" style="animation-delay: 0s;"/>
+                    <path d="M 150 150 L 240 90" stroke="#e2e8f0" stroke-width="2" class="connecting-line" style="animation-delay: 0.5s;"/>
+                    <path d="M 150 150 L 220 230" stroke="#e2e8f0" stroke-width="2" class="connecting-line" style="animation-delay: 1s;"/>
+                    <path d="M 150 150 L 80 210" stroke="#e2e8f0" stroke-width="2" class="connecting-line" style="animation-delay: 1.5s;"/>
 
-                        <g id="crystal" transform="translate(100, 100) scale(1.2)">
-                            <path d="M 0,-40 L 35,0 L 0,40 L -35,0 Z" fill="#3b82f6"/>
-                            <path d="M 0,-40 L 0,40" stroke="white" stroke-width="1.5" stroke-opacity="0.5"/>
-                            <path d="M -35,0 L 35,0" stroke="white" stroke-width="1" stroke-opacity="0.3"/>
-                        </g>
-                    </svg>
-                </div>
+                    <!-- Pontos da Rede -->
+                    <circle cx="60" cy="70" r="6" fill="#10B981" filter="url(#glow)"/>
+                    <circle cx="240" cy="90" r="6" fill="#10B981" filter="url(#glow)"/>
+                    <circle cx="220" cy="230" r="6" fill="#EF4444" filter="url(#glow)"/>
+                    <circle cx="80" cy="210" r="6" fill="#10B981" filter="url(#glow)"/>
+
+                    <!-- Núcleo Central -->
+                    <g class="animate-pulse-core" style="transform-origin: center;">
+                        <circle cx="150" cy="150" r="45" fill="rgba(59, 130, 246, 0.1)"/>
+                        <circle cx="150" cy="150" r="0" fill="transparent" class="pulse-ring" stroke="#3B82F6" stroke-width="2"/>
+                        <circle cx="150" cy="150" r="30" fill="#3B82F6"/>
+                        <path d="M143 150 L147 154 L157 144 M143 156 L147 160 L157 150" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(-2, -5)"/>
+                    </g>
+                </svg>
             </div>
-            
         </div>
     </div>
 </section>
 
 
-
-
-<section id="spezzatura" class="bg-white py-20 lg:py-32">
+<section id="spezzatura" class="bg-slate-900 py-20 lg:py-32 text-white overflow-hidden">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
       
+      <!-- Coluna de Texto -->
       <div class="animate-on-scroll">
-        <p class="font-semibold text-blue-600">Oráculo de Reputação Onchain</p>
-        <h2 class="mt-4 font-serif text-4xl md:text-5xl font-bold text-slate-900">
+        <p class="font-semibold text-blue-400">Oráculo de Reputação Onchain</p>
+        <h2 class="mt-4 font-serif text-4xl md:text-5xl font-bold text-white">
           Confiança Determinística e Auditável.
         </h2>
-        <p class="mt-6 text-lg text-slate-600">
+        <p class="mt-6 text-lg text-slate-300">
           O Spezzatura não é uma caixa-preta. É um mecanismo reputacional transparente, desenvolvido para validar decisões de confiança com lógica reproduzível. Explore sua fórmula e propósito diretamente com nossa IA.
         </p>
         <div class="mt-10">
-          <a href="https://chatgpt.com/g/g-686b43cfcd488191875bddbf2aef6563-spezzatura-onchain-reputational-oracle" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-3 bg-slate-900 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-700 transition-colors duration-300">
+          <a href="https://chatgpt.com/g/g-686b43cfcd488191875bddbf2aef6563-spezzatura-onchain-reputational-oracle" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-3 border border-slate-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-800 transition-colors duration-300 transform hover:-translate-y-1">
             Conversar com Spezzatura
             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
@@ -366,42 +446,59 @@
         </div>
       </div>
 
-      <div class="animate-on-scroll" style="transition-delay: 200ms;">
-        <div class="bg-slate-900 rounded-xl shadow-2xl p-6 font-mono text-sm text-slate-300">
-          <div class="flex items-center gap-2 mb-6">
-            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-          </div>
+      <!-- Coluna com Mockup da UI -->
+      <div class="relative flex items-center justify-center min-h-[450px] animate-on-scroll" style="transition-delay: 200ms;">
+        <!-- Efeito de brilho no fundo -->
+        <div class="absolute inset-x-0 top-0 h-full bg-gradient-to-t from-slate-900 to-transparent"></div>
+        <div class="absolute -inset-10 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-transparent rounded-full blur-3xl opacity-50"></div>
 
-          <div class="space-y-5">
-            <div>
-              <span class="text-green-400">você:~$</span>
-              <p class="mt-1 ml-2 bg-slate-800/50 rounded-lg p-3 inline-block">Explique a fórmula e o propósito do Spezzatura.</p>
+        <!-- Card de Fundo -->
+        <div class="absolute w-[95%] top-0 bg-slate-800/80 backdrop-blur-sm border border-slate-700 rounded-xl shadow-2xl p-6 text-sm text-slate-300 transform -rotate-3">
+            <h3 class="font-semibold text-white mb-4">Análise de Fontes de Risco</h3>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center"><p class="text-slate-400">Fraude Sintética</p><div class="w-1/2 h-2 bg-slate-700 rounded-full"><div class="h-2 bg-red-500 rounded-full" style="width: 75%"></div></div></div>
+                <div class="flex justify-between items-center"><p class="text-slate-400">Triangulação PIX</p><div class="w-1/2 h-2 bg-slate-700 rounded-full"><div class="h-2 bg-yellow-500 rounded-full" style="width: 40%"></div></div></div>
+                <div class="flex justify-between items-center"><p class="text-slate-400">Anomalia de Rede</p><div class="w-1/2 h-2 bg-slate-700 rounded-full"><div class="h-2 bg-blue-500 rounded-full" style="width: 60%"></div></div></div>
             </div>
-
-            <div>
-              <span class="text-blue-400">spezzatura_ai:~$</span>
-              <p class="mt-1 ml-2 bg-slate-800 rounded-lg p-3">
-                O Spezzatura Oracle é um mecanismo reputacional <span class="text-white">determinístico</span> e <span class="text-white">auditável</span>, desenvolvido para validar decisões de confiança em ambientes Web3 e TradFi.
-              </p>
+        </div>
+        
+        <!-- Card da Frente com Pulse -->
+        <div class="relative w-full max-w-sm bg-slate-800/80 backdrop-blur-sm border rounded-xl shadow-2xl p-6 text-sm text-slate-300 card-pulse-border">
+          <h3 class="font-semibold text-white mb-4">Transações de Risco Elevado</h3>
+          <div class="space-y-4">
+            <!-- Item 1 -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs">AC</div>
+                    <div>
+                        <p class="font-medium text-white">Conta Anónima</p>
+                        <p class="text-xs text-slate-400">Origem: Mixer Cripto</p>
+                    </div>
+                </div>
+                <p class="font-mono text-red-400">R$ 1.500,00</p>
             </div>
-            
-            <div>
-              <span class="text-blue-400">spezzatura_ai:~$</span>
-              <p class="mt-1 ml-2 bg-slate-800 rounded-lg p-3">
-                Sua finalidade é validar decisões com lógica reproduzível. Cada decisão gera um score numérico, um veredito (ALLOW, REVIEW, BLOCK) e uma rationale textual com hash SHA-256.
-              </p>
+            <!-- Item 2 -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs">DV</div>
+                    <div>
+                        <p class="font-medium text-white">Conta Dormente</p>
+                        <p class="text-xs text-slate-400">Última Atividade: 18 meses</p>
+                    </div>
+                </div>
+                <p class="font-mono text-red-400">R$ 15.800,00</p>
             </div>
-
-            <div>
-              <span class="text-blue-400">spezzatura_ai:~$</span>
-              <p class="mt-1 ml-2">A reputação é medida com a seguinte fórmula:</p>
-              <div class="mt-2 ml-2 bg-slate-800 rounded-lg p-4 text-center">
-                <code class="text-teal-300">score <span class="text-white">=</span> log₂<span class="text-slate-400">(</span><span class="text-amber-400">C</span> <span class="text-white">×</span> <span class="text-amber-400">A</span> <span class="text-white">×</span> <span class="text-amber-400">T</span><span class="text-teal-300">²</span> <span class="text-white">×</span> <span class="text-amber-400">U</span> <span class="text-white">×</span> <span class="text-amber-400">R</span> <span class="text-white">×</span> <span class="text-amber-400">Å</span><span class="text-slate-400">)</span></code>
-              </div>
+             <!-- Item 3 -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs">JR</div>
+                    <div>
+                        <p class="font-medium text-white">Rede Suspeita</p>
+                        <p class="text-xs text-slate-400">Conexão com 3 CPFs de risco</p>
+                    </div>
+                </div>
+                <p class="font-mono text-yellow-400">R$ 7.500,00</p>
             </div>
-
           </div>
         </div>
       </div>
@@ -419,53 +516,111 @@
 
 
 
+<section id="solucao" class="bg-slate-900 py-20 lg:py-32 text-white overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Título da Seção -->
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-white animate-on-scroll">
+                Não Apenas Analisamos. Entregamos um Veredito.
+            </h2>
+            <p class="mt-4 text-lg text-slate-300 animate-on-scroll" style="transition-delay: 150ms;">
+                Apresentamos o Reputation-as-a-Transaction (RaaT). Uma camada de execução que condiciona cada transação à reputação das partes, em tempo real.
+            </p>
+        </div>
 
-<section id="solucao" class="py-20 lg:py-32 relative bg-white">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 animate-on-scroll">Não Apenas Analisamos. Entregamos um Veredito.</h2>
-      <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 150ms;">
-        Apresentamos o Reputation-as-a-Transaction (RaaT). Uma camada de execução programática que condiciona cada transação à reputação das partes, em tempo real, inserindo-se diretamente no núcleo das suas operações.
-      </p>
-    </div>
+        <!-- Container dos Passos -->
+        <div class="relative mt-20 max-w-5xl mx-auto">
+            <!-- Linha Conectora Vertical -->
+            <div class="absolute left-4 md:left-1/2 top-4 h-full w-0.5 bg-slate-700 -translate-x-1/2" aria-hidden="true"></div>
 
-    <div class="relative z-10 -mb-16 lg:-mb-20 mt-16 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 animate-on-scroll">
-      <div class="text-center p-4">
-        <p class="text-lg font-semibold text-slate-500">Transação Entra</p>
-      </div>
-      <div class="text-slate-300 hidden md:block">
-        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-      </div>
-      <div class="p-6 border-2 border-slate-800 rounded-xl shadow-2xl bg-white text-center">
-        <p class="font-bold text-2xl text-slate-900">FOUNDLAB F2F</p>
-      </div>
-      <div class="text-slate-300 hidden md:block">
-          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-      </div>
-      <div class="grid grid-cols-3 gap-4 text-center mt-8 md:mt-0">
-        <div class="flex flex-col items-center p-4">
-          <div class="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full">
-            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-          </div>
-          <p class="mt-2 font-bold text-green-800">ALLOW</p>
+            <!-- Passo 1 -->
+            <div class="relative grid md:grid-cols-2 gap-12 items-center mb-24">
+                <!-- Visual SVG -->
+                <div class="relative animate-on-scroll">
+                    <div class="p-6 bg-slate-800/50 rounded-xl border border-slate-700 shadow-2xl shadow-blue-500/10">
+                        <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                            <g class="opacity-0 animate-fadeInUp" style="animation-delay: 0.4s;">
+                                <rect x="10" y="40" width="180" height="70" rx="8" fill="url(#grad1)"/>
+                                <path d="M 30 75 L 70 75" stroke-width="3" stroke="#94a3b8" stroke-linecap="round"/>
+                                <path d="M 30 85 L 60 85" stroke-width="3" stroke="#64748B" stroke-linecap="round"/>
+                                <circle cx="140" cy="75" r="25" fill="#1e293b"/>
+                                <circle cx="140" cy="75" r="20" class="svg-pulse" fill="#3b82f6"/>
+                            </g>
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Texto -->
+                <div class="relative animate-on-scroll">
+                    <div class="absolute -left-12 md:left-auto md:-right-12 lg:-left-20 top-0 flex items-center justify-center w-8 h-8 bg-slate-700 text-blue-300 font-bold rounded-full ring-8 ring-slate-900">1</div>
+                    <div class="opacity-0 animate-fadeInUp">
+                        <h3 class="text-3xl font-bold">Entrada da Transação</h3>
+                        <p class="mt-4 text-slate-300">Cada transação, seja Pix, TED ou uma operação com ativos digitais, é recebida pela nossa API como um ponto de dados a ser validado.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passo 2 -->
+            <div class="relative grid md:grid-cols-2 gap-12 items-center mb-24">
+                <!-- Texto -->
+                <div class="relative md:text-right animate-on-scroll md:order-2">
+                    <div class="absolute -left-12 md:left-auto md:-right-12 top-0 flex items-center justify-center w-8 h-8 bg-slate-700 text-blue-300 font-bold rounded-full ring-8 ring-slate-900">2</div>
+                    <div class="opacity-0 animate-fadeInUp">
+                        <h3 class="text-3xl font-bold">Análise Reputacional</h3>
+                        <p class="mt-4 text-slate-300">O motor Spezzatura analisa a transação em tempo real, cruzando centenas de variáveis on-chain e off-chain para gerar um score de risco determinístico.</p>
+                    </div>
+                </div>
+                <!-- Visual SVG -->
+                <div class="relative animate-on-scroll md:order-1">
+                     <div class="p-6 bg-slate-800/50 rounded-xl border border-slate-700 shadow-2xl shadow-blue-500/10">
+                        <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                            <g class="opacity-0 animate-fadeInUp" style="animation-delay: 0.4s;">
+                                <circle cx="100" cy="75" r="60" fill="none" stroke="#334155" stroke-width="1" />
+                                <circle cx="100" cy="75" r="40" fill="none" stroke="#475569" stroke-width="1" class="svg-rotate" style="transform-origin: center; animation-direction: reverse;"/>
+                                <circle cx="100" cy="75" r="20" class="svg-pulse" fill="#3b82f6"/>
+                                <path class="svg-path-draw" d="M 100 15 L 100 55 M 100 95 L 100 135 M 185 75 L 145 75 M 55 75 L 15 75" stroke="#475569" stroke-width="2"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passo 3 -->
+            <div class="relative grid md:grid-cols-2 gap-12 items-center">
+                <!-- Visual SVG -->
+                <div class="relative animate-on-scroll">
+                    <div class="p-6 bg-slate-800/50 rounded-xl border border-slate-700 shadow-2xl shadow-blue-500/10">
+                        <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                            <g class="opacity-0 animate-fadeInUp" style="animation-delay: 0.4s;">
+                                <path d="M 50 20 L 150 20 L 150 130 L 50 130 Z" fill="none" stroke="#475569" stroke-width="2"/>
+                                <path d="M 70 40 L 130 40" stroke="#334155" stroke-width="2"/>
+                                <path d="M 70 110 L 130 110" stroke="#334155" stroke-width="2"/>
+                                <circle cx="100" cy="75" r="20" class="svg-pulse" fill="#10B981"/>
+                                <path d="M 92 75 L 98 81 L 110 69" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Texto -->
+                <div class="relative animate-on-scroll">
+                    <div class="absolute -left-12 md:left-auto md:-right-12 lg:-left-20 top-0 flex items-center justify-center w-8 h-8 bg-slate-700 text-blue-300 font-bold rounded-full ring-8 ring-slate-900">3</div>
+                    <div class="opacity-0 animate-fadeInUp">
+                        <h3 class="text-3xl font-bold">Entrega do Veredito</h3>
+                        <p class="mt-4 text-slate-300">Um veredito final (ALLOW, REVIEW, BLOCK) é entregue via API, permitindo que os seus sistemas executem a ação apropriada de forma automatizada e auditável.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="flex flex-col items-center p-4">
-          <div class="flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full">
-            <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          </div>
-          <p class="mt-2 font-bold text-yellow-800">REVIEW</p>
-        </div>
-        <div class="flex flex-col items-center p-4">
-          <div class="flex items-center justify-center w-16 h-16 bg-red-100 rounded-full">
-            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-          </div>
-          <p class="mt-2 font-bold text-red-800">BLOCK</p>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
 
+
+<!--
 <div class="bg-white">
   <div class="w-full h-20 md:h-32 lg:h-40 bg-slate-900">
     <svg
@@ -479,6 +634,12 @@
     </svg>
   </div>
 </div>
+
+
+
+
+
+
 
 <section class="pt-28 lg:pt-32 pb-20 lg:pb-32 bg-slate-900 text-white">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -494,6 +655,10 @@
         </div>
   </div>
 </section>
+-->
+
+
+
 
 <div class="bg-slate-100">
   <div class="w-full h-20 md:h-32 lg:h-40 bg-slate-900">
@@ -1119,6 +1284,156 @@
 
 
 
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lógica para o efeito de scroll no header
+        const header = document.getElementById('page-header');
+        if (header) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.cssText += 'background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-bottom: 1px solid #E5E7EB;';
+                } else {
+                    header.style.cssText += 'background-color: transparent; backdrop-filter: none; box-shadow: none; border-bottom: 1px solid transparent;';
+                }
+            });
+        }
+
+        // Lógica para o menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        function closeMobileMenu() {
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+        }
+
+        if (mobileMenuButton) mobileMenuButton.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+        if (mobileMenuCloseButton) mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
+        if (mobileMenuLinks) mobileMenuLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+        
+        // Lógica para a animação do Canvas
+        const canvas = document.getElementById('hero-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+
+            // Define o tamanho do canvas para preencher a janela
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // Classe para criar cada partícula
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.directionX = directionX;
+                    this.directionY = directionY;
+                    this.size = size;
+                    this.color = color;
+                }
+                // Desenha a partícula no canvas
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+                // Atualiza a posição da partícula
+                update() {
+                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                    this.x += this.directionX;
+                    this.y += this.directionY;
+                    this.draw();
+                }
+            }
+
+            // Inicializa as partículas
+            function init() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 12000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 1.5) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * .3) - .15;
+                    let directionY = (Math.random() * .3) - .15;
+                    // Cor azul para as partículas
+                    let color = 'rgba(37, 99, 235, 0.5)'; 
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                }
+            }
+
+            // Conecta as partículas com linhas se estiverem próximas
+            function connect() {
+                let opacityValue = 1;
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                                     ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (distance < (canvas.width / 8) * (canvas.height / 8)) {
+                            opacityValue = 1 - (distance / 20000);
+                            // Cor azul para as linhas de conexão
+                            ctx.strokeStyle = 'rgba(37, 99, 235,' + opacityValue + ')';
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            // Loop de animação
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+                connect();
+            }
+
+            init();
+            animate();
+        }
+    });
+</script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const animatedSections = document.querySelectorAll('#solucao');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('section-visible');
+            }
+        });
+    }, { threshold: 0.3 }); // A animação começa quando 30% da seção está visível
+
+    animatedSections.forEach(section => {
+        // Adiciona a classe 'animate-on-scroll' a todos os elementos que devem ser animados
+        section.querySelectorAll('.animate-on-scroll').forEach(el => {
+            el.classList.add('opacity-0'); // Começa invisível
+        });
+        observer.observe(section);
+    });
+});
+</script>
 
 
 </body>
