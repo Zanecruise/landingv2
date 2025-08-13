@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -21,9 +21,9 @@
             --text-light: #FFFFFF;
             --text-muted: #A0A0A0;
             --color-accent: #3b82f6;
-            /* Azul 500 da Tailwind */
+            /* Tailwind Blue 500 */
             --color-border: #27272a;
-            /* Zinco 800 da Tailwind */
+            /* Tailwind Zinc 800 */
         }
 
         html {
@@ -35,8 +35,8 @@
             background-color: var(--bg-dark);
             color: var(--text-light);
             overflow-x: hidden;
-            /* CURSOR PADRÃO RESTAURADO */
-            cursor: auto; 
+            /* RESTORED DEFAULT CURSOR */
+            cursor: auto;
         }
 
         .font-display {
@@ -80,7 +80,7 @@
             box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
         }
 
-        /* Oculta o cursor em telas de toque (não mais necessário, mas mantido para referência) */
+        /* Hides cursor on touch screens (no longer necessary, but kept for reference) */
         @media (pointer: coarse) {
             body {
                 cursor: auto;
@@ -96,18 +96,17 @@
             <h1 class="font-display text-3xl">FOUNDLAB</h1>
             
             <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
-                <a href="#arquitetura" class="hover:text-gray-400 transition-colors">Arquitetura</a>
-                <a href="#casos-de-uso" class="hover:text-gray-400 transition-colors">Casos de Uso</a>
-                <a href="#governance-venn" class="hover:text-gray-400 transition-colors">Governança</a>
+                <a href="#arquitetura" class="hover:text-gray-400 transition-colors">Architecture</a>
+                <a href="#casos-de-uso" class="hover:text-gray-400 transition-colors">Use Cases</a>
+                <a href="#governance-venn" class="hover:text-gray-400 transition-colors">Governance</a>
                 <a href="#open-source" class="hover:text-gray-400 transition-colors">Open Source</a>
                 <div class="text-sm">
-                    <span class="text-white font-bold">PT</span>
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors">PT</a>
                     <span class="text-gray-500">/</span>
-                    <a href="index-en.html" class="text-gray-400 hover:text-white transition-colors">EN</a>
+                    <span class="text-white font-bold">EN</span>
                 </div>
                 <button id="openTallyModalBtn"
-                    class="ml-4 bg-white text-black font-semibold px-4 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm">AGENDAR
-                    DEMO</button>
+                    class="ml-4 bg-white text-black font-semibold px-4 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm">SCHEDULE DEMO</button>
             </nav>
 
             <div class="md:hidden">
@@ -122,16 +121,16 @@
 
     <div id="mobile-menu" class="hidden fixed inset-0 bg-black z-[60] flex flex-col items-center justify-center space-y-10">
         <button id="close-mobile-menu" class="absolute top-6 right-6 text-white text-4xl">&times;</button>
-        <a href="#arquitetura" class="mobile-nav-link text-2xl font-display uppercase">Arquitetura</a>
-        <a href="#casos-de-uso" class="mobile-nav-link text-2xl font-display uppercase">Casos de Uso</a>
-        <a href="#governance-venn" class="mobile-nav-link text-2xl font-display uppercase">Governança</a>
+        <a href="#arquitetura" class="mobile-nav-link text-2xl font-display uppercase">Architecture</a>
+        <a href="#casos-de-uso" class="mobile-nav-link text-2xl font-display uppercase">Use Cases</a>
+        <a href="#governance-venn" class="mobile-nav-link text-2xl font-display uppercase">Governance</a>
         <a href="#open-source" class="mobile-nav-link text-2xl font-display uppercase">Open Source</a>
         <div class="text-lg pt-4">
-            <span class="text-white font-bold">PT</span>
+            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">PT</a>
             <span class="text-gray-500">/</span>
-            <a href="index-en.html" class="text-gray-400 hover:text-white transition-colors">EN</a>
+            <span class="text-white font-bold">EN</span>
         </div>
-        <button id="openTallyModalBtnMobile" class="mt-4 bg-white text-black font-semibold px-6 py-3 rounded-md text-lg">AGENDAR DEMO</button>
+        <button id="openTallyModalBtnMobile" class="mt-4 bg-white text-black font-semibold px-6 py-3 rounded-md text-lg">SCHEDULE DEMO</button>
     </div>
 
 
@@ -155,23 +154,20 @@
         </div>
 
         <p class="mt-8 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-            Construindo a próxima geração de confiança programável com protocolos transparentes e auditáveis.
+            Building the next generation of programmable trust with transparent and auditable protocols.
         </p>
 
     </div>
 </section>
-
         <div class="container mx-auto px-6 space-y-24 md:space-y-32">
             
             <section id="problema" class="py-16 grid md:grid-cols-3 gap-8">
                 <div class="md:col-span-1 fade-in">
-                    <h3 class="font-display text-4xl uppercase">A Falha Estrutural</h3>
+                    <h3 class="font-display text-4xl uppercase">The Structural Flaw</h3>
                 </div>
                 <div class="md:col-span-2 text-xl text-gray-300 space-y-6 fade-in" style="transition-delay: 200ms;">
-                    <p>A confiança no sistema financeiro global não é um componente projetado e auditável, mas uma
-                        externalidade. O resultado é um "imposto de desconfiança" que se manifesta em processos
-                        burocráticos e fricção sistêmica.</p>
-                    <p>A FoundLab nasceu para transformar a confiança em infraestrutura programável.</p>
+                    <p>Trust in the global financial system is not a designed, auditable component, but an externality. The result is a "distrust tax" that manifests in bureaucratic processes and systemic friction.</p>
+                    <p>FoundLab was born to transform trust into programmable infrastructure.</p>
                 </div>
             </section>
 
@@ -201,8 +197,7 @@
 
                         <div class="lg:col-span-2">
                             <div class="fade-in">
-                                <h2 class="font-display text-4xl md:text-5xl uppercase leading-tight">Arquitetura de
-                                    Execução Técnica</h2>
+                                <h2 class="font-display text-4xl md:text-5xl uppercase leading-tight">Technical Execution Architecture</h2>
                             </div>
 
                             <div class="mt-12 space-y-10 relative">
@@ -219,11 +214,8 @@
                                         </svg>
                                     </div>
                                     <div>
-                                        <h4 class="font-display text-2xl uppercase text-blue-400">Abordagem Modular
-                                            API-First</h4>
-                                        <p class="mt-1 text-gray-400">Construído sobre uma abordagem modular e
-                                            API-first, nossa arquitetura garante integração flexível e entrega eficiente
-                                            de resultados.</p>
+                                        <h4 class="font-display text-2xl uppercase text-blue-400">API-First Modular Approach</h4>
+                                        <p class="mt-1 text-gray-400">Built on a modular, API-first approach, our architecture ensures flexible integration and efficient delivery of results.</p>
                                     </div>
                                 </div>
 
@@ -240,8 +232,7 @@
                                     </div>
                                     <div>
                                         <h4 class="font-display text-2xl uppercase text-blue-400">Score Engine v2.5</h4>
-                                        <p class="mt-1 text-gray-400">Um sistema híbrido que integra análise
-                                            compreensiva de longo prazo com detecção de ameaças em tempo real.</p>
+                                        <p class="mt-1 text-gray-400">A hybrid system that integrates comprehensive long-term analysis with real-time threat detection.</p>
                                     </div>
                                 </div>
 
@@ -259,8 +250,7 @@
                                     <div>
                                         <h4 class="font-display text-2xl uppercase text-blue-400">
                                             Reputation-as-a-Transaction (RaaT)</h4>
-                                        <p class="mt-1 text-gray-400">Transforma a reputação de uma métrica passiva em
-                                            uma ação transacionável - cada evento gera consequências programáveis.</p>
+                                        <p class="mt-1 text-gray-400">Transforms reputation from a passive metric into a transactable action—every event generates programmable consequences.</p>
                                     </div>
                                 </div>
 
@@ -276,9 +266,7 @@
                                     </div>
                                     <div>
                                         <h4 class="font-display text-2xl uppercase text-blue-400">Burn Engine</h4>
-                                        <p class="mt-1 text-gray-400">Executa ações irreversíveis no ponto de risco
-                                            (block, slash, freeze, burn), automatizando compliance e mitigação de risco.
-                                        </p>
+                                        <p class="mt-1 text-gray-400">Executes irreversible actions at the point of risk (block, slash, freeze, burn), automating compliance and risk mitigation.</p>
                                     </div>
                                 </div>
 
@@ -292,10 +280,8 @@
                                         </svg>
                                     </div>
                                     <div>
-                                        <h4 class="font-display text-2xl uppercase text-blue-400">Signed Digital
-                                            Identity (SDID)</h4>
-                                        <p class="mt-1 text-gray-400">Artefato de identidade portátil e verificável.
-                                            Encapsula toda a reputação, racionalidade e evidência de compliance.</p>
+                                        <h4 class="font-display text-2xl uppercase text-blue-400">Signed Digital Identity (SDID)</h4>
+                                        <p class="mt-1 text-gray-400">A portable and verifiable identity artifact. It encapsulates all reputation, rationale, and compliance evidence.</p>
                                     </div>
                                 </div>
 
@@ -309,9 +295,8 @@
                                         </svg>
                                     </div>
                                     <div>
-                                        <h4 class="font-display text-2xl uppercase text-blue-400">Protocolo Veritas</h4>
-                                        <p class="mt-1 text-gray-400">Fornece auditabilidade criptográfica para todas as
-                                            ações - cada decisão é assinada, explicada e defensável por design.</p>
+                                        <h4 class="font-display text-2xl uppercase text-blue-400">Veritas Protocol</h4>
+                                        <p class="mt-1 text-gray-400">Provides cryptographic auditability for all actions—every decision is signed, explained, and defensible by design.</p>
                                     </div>
                                 </div>
 
@@ -325,11 +310,8 @@
                                         </svg>
                                     </div>
                                     <div>
-                                        <h4 class="font-display text-2xl uppercase text-blue-400">Guardian AI & Data
-                                            Flywheel</h4>
-                                        <p class="mt-1 text-gray-400">Uma sentinela de IA que aprende continuamente com
-                                            dados vivos, detectando anomalias e ataques para evoluir as defesas do
-                                            sistema.</p>
+                                        <h4 class="font-display text-2xl uppercase text-blue-400">Guardian AI & Data Flywheel</h4>
+                                        <p class="mt-1 text-gray-400">An AI sentinel that continuously learns from live data, detecting anomalies and attacks to evolve the system's defenses.</p>
                                     </div>
                                 </div>
 
@@ -341,26 +323,21 @@
 
             <section id="solucao" class="py-16">
                 <div class="text-center mb-16 fade-in">
-                    <h3 class="font-display text-5xl md:text-7xl uppercase">Protocolo de Execução</h3>
-                    <p class="mt-4 max-w-2xl mx-auto text-gray-400">Construída sobre uma abordagem modular e API-first,
-                        nossa arquitetura garante integração flexível e entrega eficiente de resultados.</p>
+                    <h3 class="font-display text-5xl md:text-7xl uppercase">Execution Protocol</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-400">Built on a modular, API-first approach, our architecture ensures flexible integration and efficient delivery of results.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-12">
                     <div class="fade-in">
                         <h4 class="font-display text-3xl uppercase">Guardian AI</h4>
-                        <p class="mt-4 text-gray-400">Um modelo antifrágil que aprende com dados de alto risco,
-                            antecipando ameaças. Diferencia-se por ingerir dados negligenciados, criando um "loop
-                            impossível de copiar".</p>
+                        <p class="mt-4 text-gray-400">An antifragile model that learns from high-risk data, anticipating threats. It differentiates itself by ingesting neglected data, creating an 'uncopyable loop'.</p>
                     </div>
                     <div class="fade-in" style="transition-delay: 200ms;">
                         <h4 class="font-display text-3xl uppercase">Score Engine v2.5</h4>
-                        <p class="mt-4 text-gray-400">Sistema híbrido que integra análise de longo prazo com detecção de
-                            ameaças em tempo real, calculando scores dinâmicos preditivos.</p>
+                        <p class="mt-4 text-gray-400">A hybrid system that integrates long-term analysis with real-time threat detection, calculating dynamic predictive scores.</p>
                     </div>
                     <div class="fade-in" style="transition-delay: 400ms;">
                         <h4 class="font-display text-3xl uppercase">Burn Engine</h4>
-                        <p class="mt-4 text-gray-400">Braço executor autônomo para ações de compliance irreversíveis
-                            on-chain, transformando governança em um protocolo máquina-a-máquina.</p>
+                        <p class="mt-4 text-gray-400">An autonomous execution arm for irreversible on-chain compliance actions, transforming governance into a machine-to-machine protocol.</p>
                     </div>
                 </div>
             </section>
@@ -372,10 +349,9 @@
                     <div class="grid lg:grid-cols-2 gap-16 items-center">
 
                         <div class="fade-in">
-                            <h2 class="font-display text-4xl md:text-5xl uppercase">Exemplos de Casos de Uso</h2>
+                            <h2 class="font-display text-4xl md:text-5xl uppercase">Use Case Examples</h2>
                             <p class="mt-4 text-gray-400 max-w-xl">
-                                A infraestrutura inovadora da FoundLab se estende por diversas aplicações, transformando
-                                como as indústrias gerenciam confiança, compliance e reputação em tempo real.
+                                FoundLab's innovative infrastructure extends across diverse applications, transforming how industries manage trust, compliance, and reputation in real-time.
                             </p>
 
                             <div class="space-y-8 mt-12">
@@ -392,11 +368,10 @@
                                                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                             </svg>
                                         </div>
-                                        <h3 class="font-display text-xl uppercase">Onboarding & KYC Automatizados</h3>
+                                        <h3 class="font-display text-xl uppercase">Automated Onboarding & KYC</h3>
                                     </div>
                                     <p class="mt-3 text-gray-400 text-sm">
-                                        Simplifique o onboarding de clientes e parceiros com verificação de identidade e
-                                        checagens de compliance em tempo real, reduzindo drasticamente o esforço manual.
+                                        Streamline customer and partner onboarding with real-time identity verification and compliance checks, drastically reducing manual effort.
                                     </p>
                                 </div>
 
@@ -412,13 +387,10 @@
                                                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </div>
-                                        <h3 class="font-display text-xl uppercase">Mitigação de Fraude em Tempo Real
-                                        </h3>
+                                        <h3 class="font-display text-xl uppercase">Real-Time Fraud Mitigation</h3>
                                     </div>
                                     <p class="mt-3 text-gray-400 text-sm">
-                                        Detecte e previna transações fraudulentas ou atividades de alto risco
-                                        instantaneamente usando IA preditiva, garantindo integridade e compliance via
-                                        Burn Engine.
+                                        Detect and prevent fraudulent transactions or high-risk activities instantly using predictive AI, ensuring integrity and compliance via the Burn Engine.
                                     </p>
                                 </div>
 
@@ -434,18 +406,16 @@
                                                     d="M8.25 12.75h7.5m-7.5 3h7.5m-7.5 3h7.5m3-9l-3.75-3.75M12 3v5.25m0 0l3.75 3.75M12 8.25l-3.75 3.75" />
                                             </svg>
                                         </div>
-                                        <h3 class="font-display text-xl uppercase">Proveniência em Supply Chain</h3>
+                                        <h3 class="font-display text-xl uppercase">Supply Chain Provenance</h3>
                                     </div>
                                     <p class="mt-3 text-gray-400 text-sm">
-                                        Estabeleça confiança verificável em cadeias de suprimentos complexas, rastreando
-                                        a origem e a movimentação de ativos e prevenindo o comércio ilícito.
+                                        Establish verifiable trust in complex supply chains by tracking the origin and movement of assets and preventing illicit trade.
                                     </p>
                                 </div>
 
                             </div>
                             <p class="mt-12 text-gray-400 leading-relaxed">
-                                Nossa plataforma adaptável garante segurança e eficiência inigualáveis, minimizando o
-                                erro humano e acelerando a resposta a incidentes em operações críticas.
+                                Our adaptable platform ensures unparalleled security and efficiency, minimizing human error and accelerating incident response in critical operations.
                             </p>
                         </div>
 
@@ -485,7 +455,7 @@
 
                     <div class="text-center max-w-4xl mx-auto mb-12 fade-in">
                         <h2 class="font-display text-4xl md:text-5xl uppercase leading-tight">
-                            Construindo Confiança Auditável com Governança Transparente
+                            Building Auditable Trust with Transparent Governance
                         </h2>
                     </div>
 
@@ -502,51 +472,47 @@
                         </div>
 
                         <div class="absolute top-[31%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 text-center">
-                            <h3 class="font-display text-2xl uppercase tracking-wider">Responsabilidade Estratificada
-                            </h3>
+                            <h3 class="font-display text-2xl uppercase tracking-wider">Layered Accountability</h3>
                         </div>
                         <div class="absolute top-[69%] left-[25%] -translate-x-1/2 -translate-y-1/2 w-56 text-center">
-                            <h3 class="font-display text-2xl uppercase tracking-wider">Conselho de Ética Algorítmica
-                            </h3>
+                            <h3 class="font-display text-2xl uppercase tracking-wider">Algorithmic Ethics Board</h3>
                         </div>
                         <div class="absolute top-[69%] left-[75%] -translate-x-1/2 -translate-y-1/2 w-56 text-center">
-                            <h3 class="font-display text-2xl uppercase tracking-wider">Direito à Contestação</h3>
+                            <h3 class="font-display text-2xl uppercase tracking-wider">Right to Appeal</h3>
                         </div>
 
                         <div class="absolute top-[50%] left-[34%] -translate-x-1/2 -translate-y-1/2 w-48 text-center">
-                            <h4 class="font-semibold text-sm text-gray-300">Ética & Responsabilidade</h4>
+                            <h4 class="font-semibold text-sm text-gray-300">Ethics & Accountability</h4>
                         </div>
                         <div class="absolute top-[50%] left-[66%] -translate-x-1/2 -translate-y-1/2 w-48 text-center">
-                            <h4 class="font-semibold text-sm text-gray-300">Responsabilidade & Apelações</h4>
+                            <h4 class="font-semibold text-sm text-gray-300">Accountability & Appeals</h4>
                         </div>
                         <div class="absolute top-[73%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                            <h4 class="font-semibold text-sm text-gray-300">Supervisão do Usuário</h4>
+                            <h4 class="font-semibold text-sm text-gray-300">User Oversight</h4>
                         </div>
                         <div class="absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                            <h4 class="font-display text-base uppercase tracking-wider">Modelo de Governança</h4>
+                            <h4 class="font-display text-base uppercase tracking-wider">Governance Model</h4>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-12 mt-16 text-center md:hidden fade-in">
                         <div>
-                            <h3 class="font-display text-2xl uppercase">Responsabilidade Estratificada</h3>
-                            <p class="text-sm text-gray-400 mt-1">(Modelo de Governança)</p>
+                            <h3 class="font-display text-2xl uppercase">Layered Accountability</h3>
+                            <p class="text-sm text-gray-400 mt-1">(Governance Model)</p>
                         </div>
                         <div>
-                            <h3 class="font-display text-2xl uppercase">Conselho de Ética Algorítmica</h3>
-                            <p class="text-sm text-gray-400 mt-1">Ética, Responsabilidade e Supervisão do Usuário</p>
+                            <h3 class="font-display text-2xl uppercase">Algorithmic Ethics Board</h3>
+                            <p class="text-sm text-gray-400 mt-1">Ethics, Accountability & User Oversight</p>
                         </div>
                         <div>
-                            <h3 class="font-display text-2xl uppercase">Direito à Contestação</h3>
-                            <p class="text-sm text-gray-400 mt-1">Responsabilidade & Apelações</p>
+                            <h3 class="font-display text-2xl uppercase">Right to Appeal</h3>
+                            <p class="text-sm text-gray-400 mt-1">Accountability & Appeals</p>
                         </div>
                     </div>
 
                     <div class="fade-in">
                         <p class="text-center max-w-3xl mx-auto mt-20 text-gray-400 leading-relaxed">
-                            Desbloqueie um futuro onde a confiança é cristalina. A FoundLab se baseia em uma base sólida
-                            de governança e algoritmos éticos, prometendo justiça e transparência. Experimente a mudança
-                            da confiança subjetiva para a evidência matemática irrefutável.
+                            Unlock a future where trust is crystal-clear. FoundLab is built on a solid foundation of governance and ethical algorithms, promising fairness and transparency. Experience the shift from subjective trust to irrefutable mathematical evidence.
                         </p>
                     </div>
 
@@ -560,12 +526,10 @@
 
                     <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
                         <h2 class="font-display text-4xl md:text-5xl uppercase">
-                            Fundação Open Source
+                            Open Source Foundation
                         </h2>
                         <p class="mt-4 text-gray-400 leading-relaxed">
-                            A FoundLab defende uma filosofia open-source, acreditando que a verdadeira confiança e
-                            resiliência são construídas sobre transparência e inteligência coletiva. Nosso compromisso
-                            capacita uma comunidade global e garante inovação contínua.
+                            FoundLab champions an open-source philosophy, believing that true trust and resilience are built on transparency and collective intelligence. Our commitment empowers a global community and ensures continuous innovation.
                         </p>
                     </div>
 
@@ -584,10 +548,9 @@
 
                                 </div>
                             </div>
-                            <h3 class="font-display text-xl uppercase">Transparência Incomparável</h3>
+                            <h3 class="font-display text-xl uppercase">Unmatched Transparency</h3>
                             <p class="mt-2 text-gray-400 text-sm">
-                                Protocolos e componentes-chave publicamente acessíveis permitem escrutínio independente,
-                                garantindo integridade e fomentando confiança.
+                                Publicly accessible protocols and key components allow for independent scrutiny, ensuring integrity and fostering trust.
                             </p>
                         </div>
                         <div class="fade-in" style="transition-delay: 400ms;">
@@ -601,10 +564,9 @@
                                     </svg>
                                 </div>
                             </div>
-                            <h3 class="font-display text-xl uppercase">Segurança Reforçada</h3>
+                            <h3 class="font-display text-xl uppercase">Hardened Security</h3>
                             <p class="mt-2 text-gray-400 text-sm">
-                                Com mais olhos no código, vulnerabilidades são identificadas e resolvidas mais rápido,
-                                criando um ambiente mais robusto e seguro para todos.
+                                With more eyes on the code, vulnerabilities are identified and resolved faster, creating a more robust and secure environment for everyone.
                             </p>
                         </div>
 
@@ -619,10 +581,9 @@
                                     </svg>
                                 </div>
                             </div>
-                            <h3 class="font-display text-xl uppercase">Inovação pela Comunidade</h3>
+                            <h3 class="font-display text-xl uppercase">Community-Driven Innovation</h3>
                             <p class="mt-2 text-gray-400 text-sm">
-                                Nossa abordagem aberta convida à colaboração global, acelerando o desenvolvimento e
-                                integrando especialidades para construir o futuro da confiança.
+                                Our open approach invites global collaboration, accelerating development and integrating diverse expertise to build the future of trust.
                             </p>
                         </div>
                     </div>
@@ -636,7 +597,7 @@
                 <div class="container mx-auto px-6">
 
                     <h3 class="font-display text-center text-4xl md:text-5xl uppercase text-gray-400 mb-20 fade-in">
-                        Construído com Líderes da Indústria
+                        Built with Industry Leaders
                     </h3>
 
                     <div class="flex flex-wrap justify-center items-center gap-x-16 gap-y-12 md:gap-x-28">
@@ -672,7 +633,7 @@
 
                     <div class="max-w-3xl mx-auto mb-20 fade-in">
                         <h2 class="font-display text-4xl md:text-5xl uppercase leading-tight">
-                            Transforme sua Abordagem de Confiança e Compliance
+                            Transform Your Approach to Trust and Compliance
                         </h2>
                     </div>
 
@@ -680,31 +641,27 @@
 
                         <div class="fade-in" style="transition-delay: 100ms;">
                             <p class="font-display text-7xl lg:text-8xl text-blue-500">100%</p>
-                            <h3 class="font-display text-xl uppercase mt-4">Compliance Automatizado</h3>
-                            <p class="mt-2 text-gray-400">Alcance processos regulatórios contínuos com resultados
-                                previsíveis e auditáveis.</p>
+                            <h3 class="font-display text-xl uppercase mt-4">Automated Compliance</h3>
+                            <p class="mt-2 text-gray-400">Achieve seamless regulatory processes with predictable and auditable outcomes.</p>
                         </div>
 
                         <div class="fade-in" style="transition-delay: 300ms;">
                             <p class="font-display text-7xl lg:text-8xl text-blue-500">24/7</p>
-                            <h3 class="font-display text-xl uppercase mt-4">Proteção em Tempo Real</h3>
-                            <p class="mt-2 text-gray-400">Garanta monitoramento contínuo e resposta imediata a ameaças.
-                            </p>
+                            <h3 class="font-display text-xl uppercase mt-4">Real-Time Protection</h3>
+                            <p class="mt-2 text-gray-400">Ensure continuous monitoring and immediate response to threats.</p>
                         </div>
 
                         <div class="fade-in" style="transition-delay: 500ms;">
                             <p class="font-display text-7xl lg:text-8xl text-blue-500">0%</p>
-                            <h3 class="font-display text-xl uppercase mt-4">Lacuna de Confiança</h3>
-                            <p class="mt-2 text-gray-400">Preencha a lacuna crítica entre alegações de reputação e
-                                provas verificáveis.</p>
+                            <h3 class="font-display text-xl uppercase mt-4">Trust Gap</h3>
+                            <p class="mt-2 text-gray-400">Bridge the critical gap between reputation claims and verifiable proof.</p>
                         </div>
 
                     </div>
 
                     <div class="fade-in" style="transition-delay: 700ms;">
                         <p class="text-center max-w-3xl mx-auto mt-20 text-gray-400 leading-relaxed">
-                            Abrace o futuro da confiança programável com a abordagem inovadora da FoundLab para
-                            reputação e automação regulatória.
+                            Embrace the future of programmable trust with FoundLab's innovative approach to reputation and regulatory automation.
                         </p>
                     </div>
 
@@ -714,11 +671,10 @@
             <div class="divider fade-in"></div>
             <section id="contato" class="py-32 text-center">
                 <div class="fade-in">
-                    <h3 class="font-display text-5xl md:text-8xl uppercase">Transforme sua Abordagem.</h3>
+                    <h3 class="font-display text-5xl md:text-8xl uppercase">Transform Your Approach.</h3>
                     <div class="mt-10">
                         <button id="openTallyModalBtnCta"
-                            class="inline-block font-display text-3xl border-b-2 border-white hover:border-gray-500 transition-colors bg-transparent">AGENDAR
-                            DEMO</button>
+                            class="inline-block font-display text-3xl border-b-2 border-white hover:border-gray-500 transition-colors bg-transparent">SCHEDULE DEMO</button>
                     </div>
                 </div>
             </section>
@@ -731,14 +687,14 @@
             <button id="closeTallyModal"
                 class="absolute -top-2 -right-2 text-white text-3xl font-bold bg-black rounded-full w-10 h-10 flex items-center justify-center hover:text-gray-400 transition-colors z-10">&times;</button>
             <iframe id="tallyFrame" class="w-full h-full rounded-lg" frameborder="0" marginheight="0" marginwidth="0"
-                title="Agendar Demo"></iframe>
+                title="Schedule Demo"></iframe>
         </div>
     </div>
 
     <footer class="py-8 mt-16">
         <div class="container mx-auto px-6 text-center text-sm text-gray-500">
-            <p>&copy; 2025 FoundLab. Todos os direitos reservados.</p>
-            <p class="mt-2">Contato: <a href="mailto:domains@foundlab.cloud"
+            <p>&copy; 2025 FoundLab. All rights reserved.</p>
+            <p class="mt-2">Contact: <a href="mailto:domains@foundlab.cloud"
                     class="hover:text-white transition-colors">domains@foundlab.cloud</a></p>
         </div>
     </footer>
@@ -746,7 +702,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- OBSERVER PARA ANIMAÇÃO DE ENTRADA ---
+            // --- OBSERVER FOR FADE-IN ANIMATION ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -756,22 +712,22 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-            // --- LÓGICA DO MODAL TALLY ---
+            // --- TALLY MODAL LOGIC ---
             const openBtn = document.getElementById('openTallyModalBtn');
             const openBtnCta = document.getElementById('openTallyModalBtnCta');
             const openBtnMobile = document.getElementById('openTallyModalBtnMobile');
             const closeBtn = document.getElementById('closeTallyModal');
             const modal = document.getElementById('tallyModal');
             const tallyIframe = document.getElementById('tallyFrame');
-            const tallyFormUrl = "https://tally.so/r/wg18oP";
+            const tallyFormUrl = "https://tally.so/r/wg18oP"; // Same form URL assumed
 
             const openModal = () => {
                 if (tallyIframe.src !== tallyFormUrl) tallyIframe.src = tallyFormUrl;
                 modal.classList.remove('hidden');
             };
             const closeModal = () => modal.classList.add('hidden');
-
-            // Adiciona evento de clique para todos os botões "Agendar Demo"
+            
+            // Add click event for all "Schedule Demo" buttons
             if (openBtn) openBtn.addEventListener('click', openModal);
             if (openBtnCta) openBtnCta.addEventListener('click', openModal);
             if (openBtnMobile) openBtnMobile.addEventListener('click', openModal);
@@ -780,11 +736,12 @@
 
             window.addEventListener('message', (e) => {
                 if (e.origin.includes('tally.so') && e.data === 'Tally.formSubmitted') {
-                    window.location.href = 'demo.html';
+                    // Redirect to an English confirmation page if it exists, otherwise use the same
+                    window.location.href = 'demo.html'; 
                 }
             });
 
-            // --- LÓGICA DO MENU MOBILE ---
+            // --- MOBILE MENU LOGIC ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const closeMobileMenuButton = document.getElementById('close-mobile-menu');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -795,13 +752,13 @@
 
             if (mobileMenuButton) mobileMenuButton.addEventListener('click', openMobileMenu);
             if (closeMobileMenuButton) closeMobileMenuButton.addEventListener('click', closeMobileMenu);
-            // Fecha o menu ao clicar em um link
+            // Close menu when a link is clicked
             mobileNavLinks.forEach(link => {
                 link.addEventListener('click', closeMobileMenu);
             });
 
 
-            // --- ANIMAÇÃO PLEXUS NO HERO ---
+            // --- PLEXUS ANIMATION IN HERO ---
             const canvas = document.getElementById('plexus-canvas');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
@@ -887,7 +844,7 @@
                 animatePlexus();
             }
             
-            // --- ANIMAÇÃO DE TEXTO "HACKER" NO HERO ---
+            // --- "HACKER" TEXT ANIMATION IN HERO ---
             const heroTitle = document.getElementById('hero-title');
             if (heroTitle) {
                 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -913,7 +870,7 @@
                     }, 30);
                 }
                 
-                // Dispara a animação uma vez no carregamento
+                // Trigger animation once on load
                 setTimeout(triggerAnimation, 800);
             }
 
