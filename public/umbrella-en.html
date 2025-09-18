@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoundLab - Umbrella Product</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" href="logofound.png" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --text-light: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --color-accent: #3b82f6;
+            /* Tailwind's Blue 500 */
+            --color-border: #27272a;
+            /* Tailwind's Zinc 800 */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 0.02em;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        
+        .divider {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--color-border), rgba(0, 0, 0, 0));
+        }
+    </style>
+</head>
+
+<body class="bg-dark">
+
+    <header class="fixed top-0 left-0 w-full z-50 p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index-en.html" class="font-display text-3xl">FOUNDLAB</a>
+            
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+                <a href="index-en.html#architecture" class="hover:text-gray-400 transition-colors">Architecture</a>
+                <a href="index-en.html#use-cases" class="hover:text-gray-400 transition-colors">Use Cases</a>
+                <a href="index-en.html#governance" class="hover:text-gray-400 transition-colors">Governance</a>
+                <a href="index-en.html#open-source" class="hover:text-gray-400 transition-colors">Open Source</a>
+                <div class="text-sm">
+                    <a href="umbrella.html" class="text-gray-400 hover:text-white transition-colors">PT</a>
+                    <span class="text-gray-500">/</span>
+                    <span class="text-white font-bold">EN</span>
+                </div>
+                <button id="openTallyModalBtn"
+                    class="ml-4 bg-white text-black font-semibold px-4 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm">SCHEDULE
+                    DEMO</button>
+            </nav>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32">
+        <section class="container mx-auto px-6 py-16">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="font-display text-5xl md:text-7xl uppercase text-center">Umbrella</h1>
+                <p class="mt-4 text-lg text-center text-gray-400">Portfolio analysis for investment advisors.</p>
+
+                <div class="mt-16 text-xl text-gray-300 space-y-6">
+                    <p>Umbrella is a platform developed for investment advisory firms. Through it, the advisor can perform a complete and detailed analysis of their clients' portfolios, asset by asset. The platform cross-references portfolio data with the current macroeconomic scenario, generating scores, risk flags, and valuable insights to optimize decision-making and wealth management.</p>
+                    
+                    <h3 class="font-display text-3xl uppercase text-blue-400 pt-8">Key Features</h3>
+                    <ul class="list-disc list-inside space-y-4 text-gray-400">
+                        <li><strong>Complete Portfolio Analysis:</strong> Detailed evaluation of each asset in the client's portfolio, identifying risks and opportunities.</li>
+                        <li><strong>Integration with Macroeconomic Scenario:</strong> Compare the portfolio's composition with current economic trends and projections.</li>
+                        <li><strong>Risk Scores and Flags:</strong> Assignment of risk scores and automatic alerts for assets or strategies that require attention.</li>
+                        <li><strong>Portfolio Optimization:</strong> Data-driven suggestions for rebalancing and asset allocation, aiming to maximize returns and minimize risks.</li>
+                        <li><strong>Customized Client Reports:</strong> Generate clear and professional reports to communicate the analysis and recommendations to your clients.</li>
+                    </ul>
+
+                    <div class="text-center pt-12">
+                        <a href="http://example.com/demo" target="_blank" class="inline-block bg-blue-600 text-white font-semibold px-8 py-3 rounded-md hover:bg-blue-700 transition-colors text-lg">
+                            Test the Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-8 mt-16">
+        <div class="container mx-auto px-6 text-center text-sm text-gray-500">
+            <p>&copy; 2025 FoundLab. All rights reserved.</p>
+            <p class="mt-2">Contact: <a href="mailto:domains@foundlab.cloud"
+                    class="hover:text-white transition-colors">domains@foundlab.cloud</a></p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
