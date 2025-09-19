@@ -136,29 +136,92 @@
 
     <main>
 <section class="relative hero-section min-h-screen flex flex-col items-center justify-center overflow-hidden">
-    <canvas id="plexus-canvas"></canvas>
-    
-    <div class="container mx-auto px-6 text-center z-10">
-        
-        <h1 class="font-serif text-7xl lg:text-9xl font-medium tracking-wider">
-            FoundLab
-        </h1>
-        
-        <div class="flex items-center justify-center gap-3 mt-4">
-            <svg class="w-7 h-7 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.5 4.5 0 002.25 15z" />
-            </svg>
-            <p class="text-lg text-gray-400">
-                Powered by Google Cloud Web3 
-            </p>
-        </div>
+            <canvas id="plexus-canvas"></canvas>
+            <div class="container mx-auto px-6 text-center z-10">
+                <h1 class="font-serif text-7xl lg:text-9xl font-medium tracking-wider">
+                    FoundLab
+                </h1>
+                <div class="flex items-center justify-center gap-3 mt-4">
+                    <svg class="w-7 h-7 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.5 4.5 0 002.25 15z" />
+                    </svg>
+                    <p class="text-lg text-gray-400">
+                        Powered by Google Cloud Web3 
+                    </p>
+                </div>
+                <p class="mt-8 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                    Building the next generation of programmable trust with transparent and auditable protocols.
+                </p>
+            </div>
+        </section>
 
-        <p class="mt-8 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-            Building the next generation of programmable trust with transparent and auditable protocols.
-        </p>
-
-    </div>
-</section>
+        <section id="products" class="py-24">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="fade-in">
+                        <h2 class="font-display text-4xl md:text-5xl uppercase">Umbrella</h2>
+                        <p class="mt-4 text-gray-400 max-w-xl">
+                            A platform for investment advisors to analyze their clients' portfolios, compare with macroeconomic scenarios, and implement risk scores and flags.
+                        </p>
+                        <div class="space-y-6 mt-8">
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-blue-500/10 border border-blue-500/30">
+                                    <svg class="w-5 h-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Portfolio Analysis</h3>
+                                    <p class="text-gray-400 text-sm">Compare your clients' portfolios with the macroeconomic scenario.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-blue-500/10 border border-blue-500/30">
+                                    <svg class="w-5 h-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Risk Scores & Flags</h3>
+                                    <p class="text-gray-400 text-sm">Implement risk scores and flags for better decision making.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-blue-500/10 border border-blue-500/30">
+                                    <svg class="w-5 h-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Portfolio Optimization</h3>
+                                    <p class="text-gray-400 text-sm">Get insights to optimize your clients' portfolios.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center fade-in" style="transition-delay: 200ms;">
+                        <svg class="w-56 h-56 text-blue-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <title>Umbrella (Wireframe)</title>
+                            <path d="M12 12v6.5a2.5 2.5 0 1 0 5 0"/>
+                            <line x1="12" y1="2.5" x2="12" y2="12"/>
+                            <circle cx="12" cy="2.5" r="1.5"/>
+                            <path d="M22 12a10 10 0 0 0-20 0h20z"/>
+                        </svg>
+                        <a href="https://umbrellanewdemo.vercel.app" target="_blank" rel="noopener noreferrer"
+                            class="inline-block bg-white text-black font-semibold px-8 py-3 rounded-md hover:bg-gray-200 transition-colors">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div class="container mx-auto px-6 space-y-24 md:space-y-32">
             
             <section id="problema" class="py-16 grid md:grid-cols-3 gap-8">
@@ -521,104 +584,6 @@
 
             <div class="divider fade-in"></div>
 
-                        <section id="open-source" class="py-24">
-                <div class="container mx-auto px-6">
-
-                    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
-                        <h2 class="font-display text-4xl md:text-5xl uppercase">
-                            Open Source Foundation
-                        </h2>
-                        <p class="mt-4 text-gray-400 leading-relaxed">
-                            FoundLab champions an open-source philosophy, believing that true trust and resilience are built on transparency and collective intelligence. Our commitment empowers a global community and ensures continuous innovation.
-                        </p>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-x-12 gap-y-16 text-center">
-
-                        <div class="fade-in" style="transition-delay: 200ms;">
-                            <div class="flex justify-center mb-6">
-                                <div
-                                    class="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-gray-900/50 border border-gray-800">
-
-                                    <svg class="w-7 h-7 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25" />
-                                    </svg>
-
-                                </div>
-                            </div>
-                            <h3 class="font-display text-xl uppercase">Unmatched Transparency</h3>
-                            <p class="mt-2 text-gray-400 text-sm">
-                                Publicly accessible protocols and key components allow for independent scrutiny, ensuring integrity and fostering trust.
-                            </p>
-                        </div>
-                        <div class="fade-in" style="transition-delay: 400ms;">
-                            <div class="flex justify-center mb-6">
-                                <div
-                                    class="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-gray-900/50 border border-gray-800">
-                                    <svg class="w-7 h-7 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3 class="font-display text-xl uppercase">Hardened Security</h3>
-                            <p class="mt-2 text-gray-400 text-sm">
-                                With more eyes on the code, vulnerabilities are identified and resolved faster, creating a more robust and secure environment for everyone.
-                            </p>
-                        </div>
-
-                        <div class="fade-in" style="transition-delay: 600ms;">
-                            <div class="flex justify-center mb-6">
-                                <div
-                                    class="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-gray-900/50 border border-gray-800">
-                                    <svg class="w-7 h-7 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M13.5 21v-4.5c0-.621.504-1.125 1.125-1.125H16.5m-3.375 0V21m-3.375 0h-1.5a1.125 1.125 0 01-1.125-1.125V15.375m3.375 0h-3.375m3.375 0V9m-3.375 0V3.375c0-.621.504-1.125 1.125-1.125h1.5m3.375 0V9m3.375 0h-3.375m3.375 0V15.375a1.125 1.125 0 01-1.125 1.125h-1.5m-3.375 0h3.375" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3 class="font-display text-xl uppercase">Community-Driven Innovation</h3>
-                            <p class="mt-2 text-gray-400 text-sm">
-                                Our open approach invites global collaboration, accelerating development and integrating diverse expertise to build the future of trust.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <div class="divider fade-in"></div>
-
-            <section id="products" class="py-24">
-                <div class="container mx-auto px-6">
-                    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
-                        <h2 class="font-display text-4xl md:text-5xl uppercase">
-                            Products
-                        </h2>
-                        <p class="mt-4 text-gray-400 leading-relaxed">
-                            Explore our software solutions designed to solve complex problems with cutting-edge technology.
-                        </p>
-                    </div>
-
-                    <div class="flex justify-center">
-                        <div class="max-w-sm rounded-lg border border-gray-800 bg-gray-900/50 p-8 card-hover-glow transition-all duration-300 fade-in" style="transition-delay: 200ms;">
-                            <h3 class="font-display text-2xl uppercase text-blue-400">Umbrella</h3>
-                            <p class="mt-4 text-gray-400">
-                                A platform for investment advisors to analyze their clients' portfolios, comparing them against the macroeconomic scenario and implementing risk scores and flags.
-                            </p>
-                            <a href="umbrella-en.html" class="inline-block mt-6 bg-white text-black font-semibold px-6 py-2 rounded-md hover:bg-gray-200 transition-colors">
-                                Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="divider fade-in"></div>
 
             <section id="parceiros" class="py-24">
 
@@ -633,22 +598,23 @@
 
                     <div class="flex flex-wrap justify-center items-center gap-x-16 gap-y-12 md:gap-x-28">
 
-                        <div class="fade-in" style="transition-delay: 100ms;">
+                        <div class="fade-in" style="transition-delay: 200ms;">
+                            <img src="https://cdn.simpleicons.org/nvidia/white" alt="Nvidia Logo"
+                                class="h-12 transition-opacity duration-300 opacity-70 hover:opacity-100">
+                        </div>
+                        <div class="fade-in" style="transition-delay: 200ms;">
                             <img src="https://cdn.simpleicons.org/stripe/white" alt="Stripe Logo"
                                 class="h-12 transition-opacity duration-300 opacity-70 hover:opacity-100">
                         </div>
-
-                        <div class="fade-in" style="transition-delay: 200ms;">
+                        <div class="fade-in" style="transition-delay: 300ms;">
                             <img src="https://cdn.simpleicons.org/googlecloud/white" alt="Google Cloud Logo"
                                 class="h-12 transition-opacity duration-300 opacity-70 hover:opacity-100">
                         </div>
-
-                        <div class="fade-in" style="transition-delay: 300ms;">
+                        <div class="fade-in" style="transition-delay: 400ms;">
                             <img src="https://cdn.simpleicons.org/polygon/white" alt="Polygon Logo"
                                 class="h-12 transition-opacity duration-300 opacity-70 hover:opacity-100">
                         </div>
-
-                        <div class="fade-in" style="transition-delay: 400ms;">
+                        <div class="fade-in" style="transition-delay: 500ms;">
                             <img src="https://cdn.simpleicons.org/vercel/white" alt="Vercel Logo"
                                 class="h-12 transition-opacity duration-300 opacity-70 hover:opacity-100">
                         </div>
