@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundlab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Prata&family=Share+Tech+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Prata&family=Share+Tech+Mono&display=swap" rel="stylesheet"></noscript>
+    <style>
+      :root {
+        --background-primary: #0A0F19; /* Deep Blue */
+        --background-secondary: #111827; /* Tailwind gray-900 */
+        --text-primary: #E5E7EB; /* Tailwind gray-200 */
+        --text-secondary: #9CA3AF; /* Tailwind gray-400 */
+        --text-subtle: #6B7280; /* Tailwind gray-500 */
+        --accent-primary: #22D3EE; /* cyan-400 */
+        --accent-secondary: #4ADE80; /* green-400 */
+        
+        --accent-primary-alpha: rgba(34, 211, 238, 0.1);
+        --accent-secondary-alpha: rgba(74, 222, 128, 0.1);
+        --accent-primary-shadow: rgba(34, 211, 238, 0.2);
+        --accent-secondary-shadow: rgba(74, 222, 128, 0.25);
+        
+        --glass-bg: rgba(17, 24, 39, 0.6); /* gray-900 with alpha */
+        --glass-border: rgba(255, 255, 255, 0.07);
+        --border-color: rgba(255, 255, 255, 0.08);
+
+        /* Tech Icon Colors - Dark Theme */
+        --tech-gcp-color: #4285F4;
+        --tech-nvidia-color: #76B900;
+        --tech-docker-color: #2496ED;
+        --tech-gemini-color: #c084fc; /* purple-400 */
+      }
+      html {
+        scroll-padding-top: 5rem; /* Offset for fixed header */
+      }
+      html.light {
+        --background-primary: #F9FAFB; /* gray-50 */
+        --background-secondary: #FFFFFF;
+        --text-primary: #1F2937; /* gray-800 */
+        --text-secondary: #4B5563; /* gray-600 */
+        --text-subtle: #6B7280; /* gray-500 */
+        --accent-primary: #0EA5E9; /* sky-500 */
+        --accent-secondary: #10B981; /* emerald-500 */
+
+        --accent-primary-alpha: rgba(14, 165, 233, 0.1);
+        --accent-secondary-alpha: rgba(16, 185, 129, 0.1);
+        --accent-primary-shadow: rgba(14, 165, 233, 0.2);
+        --accent-secondary-shadow: rgba(16, 185, 129, 0.2);
+
+        --glass-bg: rgba(255, 255, 255, 0.7);
+        --glass-border: rgba(0, 0, 0, 0.07);
+        --border-color: rgba(0, 0, 0, 0.08);
+
+        /* Tech Icon Colors - Light Theme */
+        --tech-gcp-color: #1a73e8;
+        --tech-nvidia-color: #69a300;
+        --tech-docker-color: #1D6FAD;
+        --tech-gemini-color: #a855f7; /* purple-500 */
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--background-primary);
+        color: var(--text-primary);
+        cursor: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .gradient-text {
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+      .glass-effect {
+        background: var(--glass-bg); 
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px); 
+        border: 1px solid var(--glass-border);
+        transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+      }
+      .scroll-reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .scroll-reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .section-container {
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+      }
+      .section-container.visible {
+          opacity: 1;
+      }
+      
+      @keyframes fadeInSlightUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .tab-content-animate {
+          animation: fadeInSlightUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      /* Enhanced Focus States for Accessibility */
+      :focus-visible {
+        outline: none; /* Remove default outline to use a consistent ring */
+        box-shadow: 0 0 0 2px var(--background-primary), 0 0 0 4px var(--accent-primary);
+        transition: box-shadow 0.2s ease-in-out;
+      }
+      /* Ensure rounded elements look good with the focus ring */
+      *:focus-visible {
+        border-radius: inherit;
+      }
+      /* Better focus for text-based nav links */
+      .nav-link:focus-visible {
+        box-shadow: none;
+        outline: 2px solid var(--accent-primary);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+      /* Remove focus styles for non-keyboard interactions */
+      :focus:not(:focus-visible) {
+          outline: none;
+          box-shadow: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "recharts": "https://aistudiocdn.com/recharts@^3.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react-icons/": "https://aistudiocdn.com/react-icons@^5.5.0/",
+    "three": "https://aistudiocdn.com/three@^0.180.0",
+    "three/": "https://aistudiocdn.com/three@^0.180.0/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  </body>
+</html>

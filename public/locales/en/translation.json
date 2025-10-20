@@ -1,0 +1,539 @@
+{
+  "header": {
+    "nav": {
+      "solutions": "Solutions",
+      "whyFoundlab": "Why Foundlab?",
+      "useCases": "Use Cases",
+      "technology": "Technology",
+      "partners": "Partners",
+      "ariaLabel": "Main navigation",
+      "ariaLabelMobile": "Mobile navigation"
+    },
+    "demoButton": "Request a Demo"
+  },
+  "hero": {
+    "title": "Umbrella",
+    "subtitle": "High-Performance Serverless Infrastructure for Operations.",
+    "tagline": "Computational Trust. Institutional Certainty.",
+    "cta": "Explore the Platform",
+    "poweredBy": {
+      "foundlab": "Developed by Foundlab.",
+      "gcp": "Run on Google Cloud.",
+      "nvidia": "Accelerated by NVIDIA."
+    }
+  },
+  "painPoints": {
+    "supertitle": "Market Context",
+    "title": "The Challenges of Trust in the Financial Market",
+    "cards": {
+      "heterogeneity": {
+        "title": "Data Heterogeneity",
+        "text": "Analysts face a massive volume of heterogeneous data, requiring costly manual standardization that is prone to errors."
+      },
+      "operationalRisk": {
+        "title": "High Operational Risk",
+        "text": "Manual processes are prone to costly human errors, affecting critical operations like portfolio rebalancing, tax calculations, and asset allocation."
+      },
+      "regulatoryPressure": {
+        "title": "Regulatory Pressure",
+        "text": "Increasing regulatory pressure demands complete transparency and traceability, requiring a mathematically sound and auditable trail for every decision."
+      }
+    }
+  },
+  "customerJourney": {
+    "supertitle": "Our Solution",
+    "title": "The Infrastructure for Trust",
+    "steps": {
+      "ingestion": {
+        "title": "1. Precision Ingestion & Parsing",
+        "text": "Our infrastructure ingests documents from any source. Our specialized Precision Parser AI converts unstructured data into a canonical JSON format, ensuring information integrity from the start."
+      },
+      "validation": {
+        "title": "2. Validation, Scoring & Strategic Analysis",
+        "text": "Information is validated in a multi-stage pipeline. Our engines generate an **Explainable Score**: each score is paired with a clear natural language justification ('Rationale'), detailing the 'why' behind the assessment. This mitigates AI hallucination risk and transforms analysis into an auditable, defensible thesis."
+      },
+      "evidence": {
+        "title": "3. Generation of Auditable Evidence (Veritas Protocol)",
+        "text": "Each decision generates a unique `DecisionID` and a cryptographically signed Audit Package. We deliver mathematical proof of compliance, not just logs. Export results with the security of a 100% traceable and defensible audit trail."
+      }
+    }
+  },
+  "whyFoundlab": {
+    "supertitle": "Why Foundlab?",
+    "title": "Auditable Computational Trust as a Service",
+    "pillar": {
+      "title": "Architectural Pillar: Zero-Persistence",
+      "text": "Our Zero-Persistence architecture is a key differentiator. Sensitive data is NEVER STORED ON DISK. Processing occurs in volatile memory, eliminating custody risk and ensuring full compliance by design."
+    },
+    "vision": {
+      "title": "Our Core Vision",
+      "text": "Our vision is to shift the conversation from mere efficiency to complete defensibility. We don't just offer a tool; we provide the foundational layer for your operations. We empower analysts to make strategic decisions that are irrefutably correct and auditable because they are built on a trusted foundation."
+    },
+    "philosophy": {
+      "title": "'By-Design' Philosophy",
+      "text": "Security and auditability aren't features; they are the bedrock of our infrastructure. We believe trust must be a programmable, inherent component of the financial market's operational backbone, allowing our clients to innovate with confidence."
+    },
+    "cards": {
+      "privacy": {
+        "title": "Privacy by Design & Zero-Persistence",
+        "text": "Our Zero-Persistence policy means sensitive data is processed in-memory and never stored on disk, eliminating exposure risks and ensuring compliance with data privacy regulations like LGPD and BACEN."
+      },
+      "resilience": {
+        "title": "Antifragile Resilience",
+        "text": "Our SRE architecture doesn't just withstand failures—it strengthens under stress. With health checks, automatic retries, and infrastructure fallback (including GPUs), we guarantee uninterrupted performance."
+      },
+      "auditability": {
+        "title": "Total Auditability & Explainability",
+        "text": "The **Explainable Score** is our answer to 'black-box' risk and AI hallucination. Each score comes with a natural language 'Rationale' detailing the 'why' behind the decision. This empowers analysts to defend their theses and turns every result into an irrefutable, auditable conclusion."
+      }
+    }
+  },
+  "aiTrust": {
+    "supertitle": "Our AI Philosophy",
+    "title": "Trust in AI: Our Core Principles",
+    "subtitle": "For us, trust isn't a feature—it's the foundation. We build our AI on three fundamental pillars to ensure every decision is not only accurate but also transparent, fair, and defensible.",
+    "cards": {
+      "explainability": {
+        "title": "Explainability (XAI)",
+        "text": "Our answer to the 'black-box' problem. Every AI-generated score and decision is accompanied by a natural language 'Rationale' that explains the 'why,' transforming analysis into a defensible and 100% auditable thesis."
+      },
+      "biasMitigation": {
+        "title": "Bias Mitigation",
+        "text": "We employ a 'critic-loop' for validation, use diverse datasets for training, and maintain a human oversight board. Ethical and regulatory guardrails are applied to ensure fairness and compliance."
+      },
+      "robustModels": {
+        "title": "Robust Models & Validation",
+        "text": "Our infrastructure leverages state-of-the-art models, like Google Gemini, for maximum performance. We implement MLOps to continuously monitor performance and detect data drift, ensuring our AI remains reliable over time."
+      }
+    }
+  },
+  "performanceChart": {
+    "supertitle": "Proven Efficiency",
+    "title": "Drastic Reduction in Analysis Time",
+    "subtitle": "See the quantitative impact of our platform on critical financial tasks. We automate manual work so your team can focus on high-value strategic decisions.",
+    "manualProcess": "Manual Process",
+    "withFoundlab": "With Foundlab",
+    "yAxisLabel": "Time (minutes)",
+    "tasks": {
+      "compliance": "Compliance Analysis",
+      "dueDiligence": "Due Diligence (100 docs)",
+      "regulatoryReport": "Regulatory Report Generation"
+    }
+  },
+  "aiEngines": {
+    "supertitle": "Cognitive Architecture",
+    "title": "Intelligence as Infrastructure",
+    "subtitle": "We don't use a single AI model, but an orchestra of specialized cognitive engines, to deliver precision, security, and auditability at scale.",
+    "architecture": {
+      "title": "Foundlab's Cognitive Architecture",
+      "subtitle": "Our interconnected AI infrastructure transforms complex data into reliable, auditable decisions.",
+      "nodes": {
+        "input": {
+          "title": "Data Input",
+          "description": "Ingests any unstructured document (PDF, images, etc.)."
+        },
+        "gemini": {
+          "title": "Gemini Core",
+          "description": "Integrates Google's models and orchestrates our specialized engines."
+        },
+        "output": {
+          "title": "Auditable Output",
+          "description": "Delivers structured JSON and a signed Audit Package."
+        },
+        "engines": {
+          "title": "Core Engines Sample:"
+        }
+      }
+    },
+    "coreEngines": {
+      "title": "Our Core AI Engines",
+      "subtitle": "Explore the specialized agents that form our cognitive orchestra. Each is designed for a specific task, working in concert to deliver unparalleled results."
+    }
+  },
+  "aiEngineCarousel": {
+    "clickToLearnMore": "Click to learn more",
+    "orchestrator": {
+      "shortDescription": "Manages the AI agent orchestra, ensuring process integrity and hallucination mitigation."
+    },
+    "parser": {
+      "shortDescription": "Extracts, structures, and normalizes data from complex financial documents with high precision."
+    },
+    "analyst": {
+      "shortDescription": "Operates with an expert persona to perform detailed assessments with clear, explainable justifications."
+    },
+    "chiefStrategist": {
+      "shortDescription": "Consolidates all information to offer a macro view and actionable strategic recommendations."
+    },
+    "complianceShield": {
+      "shortDescription": "Enforces our 'zero-persistence' architecture, processing data in-memory for maximum security."
+    },
+    "sreAntifragile": {
+      "shortDescription": "Ensures maximum platform availability and reliability with automated defense mechanisms."
+    }
+  },
+  "caseStudies": {
+    "supertitle": "Practical Applications",
+    "title": "Use Cases in the Financial Market",
+    "assetManagement": {
+      "cardTitle": "Asset Management",
+      "cardDescription": "Automate portfolio compliance analysis, identify mandate deviations, and generate risk reports in minutes, not days.",
+      "modalTitle": "Use Case: Asset Management",
+      "modalContent": {
+        "p1": "Asset managers face the constant challenge of monitoring hundreds of portfolios against complex investment mandates. The manual process is slow, error-prone, and consumes valuable time that could be dedicated to strategic analysis.",
+        "h4_1": "How Foundlab Transforms the Process:",
+        "li1": "<strong>Automated Compliance Analysis:</strong> Our AI ingests portfolio documents and automatically cross-references them against pre-configured mandate rules and risk policies.",
+        "li2": "<strong>Instant Deviation Identification:</strong> Any non-compliance, such as over-concentration or policy breaches, is immediately flagged by our Granular Analyst.",
+        "li3": "<strong>Explainable Score (Rationale):</strong> Each flag is accompanied by a clear AI-generated justification, empowering the analyst to understand and defend the decision, strengthening trust with clients and auditors.",
+        "li4": "<strong>Generation of Auditable Evidence:</strong> The platform generates detailed reports and the Audit Package. The unique `DecisionID` from the Veritas Protocol offers mathematical proof of compliance, making every check defensible.",
+        "h4_2": "Impact:",
+        "quote": "A mid-sized asset manager reduced portfolio compliance check time by <strong>95%</strong>, from 4 hours per analyst daily to under 15 minutes. This freed the team to focus on portfolio optimization and client relationships while eliminating manual verification errors."
+      }
+    },
+    "privateBanking": {
+      "cardTitle": "Private Banking & Wealth Management",
+      "cardDescription": "Instantly validate portfolio suitability, ensuring regulatory compliance and strengthening client trust.",
+      "modalTitle": "Use Case: Private Banking",
+      "modalContent": {
+        "p1": "Suitability analysis is a pillar of regulation and trust in Private Banking. Ensuring that every investment recommendation is perfectly aligned with a client's risk profile is crucial, but complex to scale and audit.",
+        "h4_1": "Our Solution for Suitability:",
+        "li1": "<strong>Real-Time Validation:</strong> When creating or rebalancing a portfolio, the platform instantly checks each asset against the client's profile, generating a suitability score.",
+        "li2": "<strong>Alerts with Justification:</strong> If an investment is unsuitable, the system alerts the manager with a clear 'Rationale' (e.g., 'product risk exceeds client tolerance').",
+        "li3": "<strong>Defensible Audit Trail:</strong> Each suitability check generates an immutable record via the Veritas Protocol, creating defensible proof that the fiduciary duty was fulfilled, protecting both the institution and the client.",
+        "h4_2": "Impact:",
+        "quote": "A large private bank implemented Foundlab and achieved <strong>100% compliance</strong> in internal suitability audits over the next 6 months, while increasing client satisfaction by providing transparent justifications for investment recommendations."
+      }
+    },
+    "mergersAndAcquisitions": {
+      "cardTitle": "Mergers & Acquisitions (M&A)",
+      "cardDescription": "Accelerate due diligence by analyzing hundreds of financial documents, extracting KPIs, and systematically identifying red flags.",
+      "modalTitle": "Use Case: Mergers & Acquisitions (M&A)",
+      "modalContent": {
+        "p1": "The due diligence process in M&A involves analyzing a massive volume of documents in a data room. Manually extracting financial data, contractual clauses, and liabilities is a bottleneck that can delay negotiations and allow risks to go unnoticed.",
+        "h4_1": "Accelerating Due Diligence with AI:",
+        "li1": "<strong>Large-Scale Data Extraction:</strong> Our Precision Parser processes hundreds of balance sheets, income statements, and contracts, structuring key financial KPIs automatically.",
+        "li2": "<strong>Red Flag Identification with 'Rationale':</strong> Each identified risk comes with a contextual explanation, allowing the team to prioritize and investigate critical issues based on a clear thesis.",
+        "li3": "<strong>Executive Summarization:</strong> The AI generates summaries of key findings by document or theme, enabling the team to focus on the most critical points of the negotiation.",
+        "h4_2": "Impact:",
+        "quote": "An M&A boutique used Foundlab to analyze a data room with over 500 documents, reducing the initial due diligence phase time by <strong>70%</strong>. The platform identified a hidden tax liability clause that impacted the company's valuation by <strong>$2.5 million</strong>."
+      }
+    },
+    "regulatoryReporting": {
+      "cardTitle": "Regulatory Reporting",
+      "cardDescription": "Automate the generation of reports for regulatory bodies, ensuring accuracy, timeliness, and compliance.",
+      "modalTitle": "Use Case: Regulatory Reporting",
+      "modalContent": {
+        "p1": "Creating reports for regulatory bodies like the CVM and BACEN is a critical, complex task with zero tolerance for errors. The manual process is intensive, risky, and diverts attention from strategic activities.",
+        "h4_1": "How Foundlab Simplifies Regulatory Reporting:",
+        "li1": "<strong>Pre-configured Regulatory Templates:</strong> The platform is pre-loaded with the formats and requirements of major regulatory reports.",
+        "li2": "<strong>Automated Data Consolidation:</strong> Our AI collects and consolidates data from multiple sources (spreadsheets, statements, legacy systems) into the required regulatory format.",
+        "li3": "<strong>One-Click Generation & Audit Trail:</strong> Generate the final report instantly. Every number is traceable to its source, with a `DecisionID` and 'Rationale' that prove the integrity of the process.",
+        "h4_2": "Impact:",
+        "quote": "A securities distributor reduced the preparation time for its monthly regulatory reports from 2 days to 30 minutes. The automation <strong>eliminated 100% of manual consolidation errors</strong> and provided the compliance team with a complete audit trail for every number reported."
+      }
+    }
+  },
+  "veritasDemo": {
+    "supertitle": "The Proof",
+    "title": "Interactive Demo: The Veritas Protocol",
+    "subtitle": "Scroll to execute our trust pipeline and watch the audit trail being created in real-time.",
+    "timeline": {
+      "ingestion": "1. Ingestion & Parsing",
+      "extraction": "2. Entity Extraction (NER)",
+      "validation": "3. Validation & Scoring",
+      "analysis": "4. Analysis & Insight Generation",
+      "package": "5. Audit Package Generation"
+    },
+    "document": {
+      "title": "Sample_Statement.pdf",
+      "greeting": "Dear Client, here is a summary of your portfolio.",
+      "asset1Label": "Asset:",
+      "asset1Value": "Elitte Opportunities Fund FIC FIA",
+      "cnpjLabel": "CNPJ:",
+      "cnpjValue": "33.014.557/0001-09",
+      "allocationLabel": "Allocation:",
+      "asset2Label": "Asset:",
+      "asset2Value": "International Stock GHI Corp",
+      "isinLabel": "ISIN:",
+      "isinValue": "BRXX123ACN",
+      "invalid": "(Invalid)"
+    },
+    "logs": {
+      "title": "Veritas Protocol - Live Logs",
+      "ingestion": [
+        "Initializing Veritas Protocol...",
+        "Received 'Sample_Statement.pdf' (1.2MB).",
+        "Ingestion Service: Document queued for processing.",
+        "Precision Parser: Starting layout analysis..."
+      ],
+      "extraction": [
+        "Parser: Layout identified. 2 asset blocks found.",
+        "AI (NER): Extracting entities from Block #1...",
+        "  -> Asset: 'Elitte Opportunities Fund FIC FIA'",
+        "  -> CNPJ: '33.014.557/0001-09'",
+        "AI (NER): Extracting entities from Block #2...",
+        "  -> Asset: 'International Stock GHI Corp'",
+        "  -> ISIN: 'BRXX123ACN'"
+      ],
+      "validation": [
+        "Compliance Shield: Starting entity validation.",
+        "Validating CNPJ '33.014.557/0001-09'... OK. (Source: Federal Revenue)",
+        "Validating ISIN 'BRXX123ACN'... FAILED. (Invalid checksum)",
+        "RISK: Asset #2 data marked as unreliable."
+      ],
+      "analysis": [
+        "Granular Analyst (CFA): Generating compliance scores.",
+        "Asset #1: Compliance Score = 98.7% (Aligned with mandate)",
+        "Asset #2: Compliance Score = 15.2% (Invalid identifier)",
+        "Chief Strategist: Consolidating insights..."
+      ],
+      "final": [
+        "Veritas Protocol completed.",
+        "Audit Package generated successfully.",
+        "DecisionID: d4a2b1c7-9f8e-c3a0-1c0a-9e2f5e6bd8a4",
+        "Ready for export."
+      ]
+    },
+    "json": {
+      "title": "Structured Output (JSON)",
+      "calculating": "calculating...",
+      "rationale1": "Asset validated and 100% compliant with mandate.",
+      "rationale2": "Invalid ISIN prevents compliance verification."
+    }
+  },
+  "technology": {
+    "supertitle": "Technology & Security",
+    "title": "Enterprise-Grade Architecture",
+    "tabs": {
+      "infra": "Infrastructure",
+      "security": "Security",
+      "sre": "Reliability (SRE)",
+      "aiTrust": "AI Trust"
+    },
+    "infra": {
+      "text": "Our infrastructure is 100% cloud-native on Google Cloud, built on a robust compliance foundation. We use a serverless architecture with Cloud Run for stateless microservices, ensuring massive scalability, while NVIDIA hardware provides on-demand acceleration for intensive AI workloads, optimizing both performance and cost."
+    },
+    "security": {
+      "privacy": {
+        "title": "Privacy by Design & Zero-Persistence",
+        "text": "Our most disruptive architectural pillar. Documents and sensitive data are NEVER STORED ON DISK. Processing occurs exclusively in volatile memory, eliminating data custody risk by design."
+      },
+      "auditability": {
+        "title": "Total Auditability (Veritas Protocol)",
+        "text": "The Veritas Protocol creates mathematical proof of compliance, not just logs. Each analysis generates a unique `DecisionID` and an immutable, cryptographically signed record, ensuring complete traceability for audits."
+      },
+      "encryption": {
+        "title": "Encryption & Access Control",
+        "text": "We use state-of-the-art encryption (TLS 1.3, AES-256) and granular access control (IAM/RBAC). Our Zero-Persistence policy ensures no sensitive client data is ever stored at rest."
+      },
+      "integration": {
+        "title": "Secure Integration",
+        "text": "Our APIs (REST and GraphQL) are designed with an 'API-first' approach and protected with strong authentication (OAuth 2.0 / JWT), ensuring secure integration with legacy systems."
+      }
+    },
+    "sre": {
+      "antifragile": {
+        "title": "Antifragile Architecture",
+        "text": "Inspired by Google's SRE culture, our platform is designed to be antifragile: it not only withstands failures but strengthens with stress, ensuring service continuity."
+      },
+      "resilience": {
+        "title": "Resilience Mechanisms",
+        "text": "We implement a sophisticated fallback system, triggering alternative AI models or NVIDIA GPUs during failures. Mechanisms like throttling and circuit breakers protect the system against overloads."
+      },
+      "slos": {
+        "title": "Strict SLOs",
+        "text": "We operate with strict Service Level Objectives (SLOs), such as P95 latency < 520ms for synchronous operations. Proactive monitoring and automated alerts ensure rapid anomaly detection and resolution."
+      }
+    },
+    "aiTrustTab": {
+      "hallucination": {
+        "title": "Hallucination Mitigation",
+        "text": "Our Cognitive Orchestrator implements a 'critic-loop' for syntactic and semantic validation, acting as a self-correction system that proactively mitigates the risk of AI 'hallucination'."
+      },
+      "explainability": {
+        "title": "Explainability (XAI)",
+        "text": "Our answer to the 'black-box' problem. Every score and decision is accompanied by a 'Rationale' in natural language. This transforms the analysis into a defensible thesis that analysts can trust and argue."
+      },
+      "bias": {
+        "title": "Bias Mitigation",
+        "text": "In addition to the 'critic-loop,' we use diverse validation datasets and maintain an 'Ethics Council' for human supervision. Ethical and regulatory guardrails are applied by the Cognitive Orchestrator to ensure fairness."
+      },
+      "evaluation": {
+        "title": "Continuous Evaluation",
+        "text": "We implement MLOps to continuously monitor model performance in production. 'Data drift' detection triggers alerts for retraining, ensuring AI accuracy remains reliable and relevant over time."
+      }
+    }
+  },
+  "partners": {
+    "title": "Our Strategic Partnerships",
+    "partners": {
+      "gcp": "Cloud Infrastructure",
+      "nvidia": "AI Acceleration",
+      "governance": "Governance & Compliance",
+      "validation": "Institutional Validation",
+      "elitteCapital": "Elitte Capital",
+      "saLaw": "SA LAW"
+    }
+  },
+  "footer": {
+    "title": "Build the Future of Finance on an Infrastructure of Trust",
+    "subtitle": "Foundlab provides the structural backbone of computational trust as a service. Build your operations on our foundational layer of auditability and security to innovate with complete defensibility.",
+    "form": {
+      "submitted": {
+        "title": "Thank You!",
+        "text": "Your request has been received. Our team will be in touch shortly."
+      },
+      "placeholder": "Your business email",
+      "error": "Please enter a valid email address.",
+      "button": "Request Demo"
+    },
+    "nav": {
+      "home": "Home",
+      "challenges": "Challenges",
+      "solutions": "Solutions",
+      "whyFoundlab": "Why Foundlab?",
+      "aiEngines": "AI Engines",
+      "useCases": "Use Cases",
+      "technology": "Technology",
+      "partners": "Partners",
+      "contact": "Contact"
+    },
+    "copyright": "© {year} Foundlab. All rights reserved.",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
+  },
+  "aiEngineModal": {
+    "orchestrator": {
+      "title": "Cognitive Orchestrator",
+      "content": [
+        { "type": "p", "text": "The Cognitive Orchestrator is the central 'brain' managing our entire suite of AI agents. It doesn't just execute tasks; it orchestrates the complex sequence of prompts and engine activations required to ensure the integrity and accuracy of the final output." },
+        { "type": "h4", "text": "Key Innovations:" },
+        { "type": "ul", "items": [
+          "<strong>Critic-Loop:</strong> A self-correction mechanism that performs syntactic and semantic validation to proactively mitigate the risk of AI 'hallucination'.",
+          "<strong>Ethical & Regulatory Guardrails:</strong> Incorporates safeguards that keep operations within predefined ethical and regulatory limits, ensuring process integrity.",
+          "<strong>Resilience Trigger:</strong> Activates fallback mechanisms, such as alternative AI models or infrastructure, in case of failures.",
+          "<strong>Immutable Log:</strong> Cryptographically signs each orchestrated action, forming the backbone of the Veritas Protocol's audit trail."
+        ]},
+        { "type": "h4", "text": "Rationale (XAI):" },
+        { "type": "quote", "text": "This engine ensures transparency by recording every step and decision in an immutable audit trail, making the entire workflow explainable from end to end." }
+      ]
+    },
+    "parser": {
+      "title": "Precision Parser",
+      "content": [
+        { "type": "p", "text": "The Parser is a specialized AI engine for extracting, structuring, and normalizing data from complex financial documents. It uses a cascade of techniques to transform any document (PDF, image, etc.) into a canonical, machine-readable JSON format." },
+        { "type": "h4", "text": "Extraction Process:" },
+        { "type": "ul", "items": [
+          "<strong>Layout Analysis:</strong> Identifies text blocks, tables, and their spatial arrangement in the document.",
+          "<strong>Named Entity Recognition (NER):</strong> Accurately locates and classifies critical information such as assets, identifiers (CNPJs, ISINs), and values.",
+          "<strong>Normalization & Validation:</strong> Converts varied formats (dates, currencies) into a unified standard and performs integrity checks to prevent cascading errors."
+        ]},
+        { "type": "h4", "text": "Rationale (XAI):" },
+        { "type": "quote", "text": "This engine mitigates 'garbage in, garbage out' risk by generating justifications for its extractions, detailing how and why each piece of data was classified, increasing transparency from the very first step." }
+      ]
+    },
+    "analyst": {
+      "title": "Granular Analyst (CFA Persona)",
+      "content": [
+        { "type": "p", "text": "This AI engine mitigates 'black box' risk by operating with a configurable expert persona (e.g., Chartered Financial Analyst). It receives validated data and performs detailed, asset-level assessments, generating scores and insights with clear justifications (Rationale) for full explainability (XAI)." },
+        { "type": "h4", "text": "Example System Prompt (Persona Configuration)" },
+        { "type": "code", "text": "You are 'Analyst-7', a senior financial analyst (CFA) specializing in regulatory compliance. Your task is to evaluate the attached portfolio against the 'Conservative Growth 2024' mandate. Check for: 1. Max concentration per asset <= 5% of NAV. 2. Total Fixed Income allocation >= 60%. 3. Minimum credit rating for Fixed Income: 'AA'. 4. International assets <= 10% of NAV. 5. Derivatives for hedging only. For each violation, cite the asset and deviation. Calculate a Global Compliance Score (0-100) and generate a clear 'Rationale' justifying the score based on any deviations." },
+        { "type": "h4", "text": "Rationale (XAI): Opening the Black Box" },
+        { "type": "quote", "text": "The 'Rationale' is the pillar of our XAI approach. It translates the AI's mathematical conclusion (the 'score') into an understandable, auditable business narrative. Instead of a 'black-box' number, the analyst receives a clear thesis that can be defended before clients, managers, and auditors.", "text2": "<strong>Example:</strong> For a score of 75/100, the Rationale might be: 'Score assigned due to two mandate deviations: (1) Asset 'Debenture XYZ' (rating 'A+') violates the 'AA' minimum credit rule. (2) Concentration of 'Stock ABC' at 7.2% exceeds the 5% per-asset limit.' This justification directly connects the input data, business rules, and the final result, making the process 100% transparent and defensible." }
+      ]
+    },
+    "chiefStrategist": {
+      "title": "Chief Strategist",
+      "content": [
+        { "type": "p", "text": "While the Granular Analyst focuses on details, the Chief Strategist consolidates all information to offer a macro view. It analyzes portfolio concentration, currency exposure, and the impact of macroeconomic scenarios, turning complex data into actionable recommendations." },
+        { "type": "h4", "text": "Essential Functions:" },
+        { "type": "ul", "items": [
+          "<strong>Aggregated Portfolio Analysis:</strong> Evaluates the portfolio as a whole, identifying systemic risks and opportunities.",
+          "<strong>Scenario Modeling:</strong> Simulates the impact of different market events (e.g., interest rate changes) on the portfolio.",
+          "<strong>Strategic Risk Mitigation:</strong> Prevents decisions based on isolated data by offering a holistic, consolidated view."
+        ]},
+        { "type": "h4", "text": "Rationale (XAI):" },
+        { "type": "quote", "text": "This engine provides strategic insights based on consolidated data. Each recommendation is accompanied by a summary of the factors considered, ensuring high-level decisions are both auditable and transparent." }
+      ]
+    },
+    "complianceShield": {
+      "title": "Compliance Shield (Zero-Persistence)",
+      "content": [
+        { "type": "p", "text": "This engine is the pillar of our security and compliance strategy. It mitigates the risk of data custody and leaks by enforcing a 'zero-persistence' architecture. No sensitive client data is stored on disk; processing occurs entirely in volatile memory and is discarded upon completion." },
+        { "type": "h4", "text": "Key Features:" },
+        { "type": "ul", "items": [
+          "<strong>In-Memory Execution:</strong> No sensitive client data is ever permanently stored on disk.",
+          "<strong>Auditable Decision Trail:</strong> Although input data is discarded, each AI decision is recorded in an immutable log, ensuring full auditability without retaining raw data.",
+          "<strong>Regulatory Compliance by Design:</strong> Built to meet the stringent privacy requirements of the financial sector (LGPD, BACEN/CVM)."
+        ]},
+        { "type": "h4", "text": "Rationale (XAI):" },
+        { "type": "quote", "text": "By separating the auditable decision trail from the sensitive source data, this engine ensures that complete explainability can be achieved without compromising privacy and security." }
+      ]
+    },
+    "sreAntifragile": {
+      "title": "Antifragile SRE (Guardian AI)",
+      "content": [
+        { "type": "p", "text": "This Site Reliability Engineering (SRE) engine mitigates operational risk. Inspired by the concept of antifragility, it ensures maximum platform availability and reliability through a set of automated defense mechanisms that act under stress." },
+        { "type": "h4", "text": "Antifragility Mechanisms:" },
+        { "type": "ul", "items": [
+          "<strong>Continuous Healthchecks:</strong> Proactively monitors the health of all microservices and AI models.",
+          "<strong>Automatic Retries with Exponential Backoff:</strong> Intelligently handles transient failures to ensure successful processing.",
+          "<strong>Model/Infra Fallback:</strong> In case of an AI model or GPU failure, the system automatically triggers an alternative to maintain service continuity.",
+          "<strong>Throttling & Circuit Breakers:</strong> Protects the system from overloads by isolating failures to prevent cascading collapses."
+        ]},
+        { "type": "h4", "text": "Rationale (XAI):" },
+        { "type": "quote", "text": "The operational transparency of this engine, which logs resilience events like 'failovers,' contributes to XAI by providing a clear view of the system's reliability and behavior under stress." }
+      ]
+    }
+  },
+  "technologyTooltip": {
+    "gcp": {
+      "name": "Google Cloud Platform",
+      "description": "The foundation of our cloud-native infrastructure, ensuring global scalability and security."
+    },
+    "cloudRun": {
+      "name": "Google Cloud Run",
+      "description": "Our serverless platform for running microservices with auto-scaling from zero to millions of requests."
+    },
+    "vertexAi": {
+      "name": "Google Vertex AI",
+      "description": "Manages the entire lifecycle of our AI models, from training and tuning to deployment and monitoring."
+    },
+    "docker": {
+      "name": "Docker & Microservices",
+      "description": "Our containerized microservices architecture ensures resilience, scalability, and development agility."
+    },
+    "gemini": {
+      "name": "Google Gemini",
+      "description": "State-of-the-art AI model that powers our data analysis, extraction, and reasoning engines."
+    },
+    "nvidia": {
+      "name": "NVIDIA GPUs/NIM",
+      "description": "Hardware acceleration and optimized inference microservices for maximum AI performance on demand."
+    },
+    "close": "Close tooltip for {techName}"
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "intro": "Welcome to Foundlab. By accessing or using our services, you agree to be bound by these Terms of Service.",
+    "section1Title": "1. Use of Service",
+    "section1": "You agree to use our services only for lawful purposes and in accordance with these terms.",
+    "section2Title": "2. Intellectual Property",
+    "section2": "All content, trademarks, and data on this site are the property of Foundlab or its licensors.",
+    "section3Title": "3. Limitation of Liability",
+    "section3": "Foundlab is not liable for any damages arising from the use or inability to use the services.",
+    "section4Title": "4. Changes to Terms",
+    "section4": "We reserve the right to modify these terms at any time. Continued use of the service constitutes acceptance of the new terms."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "Your privacy is important to us. This policy explains how we collect, use, and protect your information.",
+    "section1Title": "1. Information Collection",
+    "section1": "We collect information you provide directly and data collected automatically through your use of our services.",
+    "section2Title": "2. Use of Information",
+    "section2": "We use your information to provide, maintain, and improve our services, and to communicate with you.",
+    "section3Title": "3. Data Security",
+    "section3": "We implement security measures to protect your information. However, no method of transmission over the Internet is 100% secure.",
+    "section4Title": "4. Changes to Policy",
+    "section4": "We may update this policy from time to time. We encourage you to review it regularly."
+  }
+}
