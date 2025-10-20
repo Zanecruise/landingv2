@@ -6,6 +6,10 @@ package-lock.json
 dist/
 build/
 
+# Allow the Umbrella built dist to be committed so Vercel can serve it
+!/public/UMBRELLAWEBSITE-main/dist/
+!/public/UMBRELLAWEBSITE-main/dist/**
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
