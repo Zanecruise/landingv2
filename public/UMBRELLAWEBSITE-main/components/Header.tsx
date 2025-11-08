@@ -66,6 +66,17 @@ const Header: React.FC = () => {
     };
   }, [isMenuOpen]);
   
+  const basePath = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '') || '/';
+  const withBasePath = (target: string) => {
+    if (/^(https?:|mailto:|tel:)/i.test(target) || target.startsWith('#')) {
+      return target;
+    }
+    if (target.startsWith('/')) {
+      return basePath === '/' ? target : `${basePath}${target}`;
+    }
+    return basePath === '/' ? `/${target}` : `${basePath}/${target}`;
+  };
+
   const navLinks = [
     { href: "/#solucoes", key: 'header.nav.solutions' },
     { href: "/#porque-foundlab", key: 'header.nav.whyFoundlab' },
@@ -92,30 +103,25 @@ const Header: React.FC = () => {
 
         {/* Desktop Navigation */}
         <nav aria-label={t('header.nav.ariaLabel')} className="hidden md:flex items-center space-x-8">
-          {navLinks.map(link => (
+          {navLinks.map(link => {
+            const targetHref = withBasePath(link.href);
+            return (
              <a
                key={link.key}
-               href={link.href}
+               href={targetHref}
                className="nav-link text-sm hover:text-[var(--accent-primary)] transition-all duration-300 hover:-translate-y-px"
-               onClick={e => {
-                 e.preventDefault();
-                 window.location.href = link.href;
-               }}
              >
                {t(link.key)}
              </a>
-          ))}
+            );
+          })}
         </nav>
 
         {/* Desktop Controls */}
         <div className="hidden md:flex items-center space-x-4">
             <a
-              href="/#contato"
+              href={withBasePath('/#contato')}
               className="bg-[var(--text-primary)] text-[var(--background-primary)] font-semibold text-sm px-6 py-2 rounded-full hover:bg-opacity-90 transition-all"
-              onClick={e => {
-                e.preventDefault();
-                window.location.href = '/#contato';
-              }}
             >
               {t('header.demoButton')}
             </a>
@@ -145,28 +151,23 @@ const Header: React.FC = () => {
           ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}
       `}>
           <nav aria-label={t('header.nav.ariaLabelMobile')} className="flex flex-col items-center justify-center h-full space-y-8 px-6 pb-12 text-center">
-              {navLinks.map(link => (
+              {navLinks.map(link => {
+                const targetHref = withBasePath(link.href);
+                return (
                  <a
                    key={link.key}
-                   href={link.href}
+                   href={targetHref}
                    className="nav-link text-2xl font-medium hover:text-[var(--accent-primary)] transition-colors"
-                   onClick={e => {
-                     e.preventDefault();
-                     setIsMenuOpen(false);
-                     window.location.href = link.href;
-                   }}
+                   onClick={() => setIsMenuOpen(false)}
                  >
                    {t(link.key)}
                  </a>
-              ))}
+                );
+              })}
               <a
-                href="/#contato"
+                href={withBasePath('/#contato')}
                 className="!mt-12 bg-[var(--text-primary)] text-[var(--background-primary)] font-semibold text-lg px-10 py-4 rounded-full hover:bg-opacity-90 transition-all"
-                onClick={e => {
-                  e.preventDefault();
-                  setIsMenuOpen(false);
-                  window.location.href = '/#contato';
-                }}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {t('header.demoButton')}
               </a>
