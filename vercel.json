@@ -3,7 +3,6 @@
     { "src": "public/**/*", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "^/(?:index\\.html)?$", "status": 308, "headers": { "Location": "/umbrella" } },
     { "src": "/demo", "dest": "/demo.html" },
     { "src": "^/umbrella/(.*\\.(js|css|map|png|jpg|jpeg|svg|json|webp|gif|ico|txt))$", "dest": "/umbrella/$1" },
     { "src": "^/umbrella/?$", "dest": "/umbrella/index.html" },
