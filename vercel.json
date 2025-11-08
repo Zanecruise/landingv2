@@ -4,6 +4,9 @@
   ],
   "routes": [
     { "src": "/demo", "dest": "/demo.html" },
+    { "src": "^/umbrella/(.*\\.(js|css|map|png|jpg|jpeg|svg|json|webp|gif|ico|txt))$", "dest": "/umbrella/$1" },
+    { "src": "^/umbrella/?$", "dest": "/umbrella/index.html" },
+    { "src": "^/umbrella/(.*)$", "dest": "/umbrella/index.html" },
     { "src": "^/UMBRELLAWEBSITE-main/dist/(.*)$", "dest": "/UMBRELLAWEBSITE-main/dist/$1" },
     { "src": "^/UMBRELLAWEBSITE-main/(.*\\.(js|css|map|png|jpg|jpeg|svg|json))$", "dest": "/UMBRELLAWEBSITE-main/dist/$1" },
     { "src": "^/UMBRELLAWEBSITE-main/?$", "dest": "/UMBRELLAWEBSITE-main/dist/index.html" },

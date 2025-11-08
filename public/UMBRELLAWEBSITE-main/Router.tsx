@@ -25,34 +25,37 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
-const Router: React.FC = () => (
-  <BrowserRouter>
-    <ScrollToTop />
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route
-          index
-          element={
-            <>
-              <Hero />
-              <PainPoints />
-              <CustomerJourney />
-              <WhyFoundlab />
-              <AiTrust />
-              <PerformanceChart />
-              <AiEngines />
-              <CaseStudies />
-              <VeritasProtocolDemo />
-              <Technology />
-              <Partners />
-            </>
-          }
-        />
-        <Route path="terms" element={<TermsOfService />} />
-        <Route path="privacy" element={<PrivacyPolicy />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
-);
+const Router: React.FC = () => {
+  const basePath = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '') || '/';
+  return (
+    <BrowserRouter basename={basePath === '/' ? undefined : basePath}>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route
+            index
+            element={
+              <>
+                <Hero />
+                <PainPoints />
+                <CustomerJourney />
+                <WhyFoundlab />
+                <AiTrust />
+                <PerformanceChart />
+                <AiEngines />
+                <CaseStudies />
+                <VeritasProtocolDemo />
+                <Technology />
+                <Partners />
+              </>
+            }
+          />
+          <Route path="terms" element={<TermsOfService />} />
+          <Route path="privacy" element={<PrivacyPolicy />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default Router;
