@@ -145,6 +145,10 @@
         }
       }
     },
+    "dualShowcase": {
+      "imageAlt": "Visual da arquitetura Dual da Foundlab",
+      "ctaLabel": "Testar demo da Umbrella"
+    },
     "coreEngines": {
       "title": "Nossos Motores de IA",
       "subtitle": "Explore os agentes especializados que formam nossa orquestra cognitiva. Cada um é projetado para uma tarefa específica, trabalhando em conjunto para entregar resultados incomparáveis."

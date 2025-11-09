@@ -177,11 +177,31 @@ const FlowNode: React.FC<{ icon: React.ReactNode; title: string; description: st
 const AiArchitectureFlow: React.FC = () => {
     const { t } = useLanguage();
     const coreEngines = aiEnginesData;
+    const dualImageSrc = 'dual.png';
 
     return (
             
 
         <div className="my-20 md:my-32">
+            <div className="text-center mb-12 scroll-reveal" style={{ transitionDelay: '0s' }}>
+                <img
+                    src={dualImageSrc}
+                    alt={t('aiEngines.dualShowcase.imageAlt')}
+                    className="block mx-auto w-full max-w-[520px] h-auto rounded-[32px] border border-[var(--glass-border)] shadow-[0_20px_45px_rgba(10,15,25,0.45)]"
+                    loading="lazy"
+                />
+                <div className="mt-6">
+                    <a
+                        href="https://umbrella-demo-liard.vercel.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold tracking-wide text-sm uppercase bg-[var(--accent-primary)] text-black hover:bg-[var(--accent-secondary)] transition-colors shadow-lg"
+                    >
+                        {t('aiEngines.dualShowcase.ctaLabel')}
+                        <FiArrowRight />
+                    </a>
+                </div>
+            </div>
             <MultiEngineSelectorIllustration />
             <ArchitectureAnimations />
 

@@ -145,6 +145,10 @@
         }
       }
     },
+    "dualShowcase": {
+      "imageAlt": "Foundlab Dual architecture visual",
+      "ctaLabel": "Try the Umbrella demo"
+    },
     "coreEngines": {
       "title": "Our Core AI Engines",
       "subtitle": "Explore the specialized agents that form our cognitive orchestra. Each is designed for a specific task, working in concert to deliver unparalleled results."
