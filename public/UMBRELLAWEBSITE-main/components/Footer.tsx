@@ -16,9 +16,6 @@ const Footer: React.FC = () => {
 
         <div className="mt-8 max-w-lg mx-auto h-36 flex items-center justify-center">
           <div className="glass-effect p-6 rounded-2xl text-center border border-[var(--glass-border)] w-full">
-            <p className="text-[var(--text-subtle)] text-sm mb-4">
-              {t('footer.form.placeholder')}
-            </p>
             <a
               href="https://umbrella-demo-liard.vercel.app"
               target="_blank"
