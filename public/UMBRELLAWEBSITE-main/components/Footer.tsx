@@ -1,29 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLanguage } from './LanguageContext';
-import { FiCheckCircle } from 'react-icons/fi';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const validateEmail = (email: string): boolean => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !validateEmail(email)) {
-      setError(t('footer.form.error'));
-      setIsSubmitted(false);
-    } else {
-      setError('');
-      setIsSubmitted(true);
-      console.log('Email submitted for demo request:', email);
-    }
-  };
 
   return (
     <footer id="contato" className="section-container bg-[var(--background-secondary)] py-20 mt-20">
@@ -36,60 +15,19 @@ const Footer: React.FC = () => {
         </p>
 
         <div className="mt-8 max-w-lg mx-auto h-36 flex items-center justify-center">
-          {isSubmitted ? (
-            <div className="glass-effect p-6 rounded-2xl text-center border border-[var(--accent-secondary)] w-full tab-content-animate">
-              {/* Ícone dentro de um span para evitar passar props inválidos ao componente */}
-              <span className="mx-auto mb-2 block" aria-hidden="true">
-                <FiCheckCircle size={36} />
-              </span>
-              <h4 className="font-bold text-lg text-[var(--text-primary)]">
-                {t('footer.form.submitted.title')}
-              </h4>
-              <p className="text-[var(--text-subtle)] mt-1 text-sm">
-                {t('footer.form.submitted.text')}
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} noValidate className="w-full flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <div className="relative w-full">
-                <label htmlFor="email-input" className="sr-only">
-                  Email for demo request
-                </label>
-                <input
-                  id="email-input"
-                  type="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    if (error) setError('');
-                  }}
-                  placeholder={t('footer.form.placeholder')}
-                  className={`
-                    w-full px-6 py-4 rounded-full text-[var(--text-primary)] bg-[var(--glass-bg)]
-                    border transition-all duration-300 outline-none
-                    ${error ? 'border-red-500' : 'border-[var(--glass-border)]'}
-                  `}
-                  aria-invalid={!!error}
-                  aria-describedby="email-error"
-                />
-                {error && (
-                  <p id="email-error" role="alert" className="text-red-500 text-sm mt-2 text-left pl-4">
-                    {error}
-                  </p>
-                )}
-              </div>
-              <button
-                type="submit"
-                className="
-                  w-full sm:w-auto flex-shrink-0 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]
-                  text-black font-bold text-lg px-10 py-4 rounded-full
-                  inline-block hover:scale-105 transition-transform
-                "
-              >
-                {t('footer.form.button')}
-              </button>
-            </form>
-          )}
+          <div className="glass-effect p-6 rounded-2xl text-center border border-[var(--glass-border)] w-full">
+            <p className="text-[var(--text-subtle)] text-sm mb-4">
+              {t('footer.form.placeholder')}
+            </p>
+            <a
+              href="https://umbrella-demo-liard.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-black font-bold text-lg px-10 py-4 rounded-full hover:scale-105 transition-transform"
+            >
+              {t('footer.form.button')}
+            </a>
+          </div>
         </div>
 
         <div className="mt-20 pt-10 border-t border-[var(--border-color)]/50">

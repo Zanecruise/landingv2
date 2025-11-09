@@ -69,101 +69,6 @@ const GeminiIcon = () => (
 );
 const OutputIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>;
 
-const MultiEngineSelectorIllustration: React.FC = () => (
-    <svg
-        viewBox="0 0 640 420"
-        className="block mx-auto mb-8 w-full max-w-[520px] h-auto drop-shadow-lg text-[var(--text-primary)]"
-        role="img"
-        aria-labelledby="multi-engine-title multi-engine-desc"
-    >
-        <title id="multi-engine-title">Multi-engine runtime selection</title>
-        <desc id="multi-engine-desc">
-            Visual flow showing prompts being routed between Google Gemini and NVIDIA NIM execution environments.
-        </desc>
-        <defs>
-            <linearGradient id="panelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="var(--accent-primary)" stopOpacity="0.25" />
-                <stop offset="100%" stopColor="var(--accent-secondary)" stopOpacity="0.15" />
-            </linearGradient>
-            <linearGradient id="connectorGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="var(--accent-primary)" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="var(--accent-secondary)" stopOpacity="0.9" />
-            </linearGradient>
-            <linearGradient id="pillGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="var(--accent-primary)" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="var(--accent-secondary)" stopOpacity="0.85" />
-            </linearGradient>
-        </defs>
-        <rect x="20" y="20" width="600" height="380" rx="36" fill="url(#panelGradient)" stroke="var(--glass-border)" strokeWidth="1.5" />
-        <text x="320" y="72" textAnchor="middle" fontSize="20" fontWeight="600" fill="var(--text-primary)">Orquestração multi-engine</text>
-        <text x="320" y="94" textAnchor="middle" fontSize="13" fill="var(--text-subtle)">Selecione dinamicamente entre Gemini (Google) e NIM (NVIDIA)</text>
-
-        <g aria-hidden="true">
-            <rect x="210" y="110" width="220" height="40" rx="20" fill="rgba(255,255,255,0.05)" stroke="var(--glass-border)" strokeWidth="1" />
-            <rect x="220" y="116" width="90" height="28" rx="14" fill="url(#pillGradient)" />
-            <rect x="320" y="116" width="90" height="28" rx="14" fill="url(#pillGradient)" opacity="0.9" />
-            <path d="M248 130l6 6 12-12" stroke="var(--text-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M348 130l6 6 12-12" stroke="var(--text-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <text x="265" y="134" textAnchor="middle" fontSize="13" fontWeight="600" fill="var(--text-primary)">Gemini</text>
-            <text x="365" y="134" textAnchor="middle" fontSize="13" fontWeight="600" fill="var(--text-primary)">NIM</text>
-        </g>
-
-        <g>
-            <rect x="80" y="160" width="160" height="70" rx="24" fill="rgba(255,255,255,0.05)" stroke="var(--glass-border)" strokeWidth="1" />
-            <text x="160" y="188" textAnchor="middle" fontSize="14" fontWeight="600" fill="var(--text-primary)">Prompt + contexto</text>
-            <text x="160" y="206" textAnchor="middle" fontSize="12" fill="var(--text-subtle)">Preferências do cliente</text>
-        </g>
-
-        <g>
-            <rect x="250" y="175" width="140" height="85" rx="28" fill="rgba(5,10,25,0.55)" stroke="var(--accent-primary)" strokeWidth="1.5" />
-            <text x="320" y="208" textAnchor="middle" fontSize="15" fontWeight="600" fill="var(--text-primary)">Router IA</text>
-            <text x="320" y="228" textAnchor="middle" fontSize="11" fill="var(--text-subtle)">Políticas · Métricas · Custos</text>
-        </g>
-
-        <path d="M 240 195 C 260 200, 280 205, 320 215" stroke="url(#connectorGradient)" strokeWidth="3" fill="none" strokeLinecap="round" />
-        <circle cx="240" cy="195" r="6" fill="var(--accent-secondary)" opacity="0.9" />
-        <circle cx="320" cy="215" r="7" fill="var(--accent-primary)" />
-
-        <path d="M 320 245 C 260 270, 220 295, 180 320" stroke="url(#connectorGradient)" strokeWidth="3" fill="none" strokeLinecap="round" />
-        <path d="M 320 245 C 380 270, 420 295, 460 320" stroke="url(#connectorGradient)" strokeWidth="3" fill="none" strokeLinecap="round" />
-        <circle cx="180" cy="320" r="5" fill="var(--accent-secondary)" opacity="0.9" />
-        <circle cx="460" cy="320" r="5" fill="var(--accent-secondary)" opacity="0.9" />
-
-        <g>
-            <rect x="60" y="240" width="220" height="140" rx="28" fill="rgba(10,15,35,0.65)" stroke="var(--glass-border)" strokeWidth="1" />
-            <circle cx="110" cy="280" r="26" fill="rgba(255,255,255,0.05)" stroke="var(--accent-primary)" strokeWidth="1.5" />
-            <path d="M96 272c8 0 12-10 20-10s12 10 20 10-12 20-20 20-12-20-20-20z" fill="none" stroke="var(--accent-secondary)" strokeWidth="1.2" strokeLinecap="round" />
-            <path d="M110 258v44" stroke="var(--accent-secondary)" strokeWidth="1" strokeDasharray="4 4" />
-            <text x="185" y="272" fontSize="18" fontWeight="700" fill="var(--text-primary)">Gemini</text>
-            <text x="185" y="292" fontSize="12" fill="var(--text-subtle)">Google · geração completa</text>
-            <rect x="120" y="306" width="140" height="12" rx="6" fill="rgba(255,255,255,0.08)" />
-            <rect x="120" y="306" width="110" height="12" rx="6" fill="url(#pillGradient)" />
-            <text x="190" y="330" textAnchor="middle" fontSize="11" fill="var(--text-subtle)">Latência baixa · tokens longos</text>
-            <g>
-                <rect x="160" y="338" width="80" height="28" rx="14" fill="url(#pillGradient)" />
-                <text x="200" y="357" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--text-primary)">Selecionado</text>
-            </g>
-        </g>
-
-        <g>
-            <rect x="360" y="240" width="220" height="140" rx="28" fill="rgba(10,15,35,0.65)" stroke="var(--glass-border)" strokeWidth="1" />
-            <rect x="410" y="254" width="42" height="42" rx="10" fill="rgba(255,255,255,0.05)" stroke="var(--accent-primary)" strokeWidth="1.5" />
-            <path d="M418 262h26v26h-26z" stroke="var(--accent-secondary)" strokeWidth="1.2" fill="none" />
-            <path d="M418 275h26" stroke="var(--accent-secondary)" strokeWidth="1.2" />
-            <path d="M431 262v26" stroke="var(--accent-secondary)" strokeWidth="1.2" />
-            <text x="470" y="272" fontSize="18" fontWeight="700" fill="var(--text-primary)">NIM</text>
-            <text x="470" y="292" fontSize="12" fill="var(--text-subtle)">NVIDIA · inference engine</text>
-            <rect x="420" y="306" width="140" height="12" rx="6" fill="rgba(255,255,255,0.08)" />
-            <rect x="420" y="306" width="95" height="12" rx="6" fill="var(--accent-secondary)" />
-            <text x="490" y="330" textAnchor="middle" fontSize="11" fill="var(--text-subtle)">Modelos otimizados · GPUs</text>
-            <g>
-                <rect x="452" y="338" width="96" height="28" rx="14" fill="rgba(255,255,255,0.08)" stroke="var(--glass-border)" strokeWidth="1" />
-                <text x="500" y="357" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--text-primary)">Pronto para uso</text>
-            </g>
-        </g>
-    </svg>
-);
-
 const FlowNode: React.FC<{ icon: React.ReactNode; title: string; description: string; delay?: string; className?: string }> = ({ icon, title, description, delay = '0s', className = '' }) => (
     <div className={`architecture-node glass-effect p-6 rounded-2xl text-center border border-[var(--glass-border)] scroll-reveal z-10 ${className}`} style={{ animationDelay: `${delay}, 0s` }}>
         <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center text-[var(--accent-primary)]">
@@ -202,7 +107,6 @@ const AiArchitectureFlow: React.FC = () => {
                     </a>
                 </div>
             </div>
-            <MultiEngineSelectorIllustration />
             <ArchitectureAnimations />
 
 
