@@ -5,6 +5,13 @@ import { aiEnginesData, ModalId, AiEngine } from '../data/aiEngineData';
 import { useLanguage } from './LanguageContext';
 import { FiChevronLeft, FiChevronRight, FiArrowRight } from 'react-icons/fi';
 
+const resolveAssetPath = (assetName: string): string => {
+    // Respect the Vite base path so the asset loads on nested deployments (e.g., /umbrella)
+    const normalizedAsset = assetName.startsWith('/') ? assetName : `/${assetName}`;
+    const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+    return base ? `${base}${normalizedAsset}` : normalizedAsset;
+};
+
 // --- Top-Level Component Definitions ---
 
 const ArchitectureAnimations: React.FC = () => (
@@ -82,7 +89,7 @@ const FlowNode: React.FC<{ icon: React.ReactNode; title: string; description: st
 const AiArchitectureFlow: React.FC = () => {
     const { t } = useLanguage();
     const coreEngines = aiEnginesData;
-    const dualImageSrc = 'dual.png';
+    const dualImageSrc = resolveAssetPath('dual.png');
 
     return (
             
