@@ -53,8 +53,8 @@
         "text": "A informação é validada em um pipeline multiestágio. Nossos motores geram um **Score Explicável**: cada pontuação é acompanhada por uma justificativa clara em linguagem natural ('Rationale'), detalhando o 'porquê' da avaliação. Isso mitiga o risco de alucinação da IA e transforma a análise em uma tese auditável e defensável."
       },
       "evidence": {
-        "title": "3. Geração de Evidência Auditável (Protocolo Veritas)",
-        "text": "Cada decisão gera um `DecisionID` exclusivo e um Pacote de Auditoria criptograficamente assinado. Entregamos prova matemática de conformidade, não apenas logs. Exporte os resultados com a segurança de uma trilha 100% rastreável e defensável."
+        "title": "3. FoundLab Veritas 2.0 (Evidência Auditável Não-Custodial)",
+        "text": "Cada decisão gera um Decision Evidence Object (DEO) selado como uma Credencial Verificável W3C e preservado em um Cofre WORM no BigQuery com `deletion_protection=true` e ingestão append-only. O Kill Switch via CMEK destrói a chave sob demanda, mantendo retenção física e removendo a legibilidade criptográfica - a única resposta defensável ao Paradoxo da Retenção."
       }
     }
   },
@@ -184,7 +184,7 @@
         "li1": "<strong>Análise de Conformidade Automatizada:</strong> Nossa IA ingere os documentos do portfóflio e os cruza automaticamente com as regras do mandato e políticas de risco pré-configuradas.",
         "li2": "<strong>Identificação Instantânea de Desvios:</strong> Qualquer não conformidade, como excesso de concentração ou quebras de política, é sinalizada imediatamente pelo nosso Analista Granular.",
         "li3": "<strong>Score Explicável (Rationale):</strong> Cada alerta é acompanhado por uma justificativa clara gerada pela IA, capacitando o analista a entender e defender a decisão, fortalecendo a confiança com clientes e auditores.",
-        "li4": "<strong>Geração de Evidência Auditável:</strong> A plataforma gera relatórios detalhados e o Pacote de Auditoria. O `DecisionID` exclusivo do Protocolo Veritas oferece prova matemática de conformidade, tornando cada verificação defensável.",
+        "li4": "<strong>Evidência Auditável Não-Custodial:</strong> FoundLab Veritas 2.0 gera o Pacote de Auditoria como um DEO assinado (VC W3C) no Cofre WORM do BigQuery e aciona crypto-shredding via CMEK, entregando prova defensável em segundos.",
         "h4_2": "Impacto:",
         "quote": "Uma gestora de médio porte reduziu o tempo de verificação de conformidade de portfólios em <strong>95%</strong>, de 4 horas por analista/dia para menos de 15 minutos. Isso liberou a equipe para focar em otimização de carteiras e relacionamento com clientes, eliminando erros de verificação manual."
       }
@@ -198,7 +198,7 @@
         "h4_1": "Nossa Solução para Suitability:",
         "li1": "<strong>Validação em Tempo Real:</strong> Ao montar ou rebalancear uma carteira, a plataforma verifica instantaneamente cada ativo contra o perfil do cliente, gerando um score de adequação.",
         "li2": "<strong>Alertas com Justificativa:</strong> Se um investimento for inadequado, o sistema alerta o gerente com uma 'Rationale' clara (ex: 'risco do produto excede a tolerância do cliente').",
-        "li3": "<strong>Trilha de Auditoria Defensável:</strong> Cada verificação de suitability gera um registro imutável via Protocolo Veritas, criando prova defensável de que o dever fiduciário foi cumprido, protegendo a instituição e o cliente.",
+        "li3": "<strong>Trilha de Auditoria Veritas 2.0:</strong> Cada suitability gera um DEO assinado e armazenado em WORM com Kill Switch via CMEK, provando que o dever fiduciário foi cumprido sem custodiar PII.",
         "h4_2": "Impacto:",
         "quote": "Um grande banco privado implementou a Foundlab e alcançou <strong>100% de conformidade</strong> em auditorias internas de suitability nos 6 meses seguintes, além de aumentar a satisfação do cliente ao fornecer justificativas transparentes para as recomendações de investimento."
       }
@@ -234,7 +234,7 @@
   },
   "veritasDemo": {
     "supertitle": "A Prova",
-    "title": "Demonstração Interativa: Protocolo Veritas",
+    "title": "Demonstração Interativa: FoundLab Veritas 2.0",
     "subtitle": "Role para executar nosso pipeline de confiança e veja a trilha de auditoria ser criada em tempo real.",
     "timeline": {
       "ingestion": "1. Ingestão e Parsing",
@@ -258,9 +258,9 @@
       "invalid": "(Inválido)"
     },
     "logs": {
-      "title": "Veritas Protocol - Logs em Tempo Real",
+      "title": "FoundLab Veritas 2.0 - Logs em Tempo Real",
       "ingestion": [
-        "Inicializando Protocolo Veritas...",
+        "Inicializando FoundLab Veritas 2.0...",
         "Recebido 'Extrato_Exemplo.pdf' (1.2MB).",
         "Serviço de Ingestão: Documento na fila de processamento.",
         "Parser de Precisão: Iniciando análise de layout..."
@@ -287,7 +287,7 @@
         "Estratega Chefe: Consolidando insights..."
       ],
       "final": [
-        "Protocolo Veritas concluído.",
+        "FoundLab Veritas 2.0 concluído.",
         "Pacote de Auditoria gerado com sucesso.",
         "DecisionID: d4a2b1c7-9f8e-c3a0-1c0a-9e2f5e6bd8a4",
         "Pronto para exportação."
@@ -318,8 +318,8 @@
         "text": "Nosso pilar arquitetônico mais disruptivo. Documentos e dados sensíveis NUNCA SÃO ARMAZENADOS EM DISCO. O processamento ocorre exclusivamente em memória volátil, eliminando o risco de custódia de dados por design."
       },
       "auditability": {
-        "title": "Auditabilidade Total (Protocolo Veritas)",
-        "text": "O Protocolo Veritas cria prova matemática de conformidade, não apenas logs. Cada análise gera um `DecisionID` exclusivo e um registro imutável e criptograficamente assinado, garantindo rastreabilidade completa para auditorias."
+        "title": "Auditabilidade Total (FoundLab Veritas 2.0)",
+        "text": "FoundLab Veritas 2.0 impõe a ATI de três pilares: Cofre WORM no BigQuery com ingestão append-only (`deletion_protection=true`) para retenção SOX/DOJ, Decision Evidence Objects com VCs W3C que eliminam hashing de PII e Kill Switch via CMEK que executa crypto-shredding para LGPD/GDPR. O auditor verifica matemática, não promessas."
       },
       "encryption": {
         "title": "Criptografia e Controle de Acesso",
@@ -411,7 +411,7 @@
           "<strong>Critic-Loop:</strong> Um mecanismo de autocorreção que realiza validação sintática e semântica para mitigar proativamente o risco de 'alucinação' da IA.",
           "<strong>Guardrails Éticos e Regulatórios:</strong> Incorpora salvaguardas que mantêm as operações dentro de limites éticos e regulatórios pré-definidos, garantindo a integridade do processo.",
           "<strong>Gatilho de Resiliência:</strong> Ativa mecanismos de fallback, como modelos de IA ou infraestrutura alternativos, em caso de falhas.",
-          "<strong>Log Imutável:</strong> Assina criptograficamente cada ação orquestrada, formando a espinha dorsal da trilha de auditoria do Protocolo Veritas."
+          "<strong>Log Imutável:</strong> Assina criptograficamente cada ação orquestrada, formando a espinha dorsal da trilha de auditoria do FoundLab Veritas 2.0."
         ]},
         { "type": "h4", "text": "Rationale (XAI):" },
         { "type": "quote", "text": "Este motor garante transparência ao registrar cada passo e decisão em uma trilha de auditoria imutável, tornando todo o fluxo de trabalho explicável de ponta a ponta." }
